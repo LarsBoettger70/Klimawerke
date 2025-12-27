@@ -1,0 +1,24 @@
+
+============================================================
+REMO CLIMATE MODEL ANALYSIS - SUMMARY REPORT
+============================================================
+
+DATASET INFORMATION:
+  Time steps: 1
+  Grid dimensions: {'nhyi': 28, 'nhym': 27, 'time': 1, 'rlat': 121, 'rlon': 129, 'lev': 27, 'rlon_2': 129, 'rlat_2': 121, 'lev_2': 27}
+  Variables: ['rotated_pole', 'hyai', 'hybi', 'hyam', 'hybm', 'FIB', 'T', 'U', 'V', 'QD', 'PS', 'OMEGA', 'QW', 'FI', 'ACLC', 'BLA', 'QDBL', 'WSMX', 'GLAC', 'WS', 'SN', 'TD', 'TDCL', 'TSN', 'TD3', 'TD4', 'TD5', 'QDB', 'WL', 'TS', 'TSL', 'TSW', 'TSI', 'SEAICE', 'SICED', 'PHI', 'RLA', 'QI']
+
+EXTRACTED REGION:  Germany
+  Total grid points: 15609
+  Lat range: 13.27° - 66.07°
+  Lon range: -21.73° - 34.59°
+
+CLIMATE PARAMETERS: 
+
+OUTPUT FILES CREATED:
+  - remo_interactive_map. html (Interactive map with polygons)
+  - climate_parameters_table.html (Parameter table)
+  - climate_parameters. csv (Full parameter data)
+  - analysis_report.txt (This report)
+
+============================================================
