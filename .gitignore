@@ -1,2 +1,5 @@
 installing git and personal key.txt
 .DS_Store
+*.nc
+*.pyc
+__pycache__/
