@@ -54,9 +54,9 @@ When running `interpolation_demo.py`:
    - Layer controls and popups with data values
 
 2. **interpolation_results.csv** (12KB) - Tabular results:
-   - Columns: lat, lon, value_rbf, value_linear
+   - Columns: lat, lon, value_rbf, value_linear, value_rbf_celsius, value_linear_celsius
    - 396 rows (one per mesh point)
-   - Temperature values in Kelvin
+   - Temperature values in both Kelvin and Celsius (for TS variable)
 
 3. **interpolation_quality_report.txt** (1.4KB) - Quality metrics:
    - Grid statistics (10,000 valid points)

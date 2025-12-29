@@ -187,11 +187,18 @@ def perform_interpolation(interp, mesh, stations, grid_points, ds):
     try:
         mesh['value_rbf'] = interp.interpolate(mesh_rlat, mesh_rlon, method='rbf')
         mesh['value_linear'] = interp.interpolate(mesh_rlat, mesh_rlon, method='linear')
+        # Convert Kelvin to Celsius for temperature data (TS variable)
+        if interp.variable == 'TS':
+            mesh['value_rbf_celsius'] = mesh['value_rbf'] - 273.15
+            mesh['value_linear_celsius'] = mesh['value_linear'] - 273.15
         print(f"✓ Mesh interpolation complete")
     except (ValueError, RuntimeError, np.linalg.LinAlgError) as e:
         print(f"⚠ Warning: Mesh interpolation failed: {e}")
         mesh['value_rbf'] = np.nan
         mesh['value_linear'] = np.nan
+        if interp.variable == 'TS':
+            mesh['value_rbf_celsius'] = np.nan
+            mesh['value_linear_celsius'] = np.nan
     
     # Interpolate at station points
     print(f"\n  Interpolating at {len(stations)} station points...")
@@ -207,11 +214,18 @@ def perform_interpolation(interp, mesh, stations, grid_points, ds):
     try:
         stations['value_rbf'] = interp.interpolate(station_rlat, station_rlon, method='rbf')
         stations['value_linear'] = interp.interpolate(station_rlat, station_rlon, method='linear')
+        # Convert Kelvin to Celsius for temperature data (TS variable)
+        if interp.variable == 'TS':
+            stations['value_rbf_celsius'] = stations['value_rbf'] - 273.15
+            stations['value_linear_celsius'] = stations['value_linear'] - 273.15
         print(f"✓ Station interpolation complete")
     except (ValueError, RuntimeError, np.linalg.LinAlgError) as e:
         print(f"⚠ Warning: Station interpolation failed: {e}")
         stations['value_rbf'] = np.nan
         stations['value_linear'] = np.nan
+        if interp.variable == 'TS':
+            stations['value_rbf_celsius'] = np.nan
+            stations['value_linear_celsius'] = np.nan
     
     return mesh, stations
 
@@ -422,7 +436,11 @@ def create_visualization(ds, mesh, stations, grid_points, interp, quality_metric
     print(f"✓ Interactive map saved to '{output_file}'")
     
     # Save results to CSV
-    mesh_out = mesh[['lat', 'lon', 'value_rbf', 'value_linear']].copy()
+    # Include Celsius columns if they exist (for TS variable)
+    csv_columns = ['lat', 'lon', 'value_rbf', 'value_linear']
+    if 'value_rbf_celsius' in mesh.columns:
+        csv_columns.extend(['value_rbf_celsius', 'value_linear_celsius'])
+    mesh_out = mesh[csv_columns].copy()
     mesh_out.to_csv('interpolation_results.csv', index=False)
     print(f"✓ Results saved to 'interpolation_results.csv'")
     
