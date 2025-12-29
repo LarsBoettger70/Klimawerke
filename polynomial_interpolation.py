@@ -37,6 +37,27 @@ from typing import Tuple, Optional, Union, List
 import warnings
 
 
+def kelvin_to_celsius(kelvin_value: Union[float, np.ndarray]) -> Union[float, np.ndarray]:
+    """
+    Convert temperature from Kelvin to Celsius.
+    
+    The conversion formula is: °C = K - 273.15
+    
+    Args:
+        kelvin_value: Temperature in Kelvin (scalar or array)
+    
+    Returns:
+        Temperature in Celsius (same type as input)
+    
+    Example:
+        >>> kelvin_to_celsius(273.15)
+        0.0
+        >>> kelvin_to_celsius(np.array([273.15, 293.15]))
+        array([ 0., 20.])
+    """
+    return kelvin_value - 273.15
+
+
 class RemoInterpolator:
     """
     2D Polynomial/RBF Interpolator for REMO climate data.

@@ -33,7 +33,7 @@ import warnings
 warnings.filterwarnings('ignore')
 
 # Import our modules
-from polynomial_interpolation import RemoInterpolator, calculate_interpolation_error
+from polynomial_interpolation import RemoInterpolator, calculate_interpolation_error, kelvin_to_celsius
 from mesh_generator import (
     MeshGenerator, GermanyDomain, WeatherStationManager,
     CoordinateTransformer, extract_remo_grid_in_domain
@@ -99,8 +99,18 @@ def setup_interpolation(ds, variable='TS', time_idx=0):
     stats = interp.get_statistics()
     print(f"\n  Grid Statistics:")
     print(f"    Valid points: {stats['valid_points']}")
-    print(f"    Value range: {stats['value_min']:.2f} to {stats['value_max']:.2f}")
-    print(f"    Mean value: {stats['value_mean']:.2f}")
+    
+    # Convert temperature values to Celsius if the variable is TS (surface temperature)
+    if variable == 'TS':
+        value_min_c = kelvin_to_celsius(stats['value_min'])
+        value_max_c = kelvin_to_celsius(stats['value_max'])
+        value_mean_c = kelvin_to_celsius(stats['value_mean'])
+        print(f"    Value range: {value_min_c:.2f}°C to {value_max_c:.2f}°C")
+        print(f"    Mean value: {value_mean_c:.2f}°C")
+    else:
+        print(f"    Value range: {stats['value_min']:.2f} to {stats['value_max']:.2f}")
+        print(f"    Mean value: {stats['value_mean']:.2f}")
+    
     print(f"    rlat range: {stats['rlat_range']}")
     print(f"    rlon range: {stats['rlon_range']}")
     
@@ -353,7 +363,7 @@ def create_visualization(ds, mesh, stations, grid_points, interp, quality_metric
         if 'value_rbf' in station and not np.isnan(station['value_rbf']):
             value = station['value_rbf']
             if interp.variable == 'TS':
-                value_c = value - 273.15
+                value_c = kelvin_to_celsius(value)
                 value_text = f"<br>Temp (RBF): {value_c:.1f}°C"
             else:
                 value_text = f"<br>Value (RBF): {value:.2f}"
@@ -387,6 +397,12 @@ def create_visualization(ds, mesh, stations, grid_points, interp, quality_metric
                     b = int(255 * (1 - norm_val))
                     color = f'#{r:02x}88{b:02x}'
                     
+                    # Format value for display
+                    if interp.variable == 'TS':
+                        value_display = f"{kelvin_to_celsius(point['value_rbf']):.2f}°C"
+                    else:
+                        value_display = f"{point['value_rbf']:.2f}"
+                    
                     folium.CircleMarker(
                         location=[point['lat'], point['lon']],
                         radius=3,
@@ -394,7 +410,7 @@ def create_visualization(ds, mesh, stations, grid_points, interp, quality_metric
                         fill=True,
                         fillColor=color,
                         fillOpacity=0.6,
-                        popup=f"Interpolated<br>Value: {point['value_rbf']:.2f}"
+                        popup=f"Interpolated<br>Value: {value_display}"
                     ).add_to(mesh_feature_group)
     
     mesh_feature_group.add_to(m)
@@ -423,6 +439,12 @@ def create_visualization(ds, mesh, stations, grid_points, interp, quality_metric
     
     # Save results to CSV
     mesh_out = mesh[['lat', 'lon', 'value_rbf', 'value_linear']].copy()
+    
+    # Add Celsius columns if variable is TS
+    if interp.variable == 'TS':
+        mesh_out['value_rbf_celsius'] = kelvin_to_celsius(mesh_out['value_rbf'])
+        mesh_out['value_linear_celsius'] = kelvin_to_celsius(mesh_out['value_linear'])
+    
     mesh_out.to_csv('interpolation_results.csv', index=False)
     print(f"✓ Results saved to 'interpolation_results.csv'")
     
@@ -443,6 +465,21 @@ def create_quality_report(interp, quality_metrics, mesh, stations, grid_points):
     """
     stats = interp.get_statistics()
     
+    # Check if variable is temperature to format values appropriately
+    is_temperature = interp.variable == 'TS'
+    
+    # Format value range and mean based on variable type
+    if is_temperature:
+        value_min = kelvin_to_celsius(stats['value_min'])
+        value_max = kelvin_to_celsius(stats['value_max'])
+        value_mean = kelvin_to_celsius(stats['value_mean'])
+        value_unit = "°C"
+    else:
+        value_min = stats['value_min']
+        value_max = stats['value_max']
+        value_mean = stats['value_mean']
+        value_unit = ""
+    
     report = f"""
 {'='*60}
 REMO POLYNOMIAL INTERPOLATION - QUALITY REPORT
@@ -458,8 +495,8 @@ GRID STATISTICS:
   Total grid points: {stats['total_points']}
   Valid points: {stats['valid_points']}
   Missing points: {stats['nan_points']}
-  Value range: {stats['value_min']:.2f} to {stats['value_max']:.2f}
-  Mean value: {stats['value_mean']:.2f}
+  Value range: {value_min:.2f}{value_unit} to {value_max:.2f}{value_unit}
+  Mean value: {value_mean:.2f}{value_unit}
   
 INTERPOLATION COVERAGE:
   Mesh points: {len(mesh)}
@@ -470,13 +507,27 @@ QUALITY METRICS (Cross-validation):
 """
     
     for method, metrics in quality_metrics.items():
+        # Convert error metrics to Celsius if temperature variable
+        if is_temperature:
+            mae = kelvin_to_celsius(metrics['mae'] + 273.15) - kelvin_to_celsius(273.15)  # Convert delta
+            rmse = kelvin_to_celsius(metrics['rmse'] + 273.15) - kelvin_to_celsius(273.15)  # Convert delta
+            mean_error = kelvin_to_celsius(metrics['mean_error'] + 273.15) - kelvin_to_celsius(273.15)
+            std_error = kelvin_to_celsius(metrics['std_error'] + 273.15) - kelvin_to_celsius(273.15)
+            error_unit = "°C"
+        else:
+            mae = metrics['mae']
+            rmse = metrics['rmse']
+            mean_error = metrics['mean_error']
+            std_error = metrics['std_error']
+            error_unit = ""
+        
         report += f"""
   Method: {method.upper()}
-    Mean Absolute Error (MAE): {metrics['mae']:.4f}
-    Root Mean Square Error (RMSE): {metrics['rmse']:.4f}
+    Mean Absolute Error (MAE): {mae:.4f}{error_unit}
+    Root Mean Square Error (RMSE): {rmse:.4f}{error_unit}
     R² Score: {metrics['r2']:.4f}
-    Mean Error: {metrics['mean_error']:.4f}
-    Std Error: {metrics['std_error']:.4f}
+    Mean Error: {mean_error:.4f}{error_unit}
+    Std Error: {std_error:.4f}{error_unit}
     Test points: {metrics['n_points']}
 """
     
