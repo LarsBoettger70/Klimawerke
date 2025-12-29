@@ -1,0 +1,48 @@
+Last login: Sun Dec 28 13:13:41 on ttys000
+primoportal@MacBook-Pro-von-PRIMO ~ % git --version
+git version 2.39.5 (Apple Git-154)
+primoportal@MacBook-Pro-von-PRIMO ~ % git config --global user.email "post@larsboettger.de"
+primoportal@MacBook-Pro-von-PRIMO ~ % cd development
+primoportal@MacBook-Pro-von-PRIMO development % cd klimawerke
+primoportal@MacBook-Pro-von-PRIMO klimawerke % git remote set-url origin https://github.com/larsboettger/Klimawerke.git
+primoportal@MacBook-Pro-von-PRIMO klimawerke % git remote set-url origin https://github.com/larsboettger70/Klimawerke.git
+primoportal@MacBook-Pro-von-PRIMO klimawerke % git remote -v git branch --show-current git status
+error: unknown subcommand: `git'
+usage: git remote [-v | --verbose]
+   or: git remote add [-t <branch>] [-m <master>] [-f] [--tags | --no-tags] [--mirror=<fetch|push>] <name> <url>
+   or: git remote rename [--[no-]progress] <old> <new>
+   or: git remote remove <name>
+   or: git remote set-head <name> (-a | --auto | -d | --delete | <branch>)
+   or: git remote [-v | --verbose] show [-n] <name>
+   or: git remote prune [-n | --dry-run] <name>
+   or: git remote [-v | --verbose] update [-p | --prune] [(<group> | <remote>)...]
+   or: git remote set-branches [--add] <name> <branch>...
+   or: git remote get-url [--push] [--all] <name>
+   or: git remote set-url [--push] <name> <newurl> [<oldurl>]
+   or: git remote set-url --add <name> <newurl>
+   or: git remote set-url --delete <name> <url>
+
+    -v, --verbose         be verbose; must be placed before a subcommand
+
+primoportal@MacBook-Pro-von-PRIMO klimawerke % ssh-keygen -t ed25519 -C "post@larsboettger.de"
+Generating public/private ed25519 key pair.
+Enter file in which to save the key (/Users/primoportal/.ssh/id_ed25519): LB_Github
+Enter passphrase for "LB_Github" (empty for no passphrase): 
+Enter same passphrase again: 
+Your identification has been saved in LB_Github
+Your public key has been saved in LB_Github.pub
+The key fingerprint is:
+SHA256:fXm9ASNydDSlv6rI6CuFPDojURnkgM0AleHhRmLx+ZI post@larsboettger.de
+The key's randomart image is:
++--[ED25519 256]--+
+|*OB+       ..+.. |
+|o=Bo.     . . o  |
+|  ++o    . o +   |
+| . oo    .o ..+. |
+|  .E... S . o .o.|
+| .  .+ .   . .  +|
+|  . . o        o |
+| . + .  o .   .  |
+|  . o o+.o ...   |
++----[SHA256]-----+
+primoportal@MacBook-Pro-von-PRIMO klimawerke % 

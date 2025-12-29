@@ -1,0 +1,2758 @@
+Last login: Sun Dec 28 11:07:41 on console
+primoportal@MacBookPro ~ % python3 final_visualization_demoremo.py
+
+/Library/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python: can't open file '/Users/primoportal/final_visualization_demoremo.py': [Errno 2] No such file or directory
+primoportal@MacBookPro ~ % cd.. 
+zsh: command not found: cd..
+primoportal@MacBookPro ~ % cd..
+zsh: command not found: cd..
+primoportal@MacBookPro ~ % cd primoportal
+cd: no such file or directory: primoportal
+primoportal@MacBookPro ~ % ls
+Desktop		Documents	Library		Music		PRIMO AI
+development	Downloads	Movies		Pictures	Public
+primoportal@MacBookPro ~ % cd development
+primoportal@MacBookPro development % cd klimawerke
+primoportal@MacBookPro klimawerke % python3 final_visualization_demoremo.py
+
+Traceback (most recent call last):
+  File "/Users/primoportal/development/klimawerke/final_visualization_demoremo.py", line 6, in <module>
+    import xarray as xr
+ModuleNotFoundError: No module named 'xarray'
+primoportal@MacBookPro klimawerke % pip3 install xarray netCDF4 pandas numpy folium geopandas shapely matplotlib
+
+Collecting xarray
+  Using cached xarray-2025.12.0-py3-none-any.whl.metadata (12 kB)
+Collecting netCDF4
+  Using cached netcdf4-1.7.3-cp311-abi3-macosx_13_0_x86_64.whl.metadata (1.9 kB)
+Collecting pandas
+  Using cached pandas-2.3.3-cp314-cp314-macosx_10_13_x86_64.whl.metadata (91 kB)
+Collecting numpy
+  Using cached numpy-2.4.0-cp314-cp314-macosx_14_0_x86_64.whl.metadata (6.6 kB)
+Collecting folium
+  Using cached folium-0.20.0-py2.py3-none-any.whl.metadata (4.2 kB)
+Collecting geopandas
+  Using cached geopandas-1.1.2-py3-none-any.whl.metadata (2.3 kB)
+Collecting shapely
+  Using cached shapely-2.1.2-cp314-cp314-macosx_10_13_x86_64.whl.metadata (6.8 kB)
+Collecting matplotlib
+  Using cached matplotlib-3.10.8-cp314-cp314-macosx_10_13_x86_64.whl.metadata (52 kB)
+Collecting packaging>=24.1 (from xarray)
+  Using cached packaging-25.0-py3-none-any.whl.metadata (3.3 kB)
+Collecting cftime (from netCDF4)
+  Using cached cftime-1.6.5-cp314-cp314-macosx_10_15_x86_64.whl.metadata (8.7 kB)
+Requirement already satisfied: certifi in /Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/site-packages (from netCDF4) (2025.11.12)
+Collecting python-dateutil>=2.8.2 (from pandas)
+  Using cached python_dateutil-2.9.0.post0-py2.py3-none-any.whl.metadata (8.4 kB)
+Collecting pytz>=2020.1 (from pandas)
+  Using cached pytz-2025.2-py2.py3-none-any.whl.metadata (22 kB)
+Collecting tzdata>=2022.7 (from pandas)
+  Using cached tzdata-2025.3-py2.py3-none-any.whl.metadata (1.4 kB)
+Collecting branca>=0.6.0 (from folium)
+  Using cached branca-0.8.2-py3-none-any.whl.metadata (1.7 kB)
+Collecting jinja2>=2.9 (from folium)
+  Using cached jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+Collecting requests (from folium)
+  Using cached requests-2.32.5-py3-none-any.whl.metadata (4.9 kB)
+Collecting xyzservices (from folium)
+  Using cached xyzservices-2025.11.0-py3-none-any.whl.metadata (4.3 kB)
+Collecting pyogrio>=0.7.2 (from geopandas)
+  Using cached pyogrio-0.12.1-cp314-cp314-macosx_12_0_x86_64.whl.metadata (5.9 kB)
+Collecting pyproj>=3.5.0 (from geopandas)
+  Using cached pyproj-3.7.2-cp314-cp314-macosx_13_0_x86_64.whl.metadata (31 kB)
+Collecting contourpy>=1.0.1 (from matplotlib)
+  Using cached contourpy-1.3.3-cp314-cp314-macosx_10_13_x86_64.whl.metadata (5.5 kB)
+Collecting cycler>=0.10 (from matplotlib)
+  Using cached cycler-0.12.1-py3-none-any.whl.metadata (3.8 kB)
+Collecting fonttools>=4.22.0 (from matplotlib)
+  Using cached fonttools-4.61.1-cp314-cp314-macosx_10_15_x86_64.whl.metadata (114 kB)
+Collecting kiwisolver>=1.3.1 (from matplotlib)
+  Using cached kiwisolver-1.4.9-cp314-cp314-macosx_10_13_x86_64.whl.metadata (6.3 kB)
+Collecting pillow>=8 (from matplotlib)
+  Using cached pillow-12.0.0-cp314-cp314-macosx_10_15_x86_64.whl.metadata (8.8 kB)
+Collecting pyparsing>=3 (from matplotlib)
+  Using cached pyparsing-3.3.1-py3-none-any.whl.metadata (5.6 kB)
+Collecting MarkupSafe>=2.0 (from jinja2>=2.9->folium)
+  Using cached markupsafe-3.0.3-cp314-cp314-macosx_10_13_x86_64.whl.metadata (2.7 kB)
+Collecting six>=1.5 (from python-dateutil>=2.8.2->pandas)
+  Using cached six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)
+Collecting charset_normalizer<4,>=2 (from requests->folium)
+  Using cached charset_normalizer-3.4.4-cp314-cp314-macosx_10_13_universal2.whl.metadata (37 kB)
+Collecting idna<4,>=2.5 (from requests->folium)
+  Using cached idna-3.11-py3-none-any.whl.metadata (8.4 kB)
+Collecting urllib3<3,>=1.21.1 (from requests->folium)
+  Using cached urllib3-2.6.2-py3-none-any.whl.metadata (6.6 kB)
+Using cached xarray-2025.12.0-py3-none-any.whl (1.4 MB)
+Using cached netcdf4-1.7.3-cp311-abi3-macosx_13_0_x86_64.whl (2.8 MB)
+Using cached pandas-2.3.3-cp314-cp314-macosx_10_13_x86_64.whl (11.5 MB)
+Using cached numpy-2.4.0-cp314-cp314-macosx_14_0_x86_64.whl (6.5 MB)
+Using cached folium-0.20.0-py2.py3-none-any.whl (113 kB)
+Using cached geopandas-1.1.2-py3-none-any.whl (341 kB)
+Using cached shapely-2.1.2-cp314-cp314-macosx_10_13_x86_64.whl (1.8 MB)
+Using cached matplotlib-3.10.8-cp314-cp314-macosx_10_13_x86_64.whl (8.3 MB)
+Using cached branca-0.8.2-py3-none-any.whl (26 kB)
+Using cached contourpy-1.3.3-cp314-cp314-macosx_10_13_x86_64.whl (292 kB)
+Using cached cycler-0.12.1-py3-none-any.whl (8.3 kB)
+Using cached fonttools-4.61.1-cp314-cp314-macosx_10_15_x86_64.whl (2.4 MB)
+Using cached jinja2-3.1.6-py3-none-any.whl (134 kB)
+Using cached kiwisolver-1.4.9-cp314-cp314-macosx_10_13_x86_64.whl (66 kB)
+Using cached markupsafe-3.0.3-cp314-cp314-macosx_10_13_x86_64.whl (11 kB)
+Using cached packaging-25.0-py3-none-any.whl (66 kB)
+Using cached pillow-12.0.0-cp314-cp314-macosx_10_15_x86_64.whl (5.3 MB)
+Using cached pyogrio-0.12.1-cp314-cp314-macosx_12_0_x86_64.whl (25.2 MB)
+Using cached pyparsing-3.3.1-py3-none-any.whl (121 kB)
+Using cached pyproj-3.7.2-cp314-cp314-macosx_13_0_x86_64.whl (6.2 MB)
+Using cached python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)
+Using cached pytz-2025.2-py2.py3-none-any.whl (509 kB)
+Using cached six-1.17.0-py2.py3-none-any.whl (11 kB)
+Using cached tzdata-2025.3-py2.py3-none-any.whl (348 kB)
+Using cached cftime-1.6.5-cp314-cp314-macosx_10_15_x86_64.whl (502 kB)
+Using cached requests-2.32.5-py3-none-any.whl (64 kB)
+Using cached charset_normalizer-3.4.4-cp314-cp314-macosx_10_13_universal2.whl (207 kB)
+Using cached idna-3.11-py3-none-any.whl (71 kB)
+Using cached urllib3-2.6.2-py3-none-any.whl (131 kB)
+Using cached xyzservices-2025.11.0-py3-none-any.whl (93 kB)
+Installing collected packages: pytz, xyzservices, urllib3, tzdata, six, pyproj, pyparsing, pillow, packaging, numpy, MarkupSafe, kiwisolver, idna, fonttools, cycler, charset_normalizer, shapely, requests, python-dateutil, pyogrio, jinja2, contourpy, cftime, pandas, netCDF4, matplotlib, branca, xarray, geopandas, folium
+Successfully installed MarkupSafe-3.0.3 branca-0.8.2 cftime-1.6.5 charset_normalizer-3.4.4 contourpy-1.3.3 cycler-0.12.1 folium-0.20.0 fonttools-4.61.1 geopandas-1.1.2 idna-3.11 jinja2-3.1.6 kiwisolver-1.4.9 matplotlib-3.10.8 netCDF4-1.7.3 numpy-2.4.0 packaging-25.0 pandas-2.3.3 pillow-12.0.0 pyogrio-0.12.1 pyparsing-3.3.1 pyproj-3.7.2 python-dateutil-2.9.0.post0 pytz-2025.2 requests-2.32.5 shapely-2.1.2 six-1.17.0 tzdata-2025.3 urllib3-2.6.2 xarray-2025.12.0 xyzservices-2025.11.0
+primoportal@MacBookPro klimawerke % python3 final_visualization_demoremo.py
+
+============================================================
+REMO Climate Model - Complete Visualization Pipeline
+============================================================
+Loading remo_EUR-44.nc...
+✓ Loaded successfully
+Traceback (most recent call last):
+  File "/Users/primoportal/development/klimawerke/final_visualization_demoremo.py", line 419, in <module>
+    main()
+    ~~~~^^
+  File "/Users/primoportal/development/klimawerke/final_visualization_demoremo.py", line 386, in main
+    coord_df = extract_grid_points(ds, 'Germany')
+               ^^^^^^^^^^^^^^^^^^^
+NameError: name 'extract_grid_points' is not defined. Did you mean: 'extractgridpoints'?
+primoportal@MacBookPro klimawerke % python3 final_visualization_demoremo.py
+
+============================================================
+REMO Climate Model - Complete Visualization Pipeline
+============================================================
+Loading remo_EUR-44.nc...
+✓ Loaded successfully
+1) Extracting Germany grid points...
+   Using rotated coordinates (REMO native)...
+   Extracted 15609 grid points.
+
+  Note: Using sample of grid points for visualization
+
+[2] Creating grid polygons (cell size: 0.5°)...
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/site-packages/pandas/core/indexes/base.py", line 3812, in get_loc
+    return self._engine.get_loc(casted_key)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "pandas/_libs/index.pyx", line 167, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 196, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7088, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7096, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'grid_x'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/primoportal/development/klimawerke/final_visualization_demoremo.py", line 419, in <module>
+    main()
+    ~~~~^^
+  File "/Users/primoportal/development/klimawerke/final_visualization_demoremo.py", line 391, in main
+    gdf = create_grid_polygons(coord_sample, cell_size=0.5)
+  File "/Users/primoportal/development/klimawerke/final_visualization_demoremo.py", line 121, in create_grid_polygons
+    'grid_x': row['grid_x'],
+              ~~~^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/site-packages/pandas/core/series.py", line 1133, in __getitem__
+    return self._get_value(key)
+           ~~~~~~~~~~~~~~~^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/site-packages/pandas/core/series.py", line 1249, in _get_value
+    loc = self.index.get_loc(label)
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/site-packages/pandas/core/indexes/base.py", line 3819, in get_loc
+    raise KeyError(key) from err
+KeyError: 'grid_x'
+primoportal@MacBookPro klimawerke % python3 final_visualization_demoremo.py
+
+============================================================
+REMO Climate Model - Complete Visualization Pipeline
+============================================================
+Loading remo_EUR-44.nc...
+✓ Loaded successfully
+1) Extracting Germany grid points...
+   Using rotated coordinates (REMO native)...
+   Extracted 15609 grid points.
+
+  Note: Using sample of grid points for visualization
+
+[2] Creating grid polygons (cell size: 0.5°)...
+✓ Created 1561 polygons
+
+[3] Extracting climate parameters...
+✓ Extracted parameters for 15609 points
+
+[4] Creating interactive map...
+/Users/primoportal/development/klimawerke/final_visualization_demoremo.py:185: UserWarning: Geometry is in a geographic CRS. Results from 'centroid' are likely incorrect. Use 'GeoSeries.to_crs()' to re-project geometries to a projected CRS before this operation.
+
+  center_lat = gdf. geometry.centroid. y. mean()
+/Users/primoportal/development/klimawerke/final_visualization_demoremo.py:186: UserWarning: Geometry is in a geographic CRS. Results from 'centroid' are likely incorrect. Use 'GeoSeries.to_crs()' to re-project geometries to a projected CRS before this operation.
+
+  center_lon = gdf.geometry.centroid. x.mean()
+  Adding polygons...  0/1561
+  Adding polygons...  100/1561
+  Adding polygons...  200/1561
+  Adding polygons...  300/1561
+  Adding polygons...  400/1561
+  Adding polygons...  500/1561
+  Adding polygons...  600/1561
+  Adding polygons...  700/1561
+  Adding polygons...  800/1561
+  Adding polygons...  900/1561
+  Adding polygons...  1000/1561
+  Adding polygons...  1100/1561
+  Adding polygons...  1200/1561
+  Adding polygons...  1300/1561
+  Adding polygons...  1400/1561
+  Adding polygons...  1500/1561
+✓ Map saved to 'remo_interactive_map.html'
+
+[5] Creating parameter table...
+✓ Table saved to 'climate_parameters_table.html'
+
+[6] Creating summary report...
+/Users/primoportal/development/klimawerke/final_visualization_demoremo.py:324: FutureWarning: The return type of `Dataset.dims` will be changed to return a set of dimension names in future, in order to be more consistent with `DataArray.dims`. To access a mapping from dimension names to lengths, please use `Dataset.sizes`.
+  Grid dimensions: {dict(ds.dims)}
+
+============================================================
+REMO CLIMATE MODEL ANALYSIS - SUMMARY REPORT
+============================================================
+
+DATASET INFORMATION:
+  Time steps: 1
+  Grid dimensions: {'nhyi': 28, 'nhym': 27, 'time': 1, 'rlat': 121, 'rlon': 129, 'lev': 27, 'rlon_2': 129, 'rlat_2': 121, 'lev_2': 27}
+  Variables: ['rotated_pole', 'hyai', 'hybi', 'hyam', 'hybm', 'FIB', 'T', 'U', 'V', 'QD', 'PS', 'OMEGA', 'QW', 'FI', 'ACLC', 'BLA', 'QDBL', 'WSMX', 'GLAC', 'WS', 'SN', 'TD', 'TDCL', 'TSN', 'TD3', 'TD4', 'TD5', 'QDB', 'WL', 'TS', 'TSL', 'TSW', 'TSI', 'SEAICE', 'SICED', 'PHI', 'RLA', 'QI']
+
+EXTRACTED REGION:  Germany
+  Total grid points: 15609
+  Lat range: 17.68° - 76.82°
+  Lon range: -55.15° - 82.73°
+
+CLIMATE PARAMETERS: 
+
+OUTPUT FILES CREATED:
+  - remo_interactive_map. html (Interactive map with polygons)
+  - climate_parameters_table.html (Parameter table)
+  - climate_parameters. csv (Full parameter data)
+  - analysis_report.txt (This report)
+
+============================================================
+
+✓ Report saved to 'analysis_report. txt'
+✓ Parameters saved to 'climate_parameters. csv'
+
+============================================================
+✓ VISUALIZATION COMPLETE!
+============================================================
+
+Output files created:
+  1. remo_interactive_map. html - Open in browser!
+  2. climate_parameters_table.html - View parameters
+  3. climate_parameters.csv - All data in CSV format
+  4. analysis_report.txt - Summary statistics
+============================================================
+
+Next steps:
+  1. open remo_interactive_map.html
+  2. open climate_parameters_table.html
+  3. Review climate_parameters.csv in spreadsheet
+============================================================
+primoportal@MacBookPro klimawerke % python3
+Python 3.14.2 (v3.14.2:df793163d58, Dec  5 2025, 12:18:06) [Clang 16.0.0 (clang-1600.0.26.6)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import xarray as xr
+... 
+... ds = xr.open_dataset("remo_EUR-44.nc")
+... 
+... print(ds.rotated_pole)
+... print(ds.rotated_pole.attrs)
+... 
+<xarray.DataArray 'rotated_pole' ()> Size: 4B
+[1 values with dtype=int32]
+Attributes:
+    grid_mapping_name:          rotated_latitude_longitude
+    grid_north_pole_longitude:  -162.0
+    grid_north_pole_latitude:   39.25
+{'grid_mapping_name': 'rotated_latitude_longitude', 'grid_north_pole_longitude': np.float64(-162.0), 'grid_north_pole_latitude': np.float64(39.25)}
+>>> import xarray as xr
+... 
+... ds = xr.open_dataset("remo_EUR-44.nc")
+... 
+... print(ds.rotated_pole)
+... print(ds.rotated_pole.attrs)
+KeyboardInterrupt
+>>> exit
+primoportal@MacBookPro klimawerke % python3 final_visualization_demoremo.py
+
+Traceback (most recent call last):
+  File "/Users/primoportal/development/klimawerke/final_visualization_demoremo.py", line 18, in <module>
+    def rotated_to_geo(rlon, rlat, pole_lon = float(ds.rotated_pole.grid_north_pole_longitude), pole_lat = float(ds.rotated_pole.grid_north_pole_latitude)):
+                                                    ^^
+NameError: name 'ds' is not defined. Did you mean: 'os'?
+primoportal@MacBookPro klimawerke % python3 final_visualization_demoremo.py
+
+Traceback (most recent call last):
+  File "/Users/primoportal/development/klimawerke/final_visualization_demoremo.py", line 18, in <module>
+    def rotated_to_geo(rlon, rlat, pole_lon = float(ds.rotated_pole.grid_north_pole_longitude), pole_lat = float(ds.rotated_pole.grid_north_pole_latitude)):
+                                                    ^^
+NameError: name 'ds' is not defined. Did you mean: 'os'?
+primoportal@MacBookPro klimawerke % python3 final_visualization_demoremo.py
+
+============================================================
+REMO Climate Model - Complete Visualization Pipeline
+============================================================
+Loading remo_EUR-44.nc...
+✓ Loaded successfully
+1) Extracting Germany grid points...
+   Using rotated coordinates (REMO native)...
+   Extracted 15609 grid points.
+
+  Note: Using sample of grid points for visualization
+
+[2] Creating grid polygons (cell size: 0.5°)...
+✓ Created 1561 polygons
+
+[3] Extracting climate parameters...
+✓ Extracted parameters for 15609 points
+
+[4] Creating interactive map...
+/Users/primoportal/development/klimawerke/final_visualization_demoremo.py:187: UserWarning: Geometry is in a geographic CRS. Results from 'centroid' are likely incorrect. Use 'GeoSeries.to_crs()' to re-project geometries to a projected CRS before this operation.
+
+  center_lat = gdf. geometry.centroid. y. mean()
+/Users/primoportal/development/klimawerke/final_visualization_demoremo.py:188: UserWarning: Geometry is in a geographic CRS. Results from 'centroid' are likely incorrect. Use 'GeoSeries.to_crs()' to re-project geometries to a projected CRS before this operation.
+
+  center_lon = gdf.geometry.centroid. x.mean()
+  Adding polygons...  0/1561
+  Adding polygons...  100/1561
+  Adding polygons...  200/1561
+  Adding polygons...  300/1561
+  Adding polygons...  400/1561
+  Adding polygons...  500/1561
+  Adding polygons...  600/1561
+  Adding polygons...  700/1561
+  Adding polygons...  800/1561
+  Adding polygons...  900/1561
+  Adding polygons...  1000/1561
+  Adding polygons...  1100/1561
+  Adding polygons...  1200/1561
+  Adding polygons...  1300/1561
+  Adding polygons...  1400/1561
+  Adding polygons...  1500/1561
+✓ Map saved to 'remo_interactive_map.html'
+
+[5] Creating parameter table...
+✓ Table saved to 'climate_parameters_table.html'
+
+[6] Creating summary report...
+/Users/primoportal/development/klimawerke/final_visualization_demoremo.py:329: FutureWarning: The return type of `Dataset.dims` will be changed to return a set of dimension names in future, in order to be more consistent with `DataArray.dims`. To access a mapping from dimension names to lengths, please use `Dataset.sizes`.
+  Grid dimensions: {dict(ds.dims)}
+
+============================================================
+REMO CLIMATE MODEL ANALYSIS - SUMMARY REPORT
+============================================================
+
+DATASET INFORMATION:
+  Time steps: 1
+  Grid dimensions: {'nhyi': 28, 'nhym': 27, 'time': 1, 'rlat': 121, 'rlon': 129, 'lev': 27, 'rlon_2': 129, 'rlat_2': 121, 'lev_2': 27}
+  Variables: ['rotated_pole', 'hyai', 'hybi', 'hyam', 'hybm', 'FIB', 'T', 'U', 'V', 'QD', 'PS', 'OMEGA', 'QW', 'FI', 'ACLC', 'BLA', 'QDBL', 'WSMX', 'GLAC', 'WS', 'SN', 'TD', 'TDCL', 'TSN', 'TD3', 'TD4', 'TD5', 'QDB', 'WL', 'TS', 'TSL', 'TSW', 'TSI', 'SEAICE', 'SICED', 'PHI', 'RLA', 'QI']
+
+EXTRACTED REGION: Germany
+  Total grid points (all): 15609
+  Total grid points (DE-filter): 279
+  Lat range (DE-filter): 47.31° - 55.46°
+  Lon range (DE-filter): 5.51° - 15.98°
+
+CLIMATE PARAMETERS:
+
+OUTPUT FILES CREATED:
+  - remo_interactive_map.html (Interactive map with polygons)
+  - climate_parameters_table.html (Parameter table)
+  - climate_parameters.csv (Full parameter data)
+  - analysis_report.txt (This report)
+
+============================================================
+
+✓ Report saved to 'analysis_report.txt'
+✓ Parameters saved to 'climate_parameters.csv'
+
+============================================================
+✓ VISUALIZATION COMPLETE!
+============================================================
+
+Output files created:
+  1. remo_interactive_map. html - Open in browser!
+  2. climate_parameters_table.html - View parameters
+  3. climate_parameters.csv - All data in CSV format
+  4. analysis_report.txt - Summary statistics
+============================================================
+
+Next steps:
+  1. open remo_interactive_map.html
+  2. open climate_parameters_table.html
+  3. Review climate_parameters.csv in spreadsheet
+============================================================
+primoportal@MacBookPro klimawerke % python3 final_visualization_demoremo.py
+
+  File "/Users/primoportal/development/klimawerke/final_visualization_demoremo.py", line 389
+    ds = load_remo_data(ETCDF_FILE))
+                                   ^
+SyntaxError: unmatched ')'
+primoportal@MacBookPro klimawerke % python3 final_visualization_demoremo.py
+
+  File "/Users/primoportal/development/klimawerke/final_visualization_demoremo.py", line 384
+    print(f"\n✗ Error: {NETCDF_FILE} not found")
+    ^^^^^
+IndentationError: expected an indented block after 'if' statement on line 383
+primoportal@MacBookPro klimawerke % python3 final_visualization_demoremo.py
+
+  File "/Users/primoportal/development/klimawerke/final_visualization_demoremo.py", line 385
+    print(f"\n✗ Error: {NETCDF_FILE} not found")
+    ^^^^^
+IndentationError: expected an indented block after 'if' statement on line 384
+primoportal@MacBookPro klimawerke % python3 final_visualization_demoremo.py
+
+  File "/Users/primoportal/development/klimawerke/final_visualization_demoremo.py", line 385
+    print(f"\n✗ Error: {NETCDF_FILE} not found")
+    ^^^^^
+IndentationError: expected an indented block after 'if' statement on line 384
+primoportal@MacBookPro klimawerke % python3 final_visualization_demoremo.py
+
+  File "/Users/primoportal/development/klimawerke/final_visualization_demoremo.py", line 378
+    ef main():
+       ^^^^
+SyntaxError: invalid syntax
+primoportal@MacBookPro klimawerke % python3 final_visualization_demoremo.py
+
+============================================================
+REMO Climate Model - Complete Visualization Pipeline
+============================================================
+Loading remo_germany_subset.nc...
+✓ Loaded successfully
+1) Extracting Germany grid points...
+   Using rotated coordinates (REMO native)...
+   Extracted 10000 grid points.
+
+  Note: Using sample of grid points for visualization
+
+[2] Creating grid polygons (cell size: 0.5°)...
+✓ Created 1000 polygons
+
+[3] Extracting climate parameters...
+✓ Extracted parameters for 10000 points
+
+[4] Creating interactive map...
+/Users/primoportal/development/klimawerke/final_visualization_demoremo.py:190: UserWarning: Geometry is in a geographic CRS. Results from 'centroid' are likely incorrect. Use 'GeoSeries.to_crs()' to re-project geometries to a projected CRS before this operation.
+
+  center_lat = gdf. geometry.centroid. y. mean()
+/Users/primoportal/development/klimawerke/final_visualization_demoremo.py:191: UserWarning: Geometry is in a geographic CRS. Results from 'centroid' are likely incorrect. Use 'GeoSeries.to_crs()' to re-project geometries to a projected CRS before this operation.
+
+  center_lon = gdf.geometry.centroid. x.mean()
+  Adding polygons...  0/1000
+  Adding polygons...  100/1000
+  Adding polygons...  200/1000
+  Adding polygons...  300/1000
+  Adding polygons...  400/1000
+  Adding polygons...  500/1000
+  Adding polygons...  600/1000
+  Adding polygons...  700/1000
+  Adding polygons...  800/1000
+  Adding polygons...  900/1000
+✓ Map saved to 'remo_interactive_map.html'
+
+[5] Creating parameter table...
+✓ Table saved to 'climate_parameters_table.html'
+
+[6] Creating summary report...
+/Users/primoportal/development/klimawerke/final_visualization_demoremo.py:332: FutureWarning: The return type of `Dataset.dims` will be changed to return a set of dimension names in future, in order to be more consistent with `DataArray.dims`. To access a mapping from dimension names to lengths, please use `Dataset.sizes`.
+  Grid dimensions: {dict(ds.dims)}
+
+============================================================
+REMO CLIMATE MODEL ANALYSIS - SUMMARY REPORT
+============================================================
+
+DATASET INFORMATION:
+  Time steps: 1
+  Grid dimensions: {'nhyi': 28, 'nhym': 27, 'time': 1, 'rlat': 100, 'rlon': 100, 'lev': 27, 'rlon_2': 129, 'rlat_2': 121, 'lev_2': 27}
+  Variables: ['rotated_pole', 'hyai', 'hybi', 'hyam', 'hybm', 'FIB', 'T', 'U', 'V', 'QD', 'PS', 'OMEGA', 'QW', 'FI', 'ACLC', 'BLA', 'QDBL', 'WSMX', 'GLAC', 'WS', 'SN', 'TD', 'TDCL', 'TSN', 'TD3', 'TD4', 'TD5', 'QDB', 'WL', 'TS', 'TSL', 'TSW', 'TSI', 'SEAICE', 'SICED', 'PHI', 'RLA', 'QI']
+
+EXTRACTED REGION: Germany
+  Total grid points (all): 10000
+  Total grid points (DE-filter): 279
+  Lat range (DE-filter): 47.31° - 55.46°
+  Lon range (DE-filter): 5.51° - 15.98°
+
+CLIMATE PARAMETERS:
+
+OUTPUT FILES CREATED:
+  - remo_interactive_map.html (Interactive map with polygons)
+  - climate_parameters_table.html (Parameter table)
+  - climate_parameters.csv (Full parameter data)
+  - analysis_report.txt (This report)
+
+============================================================
+
+✓ Report saved to 'analysis_report.txt'
+✓ Parameters saved to 'climate_parameters.csv'
+
+============================================================
+✓ VISUALIZATION COMPLETE!
+============================================================
+
+Output files created:
+  1. remo_interactive_map. html - Open in browser!
+  2. climate_parameters_table.html - View parameters
+  3. climate_parameters.csv - All data in CSV format
+  4. analysis_report.txt - Summary statistics
+============================================================
+
+Next steps:
+  1. open remo_interactive_map.html
+  2. open climate_parameters_table.html
+  3. Review climate_parameters.csv in spreadsheet
+============================================================
+primoportal@MacBookPro klimawerke % python3 check_netcdf.py                
+
+=== DATASET INFO ===
+<xarray.Dataset> Size: 11MB
+Dimensions:       (nhyi: 28, nhym: 27, time: 1, rlat: 100, rlon: 100, lev: 27,
+                   rlon_2: 129, rlat_2: 121, lev_2: 27)
+Coordinates:
+  * time          (time) datetime64[ns] 8B 2006-01-01
+  * rlat          (rlat) float64 800B -22.33 -21.89 -21.45 ... 20.35 20.79 21.23
+  * rlon          (rlon) float64 800B -25.57 -25.13 -24.69 ... 17.11 17.55 17.99
+  * lev           (lev) float64 216B 1.0 2.0 3.0 4.0 5.0 ... 24.0 25.0 26.0 27.0
+  * rlon_2        (rlon_2) float64 1kB -31.51 -31.07 -30.63 ... 24.37 24.81
+  * rlat_2        (rlat_2) float64 968B -26.51 -26.07 -25.63 ... 25.85 26.29
+  * lev_2         (lev_2) float64 216B 1.0 2.0 3.0 4.0 ... 24.0 25.0 26.0 27.0
+Dimensions without coordinates: nhyi, nhym
+Data variables: (12/38)
+    rotated_pole  int32 4B ...
+    hyai          (nhyi) float64 224B ...
+    hybi          (nhyi) float64 224B ...
+    hyam          (nhym) float64 216B ...
+    hybm          (nhym) float64 216B ...
+    FIB           (time, rlat, rlon) float32 40kB ...
+    ...            ...
+    TSI           (time, rlat, rlon) float32 40kB ...
+    SEAICE        (time, rlat, rlon) float32 40kB ...
+    SICED         (time, rlat, rlon) float32 40kB ...
+    PHI           (time, rlat, rlon) float32 40kB ...
+    RLA           (time, rlat, rlon) float32 40kB ...
+    QI            (time, lev, rlat, rlon) float32 1MB ...
+Attributes:
+    CDI:          Climate Data Interface version 1.9.8 (https://mpimet.mpg.de...
+    Conventions:  CF-1.6
+    history:      Thu Mar 04 01:22:18 2021: cdo -f nc4 copy e056111t200601010...
+    CDO:          Climate Data Operators version 1.9.8 (https://mpimet.mpg.de...
+
+=== DIMENSIONS ===
+FrozenMappingWarningOnValuesAccess({'nhyi': 28, 'nhym': 27, 'time': 1, 'rlat': 100, 'rlon': 100, 'lev': 27, 'rlon_2': 129, 'rlat_2': 121, 'lev_2': 27})
+
+=== DATA VARIABLES ===
+['rotated_pole', 'hyai', 'hybi', 'hyam', 'hybm', 'FIB', 'T', 'U', 'V', 'QD', 'PS', 'OMEGA', 'QW', 'FI', 'ACLC', 'BLA', 'QDBL', 'WSMX', 'GLAC', 'WS', 'SN', 'TD', 'TDCL', 'TSN', 'TD3', 'TD4', 'TD5', 'QDB', 'WL', 'TS', 'TSL', 'TSW', 'TSI', 'SEAICE', 'SICED', 'PHI', 'RLA', 'QI']
+
+=== COORDS ===
+Coordinates:
+  * time     (time) datetime64[ns] 8B 2006-01-01
+  * rlat     (rlat) float64 800B -22.33 -21.89 -21.45 ... 20.35 20.79 21.23
+  * rlon     (rlon) float64 800B -25.57 -25.13 -24.69 ... 17.11 17.55 17.99
+  * lev      (lev) float64 216B 1.0 2.0 3.0 4.0 5.0 ... 23.0 24.0 25.0 26.0 27.0
+  * rlon_2   (rlon_2) float64 1kB -31.51 -31.07 -30.63 ... 23.93 24.37 24.81
+  * rlat_2   (rlat_2) float64 968B -26.51 -26.07 -25.63 ... 25.41 25.85 26.29
+  * lev_2    (lev_2) float64 216B 1.0 2.0 3.0 4.0 5.0 ... 24.0 25.0 26.0 27.0
+primoportal@MacBookPro klimawerke % python3 final_visualization_demoremo.py
+
+============================================================
+REMO Climate Model - Complete Visualization Pipeline
+============================================================
+Loading remo_germany_subset.nc...
+✓ Loaded successfully
+1) Extracting Germany grid points...
+   Using rotated coordinates (REMO native)...
+   Extracted 10000 grid points.
+
+  Note: Using sample of grid points for visualization
+
+[2] Creating grid polygons (cell size: 0.5°)...
+✓ Created 1000 polygons
+
+[3] Extracting climate parameters...
+✓ Extracted parameters for 10000 points
+
+[4] Creating interactive map...
+/Users/primoportal/development/klimawerke/final_visualization_demoremo.py:190: UserWarning: Geometry is in a geographic CRS. Results from 'centroid' are likely incorrect. Use 'GeoSeries.to_crs()' to re-project geometries to a projected CRS before this operation.
+
+  center_lat = gdf. geometry.centroid. y. mean()
+/Users/primoportal/development/klimawerke/final_visualization_demoremo.py:191: UserWarning: Geometry is in a geographic CRS. Results from 'centroid' are likely incorrect. Use 'GeoSeries.to_crs()' to re-project geometries to a projected CRS before this operation.
+
+  center_lon = gdf.geometry.centroid. x.mean()
+  Adding polygons...  0/1000
+  Adding polygons...  100/1000
+  Adding polygons...  200/1000
+  Adding polygons...  300/1000
+  Adding polygons...  400/1000
+  Adding polygons...  500/1000
+  Adding polygons...  600/1000
+  Adding polygons...  700/1000
+  Adding polygons...  800/1000
+  Adding polygons...  900/1000
+✓ Map saved to 'remo_interactive_map.html'
+
+[5] Creating parameter table...
+✓ Table saved to 'climate_parameters_table.html'
+
+[6] Creating summary report...
+/Users/primoportal/development/klimawerke/final_visualization_demoremo.py:332: FutureWarning: The return type of `Dataset.dims` will be changed to return a set of dimension names in future, in order to be more consistent with `DataArray.dims`. To access a mapping from dimension names to lengths, please use `Dataset.sizes`.
+  Grid dimensions: {dict(ds.dims)}
+
+============================================================
+REMO CLIMATE MODEL ANALYSIS - SUMMARY REPORT
+============================================================
+
+DATASET INFORMATION:
+  Time steps: 1
+  Grid dimensions: {'nhyi': 28, 'nhym': 27, 'time': 1, 'rlat': 100, 'rlon': 100, 'lev': 27, 'rlon_2': 129, 'rlat_2': 121, 'lev_2': 27}
+  Variables: ['rotated_pole', 'hyai', 'hybi', 'hyam', 'hybm', 'FIB', 'T', 'U', 'V', 'QD', 'PS', 'OMEGA', 'QW', 'FI', 'ACLC', 'BLA', 'QDBL', 'WSMX', 'GLAC', 'WS', 'SN', 'TD', 'TDCL', 'TSN', 'TD3', 'TD4', 'TD5', 'QDB', 'WL', 'TS', 'TSL', 'TSW', 'TSI', 'SEAICE', 'SICED', 'PHI', 'RLA', 'QI']
+
+EXTRACTED REGION: Germany
+  Total grid points (all): 10000
+  Total grid points (DE-filter): 279
+  Lat range (DE-filter): 47.31° - 55.46°
+  Lon range (DE-filter): 5.51° - 15.98°
+
+CLIMATE PARAMETERS:
+
+OUTPUT FILES CREATED:
+  - remo_interactive_map.html (Interactive map with polygons)
+  - climate_parameters_table.html (Parameter table)
+  - climate_parameters.csv (Full parameter data)
+  - analysis_report.txt (This report)
+
+============================================================
+
+✓ Report saved to 'analysis_report.txt'
+✓ Parameters saved to 'climate_parameters.csv'
+
+============================================================
+✓ VISUALIZATION COMPLETE!
+============================================================
+
+Output files created:
+  1. remo_interactive_map. html - Open in browser!
+  2. climate_parameters_table.html - View parameters
+  3. climate_parameters.csv - All data in CSV format
+  4. analysis_report.txt - Summary statistics
+============================================================
+
+Next steps:
+  1. open remo_interactive_map.html
+  2. open climate_parameters_table.html
+  3. Review climate_parameters.csv in spreadsheet
+============================================================
+primoportal@MacBookPro klimawerke % python3 final_visualization_demoremo.py
+
+============================================================
+REMO Climate Model - Complete Visualization Pipeline
+============================================================
+Loading remo_germany_subset.nc...
+✓ Loaded successfully
+1) Extracting Germany grid points...
+   Using rotated coordinates (REMO native)...
+   Extracted 10000 grid points.
+
+  Note: Using sample of grid points for visualization
+
+[2] Creating grid polygons (cell size: 0.5°)...
+✓ Created 1000 polygons
+
+[3] Extracting climate parameters...
+✓ Extracted parameters for 10000 points
+
+[4] Creating interactive map...
+/Users/primoportal/development/klimawerke/final_visualization_demoremo.py:197: UserWarning: Geometry is in a geographic CRS. Results from 'centroid' are likely incorrect. Use 'GeoSeries.to_crs()' to re-project geometries to a projected CRS before this operation.
+
+  center_lat = gdf. geometry.centroid. y. mean()
+/Users/primoportal/development/klimawerke/final_visualization_demoremo.py:198: UserWarning: Geometry is in a geographic CRS. Results from 'centroid' are likely incorrect. Use 'GeoSeries.to_crs()' to re-project geometries to a projected CRS before this operation.
+
+  center_lon = gdf.geometry.centroid. x.mean()
+  Adding polygons...  0/1000
+  Adding polygons...  100/1000
+  Adding polygons...  200/1000
+  Adding polygons...  300/1000
+  Adding polygons...  400/1000
+  Adding polygons...  500/1000
+  Adding polygons...  600/1000
+  Adding polygons...  700/1000
+  Adding polygons...  800/1000
+  Adding polygons...  900/1000
+✓ Map saved to 'remo_interactive_map.html'
+
+[5] Creating parameter table...
+✓ Table saved to 'climate_parameters_table.html'
+
+[6] Creating summary report...
+/Users/primoportal/development/klimawerke/final_visualization_demoremo.py:346: FutureWarning: The return type of `Dataset.dims` will be changed to return a set of dimension names in future, in order to be more consistent with `DataArray.dims`. To access a mapping from dimension names to lengths, please use `Dataset.sizes`.
+  Grid dimensions: {dict(ds.dims)}
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/site-packages/pandas/core/indexes/base.py", line 3812, in get_loc
+    return self._engine.get_loc(casted_key)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "pandas/_libs/index.pyx", line 167, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 196, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7088, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7096, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'TEMP2_C'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/primoportal/development/klimawerke/final_visualization_demoremo.py", line 449, in <module>
+    main()
+    ~~~~^^
+  File "/Users/primoportal/development/klimawerke/final_visualization_demoremo.py", line 431, in main
+    create_summary_report(ds, coord_df, params_df)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/primoportal/development/klimawerke/final_visualization_demoremo.py", line 360, in create_summary_report
+    Min:  {params_df['TEMP2_C'].min():.2f}°C
+           ~~~~~~~~~^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/site-packages/pandas/core/frame.py", line 4113, in __getitem__
+    indexer = self.columns.get_loc(key)
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/site-packages/pandas/core/indexes/base.py", line 3819, in get_loc
+    raise KeyError(key) from err
+KeyError: 'TEMP2_C'
+primoportal@MacBookPro klimawerke % python3 final_visualization_demoremo.py
+
+============================================================
+REMO Climate Model - Complete Visualization Pipeline
+============================================================
+Loading remo_germany_subset.nc...
+✓ Loaded successfully
+1) Extracting Germany grid points...
+   Using rotated coordinates (REMO native)...
+   Extracted 10000 grid points.
+
+  Note: Using sample of grid points for visualization
+
+[2] Creating grid polygons (cell size: 0.5°)...
+✓ Created 1000 polygons
+
+[3] Extracting climate parameters...
+✓ Extracted parameters for 10000 points
+
+[4] Creating interactive map...
+/Users/primoportal/development/klimawerke/final_visualization_demoremo.py:197: UserWarning: Geometry is in a geographic CRS. Results from 'centroid' are likely incorrect. Use 'GeoSeries.to_crs()' to re-project geometries to a projected CRS before this operation.
+
+  center_lat = gdf. geometry.centroid. y. mean()
+/Users/primoportal/development/klimawerke/final_visualization_demoremo.py:198: UserWarning: Geometry is in a geographic CRS. Results from 'centroid' are likely incorrect. Use 'GeoSeries.to_crs()' to re-project geometries to a projected CRS before this operation.
+
+  center_lon = gdf.geometry.centroid. x.mean()
+  Adding polygons...  0/1000
+  Adding polygons...  100/1000
+  Adding polygons...  200/1000
+  Adding polygons...  300/1000
+  Adding polygons...  400/1000
+  Adding polygons...  500/1000
+  Adding polygons...  600/1000
+  Adding polygons...  700/1000
+  Adding polygons...  800/1000
+  Adding polygons...  900/1000
+✓ Map saved to 'remo_interactive_map.html'
+
+[5] Creating parameter table...
+✓ Table saved to 'climate_parameters_table.html'
+
+[6] Creating summary report...
+/Users/primoportal/development/klimawerke/final_visualization_demoremo.py:346: FutureWarning: The return type of `Dataset.dims` will be changed to return a set of dimension names in future, in order to be more consistent with `DataArray.dims`. To access a mapping from dimension names to lengths, please use `Dataset.sizes`.
+  Grid dimensions: {dict(ds.dims)}
+
+============================================================
+REMO CLIMATE MODEL ANALYSIS - SUMMARY REPORT
+============================================================
+
+DATASET INFORMATION:
+  Time steps: 1
+  Grid dimensions: {'nhyi': 28, 'nhym': 27, 'time': 1, 'rlat': 100, 'rlon': 100, 'lev': 27, 'rlon_2': 129, 'rlat_2': 121, 'lev_2': 27}
+  Variables: ['rotated_pole', 'hyai', 'hybi', 'hyam', 'hybm', 'FIB', 'T', 'U', 'V', 'QD', 'PS', 'OMEGA', 'QW', 'FI', 'ACLC', 'BLA', 'QDBL', 'WSMX', 'GLAC', 'WS', 'SN', 'TD', 'TDCL', 'TSN', 'TD3', 'TD4', 'TD5', 'QDB', 'WL', 'TS', 'TSL', 'TSW', 'TSI', 'SEAICE', 'SICED', 'PHI', 'RLA', 'QI']
+
+EXTRACTED REGION: Germany
+  Total grid points (all): 10000
+  Total grid points (DE-filter): 279
+  Lat range (DE-filter): 47.31° - 55.46°
+  Lon range (DE-filter): 5.51° - 15.98°
+
+CLIMATE PARAMETERS:
+
+  Temperature (°C):
+    Min:  -47.03°C
+    Max:  19.83°C
+    Mean: 3.68°C
+
+  Longwave radiation (W/m²):
+    Min:  -39.98 W/m²
+    Max:  63.74 W/m²
+    Mean: 12.16 W/m²
+
+OUTPUT FILES CREATED:
+  - remo_interactive_map.html (Interactive map with polygons)
+  - climate_parameters_table.html (Parameter table)
+  - climate_parameters.csv (Full parameter data)
+  - analysis_report.txt (This report)
+
+============================================================
+
+✓ Report saved to 'analysis_report.txt'
+✓ Parameters saved to 'climate_parameters.csv'
+
+============================================================
+✓ VISUALIZATION COMPLETE!
+============================================================
+
+Output files created:
+  1. remo_interactive_map. html - Open in browser!
+  2. climate_parameters_table.html - View parameters
+  3. climate_parameters.csv - All data in CSV format
+  4. analysis_report.txt - Summary statistics
+============================================================
+
+Next steps:
+  1. open remo_interactive_map.html
+  2. open climate_parameters_table.html
+  3. Review climate_parameters.csv in spreadsheet
+============================================================
+primoportal@MacBookPro klimawerke % python3 check_netcdf.py                
+
+=== DATASET INFO ===
+<xarray.Dataset> Size: 11MB
+Dimensions:       (nhyi: 28, nhym: 27, time: 1, rlat: 100, rlon: 100, lev: 27,
+                   rlon_2: 129, rlat_2: 121, lev_2: 27)
+Coordinates:
+  * time          (time) datetime64[ns] 8B 2006-01-01
+  * rlat          (rlat) float64 800B -22.33 -21.89 -21.45 ... 20.35 20.79 21.23
+  * rlon          (rlon) float64 800B -25.57 -25.13 -24.69 ... 17.11 17.55 17.99
+  * lev           (lev) float64 216B 1.0 2.0 3.0 4.0 5.0 ... 24.0 25.0 26.0 27.0
+  * rlon_2        (rlon_2) float64 1kB -31.51 -31.07 -30.63 ... 24.37 24.81
+  * rlat_2        (rlat_2) float64 968B -26.51 -26.07 -25.63 ... 25.85 26.29
+  * lev_2         (lev_2) float64 216B 1.0 2.0 3.0 4.0 ... 24.0 25.0 26.0 27.0
+Dimensions without coordinates: nhyi, nhym
+Data variables: (12/38)
+    rotated_pole  int32 4B ...
+    hyai          (nhyi) float64 224B ...
+    hybi          (nhyi) float64 224B ...
+    hyam          (nhym) float64 216B ...
+    hybm          (nhym) float64 216B ...
+    FIB           (time, rlat, rlon) float32 40kB ...
+    ...            ...
+    TSI           (time, rlat, rlon) float32 40kB ...
+    SEAICE        (time, rlat, rlon) float32 40kB ...
+    SICED         (time, rlat, rlon) float32 40kB ...
+    PHI           (time, rlat, rlon) float32 40kB ...
+    RLA           (time, rlat, rlon) float32 40kB ...
+    QI            (time, lev, rlat, rlon) float32 1MB ...
+Attributes:
+    CDI:          Climate Data Interface version 1.9.8 (https://mpimet.mpg.de...
+    Conventions:  CF-1.6
+    history:      Thu Mar 04 01:22:18 2021: cdo -f nc4 copy e056111t200601010...
+    CDO:          Climate Data Operators version 1.9.8 (https://mpimet.mpg.de...
+
+=== DIMENSIONS ===
+FrozenMappingWarningOnValuesAccess({'nhyi': 28, 'nhym': 27, 'time': 1, 'rlat': 100, 'rlon': 100, 'lev': 27, 'rlon_2': 129, 'rlat_2': 121, 'lev_2': 27})
+
+=== DATA VARIABLES ===
+['rotated_pole', 'hyai', 'hybi', 'hyam', 'hybm', 'FIB', 'T', 'U', 'V', 'QD', 'PS', 'OMEGA', 'QW', 'FI', 'ACLC', 'BLA', 'QDBL', 'WSMX', 'GLAC', 'WS', 'SN', 'TD', 'TDCL', 'TSN', 'TD3', 'TD4', 'TD5', 'QDB', 'WL', 'TS', 'TSL', 'TSW', 'TSI', 'SEAICE', 'SICED', 'PHI', 'RLA', 'QI']
+
+=== COORDS ===
+Coordinates:
+  * time     (time) datetime64[ns] 8B 2006-01-01
+  * rlat     (rlat) float64 800B -22.33 -21.89 -21.45 ... 20.35 20.79 21.23
+  * rlon     (rlon) float64 800B -25.57 -25.13 -24.69 ... 17.11 17.55 17.99
+  * lev      (lev) float64 216B 1.0 2.0 3.0 4.0 5.0 ... 23.0 24.0 25.0 26.0 27.0
+  * rlon_2   (rlon_2) float64 1kB -31.51 -31.07 -30.63 ... 23.93 24.37 24.81
+  * rlat_2   (rlat_2) float64 968B -26.51 -26.07 -25.63 ... 25.41 25.85 26.29
+  * lev_2    (lev_2) float64 216B 1.0 2.0 3.0 4.0 5.0 ... 24.0 25.0 26.0 27.0
+primoportal@MacBookPro klimawerke % python3 final_visualization_demoremo.py
+
+============================================================
+REMO Climate Model - Complete Visualization Pipeline
+============================================================
+Loading remo_germany_subset.nc...
+✓ Loaded successfully
+1) Extracting Germany grid points...
+   Using rotated coordinates (REMO native)...
+   Extracted 10000 grid points.
+
+  Note: Using sample of grid points for visualization
+
+[2] Creating grid polygons (cell size: 0.5°)...
+✓ Created 1000 polygons
+
+[3] Extracting climate parameters...
+✓ Extracted parameters for 10000 points
+
+[4] Creating interactive map...
+/Users/primoportal/development/klimawerke/final_visualization_demoremo.py:263: UserWarning: Geometry is in a geographic CRS. Results from 'centroid' are likely incorrect. Use 'GeoSeries.to_crs()' to re-project geometries to a projected CRS before this operation.
+
+  center_lat = gdf. geometry.centroid. y. mean()
+/Users/primoportal/development/klimawerke/final_visualization_demoremo.py:264: UserWarning: Geometry is in a geographic CRS. Results from 'centroid' are likely incorrect. Use 'GeoSeries.to_crs()' to re-project geometries to a projected CRS before this operation.
+
+  center_lon = gdf.geometry.centroid. x.mean()
+  Adding polygons...  0/1000
+  Adding polygons...  100/1000
+  Adding polygons...  200/1000
+  Adding polygons...  300/1000
+  Adding polygons...  400/1000
+  Adding polygons...  500/1000
+  Adding polygons...  600/1000
+  Adding polygons...  700/1000
+  Adding polygons...  800/1000
+  Adding polygons...  900/1000
+✓ Map saved to 'remo_interactive_map.html'
+
+[5] Creating parameter table...
+✓ Table saved to 'climate_parameters_table.html'
+
+[6] Creating summary report...
+/Users/primoportal/development/klimawerke/final_visualization_demoremo.py:401: FutureWarning: The return type of `Dataset.dims` will be changed to return a set of dimension names in future, in order to be more consistent with `DataArray.dims`. To access a mapping from dimension names to lengths, please use `Dataset.sizes`.
+  Grid dimensions: {dict(ds.dims)}
+
+============================================================
+REMO CLIMATE MODEL ANALYSIS - SUMMARY REPORT
+============================================================
+
+DATASET INFORMATION:
+  Time steps: 1
+  Grid dimensions: {'nhyi': 28, 'nhym': 27, 'time': 1, 'rlat': 100, 'rlon': 100, 'lev': 27, 'rlon_2': 129, 'rlat_2': 121, 'lev_2': 27}
+  Variables: ['rotated_pole', 'hyai', 'hybi', 'hyam', 'hybm', 'FIB', 'T', 'U', 'V', 'QD', 'PS', 'OMEGA', 'QW', 'FI', 'ACLC', 'BLA', 'QDBL', 'WSMX', 'GLAC', 'WS', 'SN', 'TD', 'TDCL', 'TSN', 'TD3', 'TD4', 'TD5', 'QDB', 'WL', 'TS', 'TSL', 'TSW', 'TSI', 'SEAICE', 'SICED', 'PHI', 'RLA', 'QI']
+
+EXTRACTED REGION: Germany
+  Total grid points (all): 10000
+  Total grid points (DE-filter): 279
+  Lat range (DE-filter): 47.31° - 55.46°
+  Lon range (DE-filter): 5.51° - 15.98°
+
+CLIMATE PARAMETERS:
+
+  Temperature (°C):
+    Min:  -47.03°C
+    Max:  19.83°C
+    Mean: 3.68°C
+
+  Longwave radiation (W/m²):
+    Min:  -39.98 W/m²
+    Max:  63.74 W/m²
+    Mean: 12.16 W/m²
+
+  Wind speed (m/s):
+    Min:  0.00 m/s
+    Max:  1.26 m/s
+    Mean: 0.21 m/s
+
+  Cloud cover (-):
+    Min:  nan
+    Max:  nan
+    Mean: nan
+
+  Precipitation (mm):
+    Min:  nan mm
+    Max:  nan mm
+    Mean: nan mm
+
+OUTPUT FILES CREATED:
+  - remo_interactive_map.html (Interactive map with polygons)
+  - climate_parameters_table.html (Parameter table)
+  - climate_parameters.csv (Full parameter data)
+  - analysis_report.txt (This report)
+
+============================================================
+
+✓ Report saved to 'analysis_report.txt'
+✓ Parameters saved to 'climate_parameters.csv'
+
+============================================================
+✓ VISUALIZATION COMPLETE!
+============================================================
+
+Output files created:
+  1. remo_interactive_map. html - Open in browser!
+  2. climate_parameters_table.html - View parameters
+  3. climate_parameters.csv - All data in CSV format
+  4. analysis_report.txt - Summary statistics
+============================================================
+
+Next steps:
+  1. open remo_interactive_map.html
+  2. open climate_parameters_table.html
+  3. Review climate_parameters.csv in spreadsheet
+============================================================
+primoportal@MacBookPro klimawerke % python3 final_visualization_demoremo.py
+
+============================================================
+REMO Climate Model - Complete Visualization Pipeline
+============================================================
+Loading remo_germany_subset.nc...
+✓ Loaded successfully
+1) Extracting Germany grid points...
+   Using rotated coordinates (REMO native)...
+   Extracted 10000 grid points.
+
+  Note: Using sample of grid points for visualization
+
+[2] Creating grid polygons (cell size: 0.5°)...
+✓ Created 1000 polygons
+
+[3] Extracting climate parameters...
+✓ Extracted parameters for 10000 points
+
+[4] Creating interactive map...
+/Users/primoportal/development/klimawerke/final_visualization_demoremo.py:263: UserWarning: Geometry is in a geographic CRS. Results from 'centroid' are likely incorrect. Use 'GeoSeries.to_crs()' to re-project geometries to a projected CRS before this operation.
+
+  center_lat = gdf. geometry.centroid. y. mean()
+/Users/primoportal/development/klimawerke/final_visualization_demoremo.py:264: UserWarning: Geometry is in a geographic CRS. Results from 'centroid' are likely incorrect. Use 'GeoSeries.to_crs()' to re-project geometries to a projected CRS before this operation.
+
+  center_lon = gdf.geometry.centroid. x.mean()
+  Adding polygons...  0/1000
+  Adding polygons...  100/1000
+  Adding polygons...  200/1000
+  Adding polygons...  300/1000
+  Adding polygons...  400/1000
+  Adding polygons...  500/1000
+  Adding polygons...  600/1000
+  Adding polygons...  700/1000
+  Adding polygons...  800/1000
+  Adding polygons...  900/1000
+✓ Map saved to 'remo_interactive_map.html'
+
+[5] Creating parameter table...
+✓ Table saved to 'climate_parameters_table.html'
+
+[6] Creating summary report...
+/Users/primoportal/development/klimawerke/final_visualization_demoremo.py:424: FutureWarning: The return type of `Dataset.dims` will be changed to return a set of dimension names in future, in order to be more consistent with `DataArray.dims`. To access a mapping from dimension names to lengths, please use `Dataset.sizes`.
+  Grid dimensions: {dict(ds.dims)}
+
+============================================================
+REMO CLIMATE MODEL ANALYSIS - SUMMARY REPORT
+============================================================
+
+DATASET INFORMATION:
+  Time steps: 1
+  Grid dimensions: {'nhyi': 28, 'nhym': 27, 'time': 1, 'rlat': 100, 'rlon': 100, 'lev': 27, 'rlon_2': 129, 'rlat_2': 121, 'lev_2': 27}
+  Variables: ['rotated_pole', 'hyai', 'hybi', 'hyam', 'hybm', 'FIB', 'T', 'U', 'V', 'QD', 'PS', 'OMEGA', 'QW', 'FI', 'ACLC', 'BLA', 'QDBL', 'WSMX', 'GLAC', 'WS', 'SN', 'TD', 'TDCL', 'TSN', 'TD3', 'TD4', 'TD5', 'QDB', 'WL', 'TS', 'TSL', 'TSW', 'TSI', 'SEAICE', 'SICED', 'PHI', 'RLA', 'QI']
+
+EXTRACTED REGION: Germany
+  Total grid points (all): 10000
+  Total grid points (DE-filter): 279
+  Lat range (DE-filter): 47.31° - 55.46°
+  Lon range (DE-filter): 5.51° - 15.98°
+
+CLIMATE PARAMETERS:
+
+  Temperature (°C):
+    Min:  -47.03°C
+    Max:  19.83°C
+    Mean: 3.68°C
+
+  Longwave radiation (W/m²):
+    Min:  -39.98 W/m²
+    Max:  63.74 W/m²
+    Mean: 12.16 W/m²
+
+  Wind speed (m/s):
+    Min:  0.00 m/s
+    Max:  1.26 m/s
+    Mean: 0.21 m/s
+
+  Cloud cover (-):
+    Min:  nan
+    Max:  nan
+    Mean: nan
+
+  Precipitation (mm):
+    Min:  nan mm
+    Max:  nan mm
+    Mean: nan mm
+
+OUTPUT FILES CREATED:
+  - remo_interactive_map.html (Interactive map with polygons)
+  - climate_parameters_table.html (Parameter table)
+  - climate_parameters.csv (Full parameter data)
+  - analysis_report.txt (This report)
+
+============================================================
+
+✓ Report saved to 'analysis_report.txt'
+✓ Parameters saved to 'climate_parameters.csv'
+
+============================================================
+✓ VISUALIZATION COMPLETE!
+============================================================
+
+Output files created:
+  1. remo_interactive_map. html - Open in browser!
+  2. climate_parameters_table.html - View parameters
+  3. climate_parameters.csv - All data in CSV format
+  4. analysis_report.txt - Summary statistics
+============================================================
+
+Next steps:
+  1. open remo_interactive_map.html
+  2. open climate_parameters_table.html
+  3. Review climate_parameters.csv in spreadsheet
+============================================================
+primoportal@MacBookPro klimawerke % python3 check_netcdf.py                
+
+=== DATASET INFO ===
+<xarray.Dataset> Size: 11MB
+Dimensions:       (nhyi: 28, nhym: 27, time: 1, rlat: 100, rlon: 100, lev: 27,
+                   rlon_2: 129, rlat_2: 121, lev_2: 27)
+Coordinates:
+  * time          (time) datetime64[ns] 8B 2006-01-01
+  * rlat          (rlat) float64 800B -22.33 -21.89 -21.45 ... 20.35 20.79 21.23
+  * rlon          (rlon) float64 800B -25.57 -25.13 -24.69 ... 17.11 17.55 17.99
+  * lev           (lev) float64 216B 1.0 2.0 3.0 4.0 5.0 ... 24.0 25.0 26.0 27.0
+  * rlon_2        (rlon_2) float64 1kB -31.51 -31.07 -30.63 ... 24.37 24.81
+  * rlat_2        (rlat_2) float64 968B -26.51 -26.07 -25.63 ... 25.85 26.29
+  * lev_2         (lev_2) float64 216B 1.0 2.0 3.0 4.0 ... 24.0 25.0 26.0 27.0
+Dimensions without coordinates: nhyi, nhym
+Data variables: (12/38)
+    rotated_pole  int32 4B ...
+    hyai          (nhyi) float64 224B ...
+    hybi          (nhyi) float64 224B ...
+    hyam          (nhym) float64 216B ...
+    hybm          (nhym) float64 216B ...
+    FIB           (time, rlat, rlon) float32 40kB ...
+    ...            ...
+    TSI           (time, rlat, rlon) float32 40kB ...
+    SEAICE        (time, rlat, rlon) float32 40kB ...
+    SICED         (time, rlat, rlon) float32 40kB ...
+    PHI           (time, rlat, rlon) float32 40kB ...
+    RLA           (time, rlat, rlon) float32 40kB ...
+    QI            (time, lev, rlat, rlon) float32 1MB ...
+Attributes:
+    CDI:          Climate Data Interface version 1.9.8 (https://mpimet.mpg.de...
+    Conventions:  CF-1.6
+    history:      Thu Mar 04 01:22:18 2021: cdo -f nc4 copy e056111t200601010...
+    CDO:          Climate Data Operators version 1.9.8 (https://mpimet.mpg.de...
+
+=== DIMENSIONS ===
+FrozenMappingWarningOnValuesAccess({'nhyi': 28, 'nhym': 27, 'time': 1, 'rlat': 100, 'rlon': 100, 'lev': 27, 'rlon_2': 129, 'rlat_2': 121, 'lev_2': 27})
+
+=== DATA VARIABLES ===
+['rotated_pole', 'hyai', 'hybi', 'hyam', 'hybm', 'FIB', 'T', 'U', 'V', 'QD', 'PS', 'OMEGA', 'QW', 'FI', 'ACLC', 'BLA', 'QDBL', 'WSMX', 'GLAC', 'WS', 'SN', 'TD', 'TDCL', 'TSN', 'TD3', 'TD4', 'TD5', 'QDB', 'WL', 'TS', 'TSL', 'TSW', 'TSI', 'SEAICE', 'SICED', 'PHI', 'RLA', 'QI']
+
+=== COORDS ===
+Coordinates:
+  * time     (time) datetime64[ns] 8B 2006-01-01
+  * rlat     (rlat) float64 800B -22.33 -21.89 -21.45 ... 20.35 20.79 21.23
+  * rlon     (rlon) float64 800B -25.57 -25.13 -24.69 ... 17.11 17.55 17.99
+  * lev      (lev) float64 216B 1.0 2.0 3.0 4.0 5.0 ... 23.0 24.0 25.0 26.0 27.0
+  * rlon_2   (rlon_2) float64 1kB -31.51 -31.07 -30.63 ... 23.93 24.37 24.81
+  * rlat_2   (rlat_2) float64 968B -26.51 -26.07 -25.63 ... 25.41 25.85 26.29
+  * lev_2    (lev_2) float64 216B 1.0 2.0 3.0 4.0 5.0 ... 24.0 25.0 26.0 27.0
+primoportal@MacBookPro klimawerke % python3 final_visualization_demoremo.py
+
+============================================================
+REMO Climate Model - Complete Visualization Pipeline
+============================================================
+Loading remo_germany_subset.nc...
+✓ Loaded successfully
+Traceback (most recent call last):
+  File "/Users/primoportal/development/klimawerke/final_visualization_demoremo.py", line 551, in <module>
+    main()
+    ~~~~^^
+  File "/Users/primoportal/development/klimawerke/final_visualization_demoremo.py", line 512, in main
+    coord_df_DE = coord_df.query(
+                  ^^^^^^^^
+NameError: name 'coord_df' is not defined
+primoportal@MacBookPro klimawerke % python3 final_visualization_demoremo.py
+
+============================================================
+REMO Climate Model - Complete Visualization Pipeline
+============================================================
+Loading remo_germany_subset.nc...
+✓ Loaded successfully
+1) Extracting Germany grid points...
+   Using rotated coordinates (REMO native)...
+   Extracted 10000 grid points.
+  Filtered to 279 grid points in Germany
+
+ Note: Using sample of grid points for visualization
+
+[2] Creating grid polygons (cell size: 0.5°)...
+✓ Created 28 polygons
+
+[3] Extracting climate parameters...
+✓ Extracted parameters for 28 points
+
+[3] Extracting climate parameters...
+✓ Extracted parameters for 10000 points
+
+[4] Creating interactive map...
+/Users/primoportal/development/klimawerke/final_visualization_demoremo.py:263: UserWarning: Geometry is in a geographic CRS. Results from 'centroid' are likely incorrect. Use 'GeoSeries.to_crs()' to re-project geometries to a projected CRS before this operation.
+
+  center_lat = gdf. geometry.centroid. y. mean()
+/Users/primoportal/development/klimawerke/final_visualization_demoremo.py:264: UserWarning: Geometry is in a geographic CRS. Results from 'centroid' are likely incorrect. Use 'GeoSeries.to_crs()' to re-project geometries to a projected CRS before this operation.
+
+  center_lon = gdf.geometry.centroid. x.mean()
+  Adding polygons...  0/28
+✓ Map saved to 'remo_interactive_map.html'
+
+[5] Creating parameter table...
+✓ Table saved to 'climate_parameters_table.html'
+
+[6] Creating summary report...
+/Users/primoportal/development/klimawerke/final_visualization_demoremo.py:424: FutureWarning: The return type of `Dataset.dims` will be changed to return a set of dimension names in future, in order to be more consistent with `DataArray.dims`. To access a mapping from dimension names to lengths, please use `Dataset.sizes`.
+  Grid dimensions: {dict(ds.dims)}
+
+============================================================
+REMO CLIMATE MODEL ANALYSIS - SUMMARY REPORT
+============================================================
+
+DATASET INFORMATION:
+  Time steps: 1
+  Grid dimensions: {'nhyi': 28, 'nhym': 27, 'time': 1, 'rlat': 100, 'rlon': 100, 'lev': 27, 'rlon_2': 129, 'rlat_2': 121, 'lev_2': 27}
+  Variables: ['rotated_pole', 'hyai', 'hybi', 'hyam', 'hybm', 'FIB', 'T', 'U', 'V', 'QD', 'PS', 'OMEGA', 'QW', 'FI', 'ACLC', 'BLA', 'QDBL', 'WSMX', 'GLAC', 'WS', 'SN', 'TD', 'TDCL', 'TSN', 'TD3', 'TD4', 'TD5', 'QDB', 'WL', 'TS', 'TSL', 'TSW', 'TSI', 'SEAICE', 'SICED', 'PHI', 'RLA', 'QI']
+
+EXTRACTED REGION: Germany
+  Total grid points (all): 10000
+  Total grid points (DE-filter): 279
+  Lat range (DE-filter): 47.31° - 55.46°
+  Lon range (DE-filter): 5.51° - 15.98°
+
+CLIMATE PARAMETERS:
+
+  Temperature (°C):
+    Min:  -47.03°C
+    Max:  19.83°C
+    Mean: 3.68°C
+
+  Longwave radiation (W/m²):
+    Min:  -39.98 W/m²
+    Max:  63.74 W/m²
+    Mean: 12.16 W/m²
+
+  Wind speed (m/s):
+    Min:  0.00 m/s
+    Max:  1.26 m/s
+    Mean: 0.21 m/s
+
+  Cloud cover (-):
+    Min:  nan
+    Max:  nan
+    Mean: nan
+
+  Precipitation (mm):
+    Min:  nan mm
+    Max:  nan mm
+    Mean: nan mm
+
+OUTPUT FILES CREATED:
+  - remo_interactive_map.html (Interactive map with polygons)
+  - climate_parameters_table.html (Parameter table)
+  - climate_parameters.csv (Full parameter data)
+  - analysis_report.txt (This report)
+
+============================================================
+
+✓ Report saved to 'analysis_report.txt'
+✓ Parameters saved to 'climate_parameters.csv'
+
+============================================================
+✓ VISUALIZATION COMPLETE!
+============================================================
+
+Output files created:
+  1. remo_interactive_map. html - Open in browser!
+  2. climate_parameters_table.html - View parameters
+  3. climate_parameters.csv - All data in CSV format
+  4. analysis_report.txt - Summary statistics
+============================================================
+
+Next steps:
+  1. open remo_interactive_map.html
+  2. open climate_parameters_table.html
+  3. Review climate_parameters.csv in spreadsheet
+============================================================
+primoportal@MacBookPro klimawerke % python3 final_visualization_demoremo.py
+
+============================================================
+REMO Climate Model - Complete Visualization Pipeline
+============================================================
+Loading remo_germany_subset.nc...
+✓ Loaded successfully
+1) Extracting Germany grid points...
+   Using rotated coordinates (REMO native)...
+   Extracted 10000 grid points.
+  Filtered to 279 grid points in Germany
+
+ Note: Using sample of grid points for visualization
+
+[2] Creating grid polygons (cell size: 0.5°)...
+✓ Created 56 polygons
+
+[3] Extracting climate parameters...
+✓ Extracted parameters for 56 points
+
+[3] Extracting climate parameters...
+✓ Extracted parameters for 10000 points
+
+[4] Creating interactive map...
+/Users/primoportal/development/klimawerke/final_visualization_demoremo.py:263: UserWarning: Geometry is in a geographic CRS. Results from 'centroid' are likely incorrect. Use 'GeoSeries.to_crs()' to re-project geometries to a projected CRS before this operation.
+
+  center_lat = gdf. geometry.centroid. y. mean()
+/Users/primoportal/development/klimawerke/final_visualization_demoremo.py:264: UserWarning: Geometry is in a geographic CRS. Results from 'centroid' are likely incorrect. Use 'GeoSeries.to_crs()' to re-project geometries to a projected CRS before this operation.
+
+  center_lon = gdf.geometry.centroid. x.mean()
+  Adding polygons...  0/56
+✓ Map saved to 'remo_interactive_map.html'
+
+[5] Creating parameter table...
+✓ Table saved to 'climate_parameters_table.html'
+
+[6] Creating summary report...
+/Users/primoportal/development/klimawerke/final_visualization_demoremo.py:424: FutureWarning: The return type of `Dataset.dims` will be changed to return a set of dimension names in future, in order to be more consistent with `DataArray.dims`. To access a mapping from dimension names to lengths, please use `Dataset.sizes`.
+  Grid dimensions: {dict(ds.dims)}
+
+============================================================
+REMO CLIMATE MODEL ANALYSIS - SUMMARY REPORT
+============================================================
+
+DATASET INFORMATION:
+  Time steps: 1
+  Grid dimensions: {'nhyi': 28, 'nhym': 27, 'time': 1, 'rlat': 100, 'rlon': 100, 'lev': 27, 'rlon_2': 129, 'rlat_2': 121, 'lev_2': 27}
+  Variables: ['rotated_pole', 'hyai', 'hybi', 'hyam', 'hybm', 'FIB', 'T', 'U', 'V', 'QD', 'PS', 'OMEGA', 'QW', 'FI', 'ACLC', 'BLA', 'QDBL', 'WSMX', 'GLAC', 'WS', 'SN', 'TD', 'TDCL', 'TSN', 'TD3', 'TD4', 'TD5', 'QDB', 'WL', 'TS', 'TSL', 'TSW', 'TSI', 'SEAICE', 'SICED', 'PHI', 'RLA', 'QI']
+
+EXTRACTED REGION: Germany
+  Total grid points (all): 10000
+  Total grid points (DE-filter): 279
+  Lat range (DE-filter): 47.31° - 55.46°
+  Lon range (DE-filter): 5.51° - 15.98°
+
+CLIMATE PARAMETERS:
+
+  Temperature (°C):
+    Min:  -47.03°C
+    Max:  19.83°C
+    Mean: 3.68°C
+
+  Longwave radiation (W/m²):
+    Min:  -39.98 W/m²
+    Max:  63.74 W/m²
+    Mean: 12.16 W/m²
+
+  Wind speed (m/s):
+    Min:  0.00 m/s
+    Max:  1.26 m/s
+    Mean: 0.21 m/s
+
+  Cloud cover (-):
+    Min:  nan
+    Max:  nan
+    Mean: nan
+
+  Precipitation (mm):
+    Min:  nan mm
+    Max:  nan mm
+    Mean: nan mm
+
+OUTPUT FILES CREATED:
+  - remo_interactive_map.html (Interactive map with polygons)
+  - climate_parameters_table.html (Parameter table)
+  - climate_parameters.csv (Full parameter data)
+  - analysis_report.txt (This report)
+
+============================================================
+
+✓ Report saved to 'analysis_report.txt'
+✓ Parameters saved to 'climate_parameters.csv'
+
+============================================================
+✓ VISUALIZATION COMPLETE!
+============================================================
+
+Output files created:
+  1. remo_interactive_map. html - Open in browser!
+  2. climate_parameters_table.html - View parameters
+  3. climate_parameters.csv - All data in CSV format
+  4. analysis_report.txt - Summary statistics
+============================================================
+
+Next steps:
+  1. open remo_interactive_map.html
+  2. open climate_parameters_table.html
+  3. Review climate_parameters.csv in spreadsheet
+============================================================
+primoportal@MacBookPro klimawerke % python3 final_visualization_demoremo.py
+
+============================================================
+REMO Climate Model - Complete Visualization Pipeline
+============================================================
+Loading remo_germany_subset.nc...
+✓ Loaded successfully
+1) Extracting Germany grid points...
+   Using rotated coordinates (REMO native)...
+   Extracted 10000 grid points.
+  Filtered to 279 grid points in Germany
+
+ Note: Using sample of grid points for visualization
+
+[2] Creating grid polygons (cell size: 0.05°)...
+✓ Created 140 polygons
+
+[3] Extracting climate parameters...
+✓ Extracted parameters for 140 points
+
+[3] Extracting climate parameters...
+✓ Extracted parameters for 10000 points
+
+[4] Creating interactive map...
+/Users/primoportal/development/klimawerke/final_visualization_demoremo.py:263: UserWarning: Geometry is in a geographic CRS. Results from 'centroid' are likely incorrect. Use 'GeoSeries.to_crs()' to re-project geometries to a projected CRS before this operation.
+
+  center_lat = gdf. geometry.centroid. y. mean()
+/Users/primoportal/development/klimawerke/final_visualization_demoremo.py:264: UserWarning: Geometry is in a geographic CRS. Results from 'centroid' are likely incorrect. Use 'GeoSeries.to_crs()' to re-project geometries to a projected CRS before this operation.
+
+  center_lon = gdf.geometry.centroid. x.mean()
+  Adding polygons...  0/140
+  Adding polygons...  100/140
+✓ Map saved to 'remo_interactive_map.html'
+
+[5] Creating parameter table...
+✓ Table saved to 'climate_parameters_table.html'
+
+[6] Creating summary report...
+/Users/primoportal/development/klimawerke/final_visualization_demoremo.py:424: FutureWarning: The return type of `Dataset.dims` will be changed to return a set of dimension names in future, in order to be more consistent with `DataArray.dims`. To access a mapping from dimension names to lengths, please use `Dataset.sizes`.
+  Grid dimensions: {dict(ds.dims)}
+
+============================================================
+REMO CLIMATE MODEL ANALYSIS - SUMMARY REPORT
+============================================================
+
+DATASET INFORMATION:
+  Time steps: 1
+  Grid dimensions: {'nhyi': 28, 'nhym': 27, 'time': 1, 'rlat': 100, 'rlon': 100, 'lev': 27, 'rlon_2': 129, 'rlat_2': 121, 'lev_2': 27}
+  Variables: ['rotated_pole', 'hyai', 'hybi', 'hyam', 'hybm', 'FIB', 'T', 'U', 'V', 'QD', 'PS', 'OMEGA', 'QW', 'FI', 'ACLC', 'BLA', 'QDBL', 'WSMX', 'GLAC', 'WS', 'SN', 'TD', 'TDCL', 'TSN', 'TD3', 'TD4', 'TD5', 'QDB', 'WL', 'TS', 'TSL', 'TSW', 'TSI', 'SEAICE', 'SICED', 'PHI', 'RLA', 'QI']
+
+EXTRACTED REGION: Germany
+  Total grid points (all): 10000
+  Total grid points (DE-filter): 279
+  Lat range (DE-filter): 47.31° - 55.46°
+  Lon range (DE-filter): 5.51° - 15.98°
+
+CLIMATE PARAMETERS:
+
+  Temperature (°C):
+    Min:  -47.03°C
+    Max:  19.83°C
+    Mean: 3.68°C
+
+  Longwave radiation (W/m²):
+    Min:  -39.98 W/m²
+    Max:  63.74 W/m²
+    Mean: 12.16 W/m²
+
+  Wind speed (m/s):
+    Min:  0.00 m/s
+    Max:  1.26 m/s
+    Mean: 0.21 m/s
+
+  Cloud cover (-):
+    Min:  nan
+    Max:  nan
+    Mean: nan
+
+  Precipitation (mm):
+    Min:  nan mm
+    Max:  nan mm
+    Mean: nan mm
+
+OUTPUT FILES CREATED:
+  - remo_interactive_map.html (Interactive map with polygons)
+  - climate_parameters_table.html (Parameter table)
+  - climate_parameters.csv (Full parameter data)
+  - analysis_report.txt (This report)
+
+============================================================
+
+✓ Report saved to 'analysis_report.txt'
+✓ Parameters saved to 'climate_parameters.csv'
+
+============================================================
+✓ VISUALIZATION COMPLETE!
+============================================================
+
+Output files created:
+  1. remo_interactive_map. html - Open in browser!
+  2. climate_parameters_table.html - View parameters
+  3. climate_parameters.csv - All data in CSV format
+  4. analysis_report.txt - Summary statistics
+============================================================
+
+Next steps:
+  1. open remo_interactive_map.html
+  2. open climate_parameters_table.html
+  3. Review climate_parameters.csv in spreadsheet
+============================================================
+primoportal@MacBookPro klimawerke % python3 final_visualization_demoremo.py
+
+============================================================
+REMO Climate Model - Complete Visualization Pipeline
+============================================================
+Loading remo_germany_subset.nc...
+✓ Loaded successfully
+1) Extracting Germany grid points...
+   Using rotated coordinates (REMO native)...
+   Extracted 10000 grid points.
+  Filtered to 279 grid points in Germany
+
+ Note: Using sample of grid points for visualization
+
+[2] Creating grid polygons (cell size: 0.1°)...
+✓ Created 279 polygons
+
+[3] Extracting climate parameters...
+✓ Extracted parameters for 279 points
+
+[3] Extracting climate parameters...
+✓ Extracted parameters for 10000 points
+
+[4] Creating interactive map...
+/Users/primoportal/development/klimawerke/final_visualization_demoremo.py:263: UserWarning: Geometry is in a geographic CRS. Results from 'centroid' are likely incorrect. Use 'GeoSeries.to_crs()' to re-project geometries to a projected CRS before this operation.
+
+  center_lat = gdf. geometry.centroid. y. mean()
+/Users/primoportal/development/klimawerke/final_visualization_demoremo.py:264: UserWarning: Geometry is in a geographic CRS. Results from 'centroid' are likely incorrect. Use 'GeoSeries.to_crs()' to re-project geometries to a projected CRS before this operation.
+
+  center_lon = gdf.geometry.centroid. x.mean()
+  Adding polygons...  0/279
+  Adding polygons...  100/279
+  Adding polygons...  200/279
+✓ Map saved to 'remo_interactive_map.html'
+
+[5] Creating parameter table...
+✓ Table saved to 'climate_parameters_table.html'
+
+[6] Creating summary report...
+/Users/primoportal/development/klimawerke/final_visualization_demoremo.py:424: FutureWarning: The return type of `Dataset.dims` will be changed to return a set of dimension names in future, in order to be more consistent with `DataArray.dims`. To access a mapping from dimension names to lengths, please use `Dataset.sizes`.
+  Grid dimensions: {dict(ds.dims)}
+
+============================================================
+REMO CLIMATE MODEL ANALYSIS - SUMMARY REPORT
+============================================================
+
+DATASET INFORMATION:
+  Time steps: 1
+  Grid dimensions: {'nhyi': 28, 'nhym': 27, 'time': 1, 'rlat': 100, 'rlon': 100, 'lev': 27, 'rlon_2': 129, 'rlat_2': 121, 'lev_2': 27}
+  Variables: ['rotated_pole', 'hyai', 'hybi', 'hyam', 'hybm', 'FIB', 'T', 'U', 'V', 'QD', 'PS', 'OMEGA', 'QW', 'FI', 'ACLC', 'BLA', 'QDBL', 'WSMX', 'GLAC', 'WS', 'SN', 'TD', 'TDCL', 'TSN', 'TD3', 'TD4', 'TD5', 'QDB', 'WL', 'TS', 'TSL', 'TSW', 'TSI', 'SEAICE', 'SICED', 'PHI', 'RLA', 'QI']
+
+EXTRACTED REGION: Germany
+  Total grid points (all): 10000
+  Total grid points (DE-filter): 279
+  Lat range (DE-filter): 47.31° - 55.46°
+  Lon range (DE-filter): 5.51° - 15.98°
+
+CLIMATE PARAMETERS:
+
+  Temperature (°C):
+    Min:  -47.03°C
+    Max:  19.83°C
+    Mean: 3.68°C
+
+  Longwave radiation (W/m²):
+    Min:  -39.98 W/m²
+    Max:  63.74 W/m²
+    Mean: 12.16 W/m²
+
+  Wind speed (m/s):
+    Min:  0.00 m/s
+    Max:  1.26 m/s
+    Mean: 0.21 m/s
+
+  Cloud cover (-):
+    Min:  nan
+    Max:  nan
+    Mean: nan
+
+  Precipitation (mm):
+    Min:  nan mm
+    Max:  nan mm
+    Mean: nan mm
+
+OUTPUT FILES CREATED:
+  - remo_interactive_map.html (Interactive map with polygons)
+  - climate_parameters_table.html (Parameter table)
+  - climate_parameters.csv (Full parameter data)
+  - analysis_report.txt (This report)
+
+============================================================
+
+✓ Report saved to 'analysis_report.txt'
+✓ Parameters saved to 'climate_parameters.csv'
+
+============================================================
+✓ VISUALIZATION COMPLETE!
+============================================================
+
+Output files created:
+  1. remo_interactive_map. html - Open in browser!
+  2. climate_parameters_table.html - View parameters
+  3. climate_parameters.csv - All data in CSV format
+  4. analysis_report.txt - Summary statistics
+============================================================
+
+Next steps:
+  1. open remo_interactive_map.html
+  2. open climate_parameters_table.html
+  3. Review climate_parameters.csv in spreadsheet
+============================================================
+primoportal@MacBookPro klimawerke % python3 check_netcdf.py                
+
+=== DATASET INFO ===
+<xarray.Dataset> Size: 11MB
+Dimensions:       (nhyi: 28, nhym: 27, time: 1, rlat: 100, rlon: 100, lev: 27,
+                   rlon_2: 129, rlat_2: 121, lev_2: 27)
+Coordinates:
+  * time          (time) datetime64[ns] 8B 2006-01-01
+  * rlat          (rlat) float64 800B -22.33 -21.89 -21.45 ... 20.35 20.79 21.23
+  * rlon          (rlon) float64 800B -25.57 -25.13 -24.69 ... 17.11 17.55 17.99
+  * lev           (lev) float64 216B 1.0 2.0 3.0 4.0 5.0 ... 24.0 25.0 26.0 27.0
+  * rlon_2        (rlon_2) float64 1kB -31.51 -31.07 -30.63 ... 24.37 24.81
+  * rlat_2        (rlat_2) float64 968B -26.51 -26.07 -25.63 ... 25.85 26.29
+  * lev_2         (lev_2) float64 216B 1.0 2.0 3.0 4.0 ... 24.0 25.0 26.0 27.0
+Dimensions without coordinates: nhyi, nhym
+Data variables: (12/38)
+    rotated_pole  int32 4B ...
+    hyai          (nhyi) float64 224B ...
+    hybi          (nhyi) float64 224B ...
+    hyam          (nhym) float64 216B ...
+    hybm          (nhym) float64 216B ...
+    FIB           (time, rlat, rlon) float32 40kB ...
+    ...            ...
+    TSI           (time, rlat, rlon) float32 40kB ...
+    SEAICE        (time, rlat, rlon) float32 40kB ...
+    SICED         (time, rlat, rlon) float32 40kB ...
+    PHI           (time, rlat, rlon) float32 40kB ...
+    RLA           (time, rlat, rlon) float32 40kB ...
+    QI            (time, lev, rlat, rlon) float32 1MB ...
+Attributes:
+    CDI:          Climate Data Interface version 1.9.8 (https://mpimet.mpg.de...
+    Conventions:  CF-1.6
+    history:      Thu Mar 04 01:22:18 2021: cdo -f nc4 copy e056111t200601010...
+    CDO:          Climate Data Operators version 1.9.8 (https://mpimet.mpg.de...
+
+=== DIMENSIONS ===
+FrozenMappingWarningOnValuesAccess({'nhyi': 28, 'nhym': 27, 'time': 1, 'rlat': 100, 'rlon': 100, 'lev': 27, 'rlon_2': 129, 'rlat_2': 121, 'lev_2': 27})
+
+=== DATA VARIABLES ===
+['rotated_pole', 'hyai', 'hybi', 'hyam', 'hybm', 'FIB', 'T', 'U', 'V', 'QD', 'PS', 'OMEGA', 'QW', 'FI', 'ACLC', 'BLA', 'QDBL', 'WSMX', 'GLAC', 'WS', 'SN', 'TD', 'TDCL', 'TSN', 'TD3', 'TD4', 'TD5', 'QDB', 'WL', 'TS', 'TSL', 'TSW', 'TSI', 'SEAICE', 'SICED', 'PHI', 'RLA', 'QI']
+
+=== COORDS ===
+Coordinates:
+  * time     (time) datetime64[ns] 8B 2006-01-01
+  * rlat     (rlat) float64 800B -22.33 -21.89 -21.45 ... 20.35 20.79 21.23
+  * rlon     (rlon) float64 800B -25.57 -25.13 -24.69 ... 17.11 17.55 17.99
+  * lev      (lev) float64 216B 1.0 2.0 3.0 4.0 5.0 ... 23.0 24.0 25.0 26.0 27.0
+  * rlon_2   (rlon_2) float64 1kB -31.51 -31.07 -30.63 ... 23.93 24.37 24.81
+  * rlat_2   (rlat_2) float64 968B -26.51 -26.07 -25.63 ... 25.41 25.85 26.29
+  * lev_2    (lev_2) float64 216B 1.0 2.0 3.0 4.0 5.0 ... 24.0 25.0 26.0 27.0
+primoportal@MacBookPro klimawerke % python3 check_netcdf.py
+
+=== DATASET INFO ===
+<xarray.Dataset> Size: 11MB
+Dimensions:       (nhyi: 28, nhym: 27, time: 1, rlat: 100, rlon: 100, lev: 27,
+                   rlon_2: 129, rlat_2: 121, lev_2: 27)
+Coordinates:
+  * time          (time) datetime64[ns] 8B 2006-01-01
+  * rlat          (rlat) float64 800B -22.33 -21.89 -21.45 ... 20.35 20.79 21.23
+  * rlon          (rlon) float64 800B -25.57 -25.13 -24.69 ... 17.11 17.55 17.99
+  * lev           (lev) float64 216B 1.0 2.0 3.0 4.0 5.0 ... 24.0 25.0 26.0 27.0
+  * rlon_2        (rlon_2) float64 1kB -31.51 -31.07 -30.63 ... 24.37 24.81
+  * rlat_2        (rlat_2) float64 968B -26.51 -26.07 -25.63 ... 25.85 26.29
+  * lev_2         (lev_2) float64 216B 1.0 2.0 3.0 4.0 ... 24.0 25.0 26.0 27.0
+Dimensions without coordinates: nhyi, nhym
+Data variables: (12/38)
+    rotated_pole  int32 4B ...
+    hyai          (nhyi) float64 224B ...
+    hybi          (nhyi) float64 224B ...
+    hyam          (nhym) float64 216B ...
+    hybm          (nhym) float64 216B ...
+    FIB           (time, rlat, rlon) float32 40kB ...
+    ...            ...
+    TSI           (time, rlat, rlon) float32 40kB ...
+    SEAICE        (time, rlat, rlon) float32 40kB ...
+    SICED         (time, rlat, rlon) float32 40kB ...
+    PHI           (time, rlat, rlon) float32 40kB ...
+    RLA           (time, rlat, rlon) float32 40kB ...
+    QI            (time, lev, rlat, rlon) float32 1MB ...
+Attributes:
+    CDI:          Climate Data Interface version 1.9.8 (https://mpimet.mpg.de...
+    Conventions:  CF-1.6
+    history:      Thu Mar 04 01:22:18 2021: cdo -f nc4 copy e056111t200601010...
+    CDO:          Climate Data Operators version 1.9.8 (https://mpimet.mpg.de...
+
+=== DIMENSIONS ===
+FrozenMappingWarningOnValuesAccess({'nhyi': 28, 'nhym': 27, 'time': 1, 'rlat': 100, 'rlon': 100, 'lev': 27, 'rlon_2': 129, 'rlat_2': 121, 'lev_2': 27})
+
+=== DATA VARIABLES ===
+['rotated_pole', 'hyai', 'hybi', 'hyam', 'hybm', 'FIB', 'T', 'U', 'V', 'QD', 'PS', 'OMEGA', 'QW', 'FI', 'ACLC', 'BLA', 'QDBL', 'WSMX', 'GLAC', 'WS', 'SN', 'TD', 'TDCL', 'TSN', 'TD3', 'TD4', 'TD5', 'QDB', 'WL', 'TS', 'TSL', 'TSW', 'TSI', 'SEAICE', 'SICED', 'PHI', 'RLA', 'QI']
+
+=== COORDS ===
+Coordinates:
+  * time     (time) datetime64[ns] 8B 2006-01-01
+  * rlat     (rlat) float64 800B -22.33 -21.89 -21.45 ... 20.35 20.79 21.23
+  * rlon     (rlon) float64 800B -25.57 -25.13 -24.69 ... 17.11 17.55 17.99
+  * lev      (lev) float64 216B 1.0 2.0 3.0 4.0 5.0 ... 23.0 24.0 25.0 26.0 27.0
+  * rlon_2   (rlon_2) float64 1kB -31.51 -31.07 -30.63 ... 23.93 24.37 24.81
+  * rlat_2   (rlat_2) float64 968B -26.51 -26.07 -25.63 ... 25.41 25.85 26.29
+  * lev_2    (lev_2) float64 216B 1.0 2.0 3.0 4.0 5.0 ... 24.0 25.0 26.0 27.0
+
+=== SAMPLE GRID POINTS (first 20) ===
+Traceback (most recent call last):
+  File "/Users/primoportal/development/klimawerke/check_netcdf.py", line 49, in <module>
+    row["U_lev0"] = float(ds["U"].isel(time=0, lev=0, rlat=iy, rlon=ix).values)
+                          ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/site-packages/xarray/core/dataarray.py", line 1582, in isel
+    variable = self._variable.isel(indexers, missing_dims=missing_dims)
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/site-packages/xarray/core/variable.py", line 1127, in isel
+    indexers = drop_dims_from_indexers(indexers, self.dims, missing_dims)
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/site-packages/xarray/core/utils.py", line 938, in drop_dims_from_indexers
+    raise ValueError(
+        f"Dimensions {invalid} do not exist. Expected one or more of {dims}"
+    )
+ValueError: Dimensions {'rlon'} do not exist. Expected one or more of ('time', 'lev', 'rlat', 'rlon_2')
+primoportal@MacBookPro klimawerke % python3 check_netcdf.py
+
+=== DATASET INFO ===
+<xarray.Dataset> Size: 11MB
+Dimensions:       (nhyi: 28, nhym: 27, time: 1, rlat: 100, rlon: 100, lev: 27,
+                   rlon_2: 129, rlat_2: 121, lev_2: 27)
+Coordinates:
+  * time          (time) datetime64[ns] 8B 2006-01-01
+  * rlat          (rlat) float64 800B -22.33 -21.89 -21.45 ... 20.35 20.79 21.23
+  * rlon          (rlon) float64 800B -25.57 -25.13 -24.69 ... 17.11 17.55 17.99
+  * lev           (lev) float64 216B 1.0 2.0 3.0 4.0 5.0 ... 24.0 25.0 26.0 27.0
+  * rlon_2        (rlon_2) float64 1kB -31.51 -31.07 -30.63 ... 24.37 24.81
+  * rlat_2        (rlat_2) float64 968B -26.51 -26.07 -25.63 ... 25.85 26.29
+  * lev_2         (lev_2) float64 216B 1.0 2.0 3.0 4.0 ... 24.0 25.0 26.0 27.0
+Dimensions without coordinates: nhyi, nhym
+Data variables: (12/38)
+    rotated_pole  int32 4B ...
+    hyai          (nhyi) float64 224B ...
+    hybi          (nhyi) float64 224B ...
+    hyam          (nhym) float64 216B ...
+    hybm          (nhym) float64 216B ...
+    FIB           (time, rlat, rlon) float32 40kB ...
+    ...            ...
+    TSI           (time, rlat, rlon) float32 40kB ...
+    SEAICE        (time, rlat, rlon) float32 40kB ...
+    SICED         (time, rlat, rlon) float32 40kB ...
+    PHI           (time, rlat, rlon) float32 40kB ...
+    RLA           (time, rlat, rlon) float32 40kB ...
+    QI            (time, lev, rlat, rlon) float32 1MB ...
+Attributes:
+    CDI:          Climate Data Interface version 1.9.8 (https://mpimet.mpg.de...
+    Conventions:  CF-1.6
+    history:      Thu Mar 04 01:22:18 2021: cdo -f nc4 copy e056111t200601010...
+    CDO:          Climate Data Operators version 1.9.8 (https://mpimet.mpg.de...
+
+=== DIMENSIONS ===
+FrozenMappingWarningOnValuesAccess({'nhyi': 28, 'nhym': 27, 'time': 1, 'rlat': 100, 'rlon': 100, 'lev': 27, 'rlon_2': 129, 'rlat_2': 121, 'lev_2': 27})
+
+=== DATA VARIABLES ===
+['rotated_pole', 'hyai', 'hybi', 'hyam', 'hybm', 'FIB', 'T', 'U', 'V', 'QD', 'PS', 'OMEGA', 'QW', 'FI', 'ACLC', 'BLA', 'QDBL', 'WSMX', 'GLAC', 'WS', 'SN', 'TD', 'TDCL', 'TSN', 'TD3', 'TD4', 'TD5', 'QDB', 'WL', 'TS', 'TSL', 'TSW', 'TSI', 'SEAICE', 'SICED', 'PHI', 'RLA', 'QI']
+
+=== COORDS ===
+Coordinates:
+  * time     (time) datetime64[ns] 8B 2006-01-01
+  * rlat     (rlat) float64 800B -22.33 -21.89 -21.45 ... 20.35 20.79 21.23
+  * rlon     (rlon) float64 800B -25.57 -25.13 -24.69 ... 17.11 17.55 17.99
+  * lev      (lev) float64 216B 1.0 2.0 3.0 4.0 5.0 ... 23.0 24.0 25.0 26.0 27.0
+  * rlon_2   (rlon_2) float64 1kB -31.51 -31.07 -30.63 ... 23.93 24.37 24.81
+  * rlat_2   (rlat_2) float64 968B -26.51 -26.07 -25.63 ... 25.41 25.85 26.29
+  * lev_2    (lev_2) float64 216B 1.0 2.0 3.0 4.0 5.0 ... 24.0 25.0 26.0 27.0
+
+=== SAMPLE GRID POINTS (first 20) ===
+Traceback (most recent call last):
+  File "/Users/primoportal/development/klimawerke/check_netcdf.py", line 51, in <module>
+    row["ACLC"] = float(ds["ACLC"].isel(time=0, rlat=iy, rlon=ix).values)
+                  ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: only 0-dimensional arrays can be converted to Python scalars
+primoportal@MacBookPro klimawerke % python3 check_netcdf.py
+
+=== DATASET INFO ===
+<xarray.Dataset> Size: 11MB
+Dimensions:       (nhyi: 28, nhym: 27, time: 1, rlat: 100, rlon: 100, lev: 27,
+                   rlon_2: 129, rlat_2: 121, lev_2: 27)
+Coordinates:
+  * time          (time) datetime64[ns] 8B 2006-01-01
+  * rlat          (rlat) float64 800B -22.33 -21.89 -21.45 ... 20.35 20.79 21.23
+  * rlon          (rlon) float64 800B -25.57 -25.13 -24.69 ... 17.11 17.55 17.99
+  * lev           (lev) float64 216B 1.0 2.0 3.0 4.0 5.0 ... 24.0 25.0 26.0 27.0
+  * rlon_2        (rlon_2) float64 1kB -31.51 -31.07 -30.63 ... 24.37 24.81
+  * rlat_2        (rlat_2) float64 968B -26.51 -26.07 -25.63 ... 25.85 26.29
+  * lev_2         (lev_2) float64 216B 1.0 2.0 3.0 4.0 ... 24.0 25.0 26.0 27.0
+Dimensions without coordinates: nhyi, nhym
+Data variables: (12/38)
+    rotated_pole  int32 4B ...
+    hyai          (nhyi) float64 224B ...
+    hybi          (nhyi) float64 224B ...
+    hyam          (nhym) float64 216B ...
+    hybm          (nhym) float64 216B ...
+    FIB           (time, rlat, rlon) float32 40kB ...
+    ...            ...
+    TSI           (time, rlat, rlon) float32 40kB ...
+    SEAICE        (time, rlat, rlon) float32 40kB ...
+    SICED         (time, rlat, rlon) float32 40kB ...
+    PHI           (time, rlat, rlon) float32 40kB ...
+    RLA           (time, rlat, rlon) float32 40kB ...
+    QI            (time, lev, rlat, rlon) float32 1MB ...
+Attributes:
+    CDI:          Climate Data Interface version 1.9.8 (https://mpimet.mpg.de...
+    Conventions:  CF-1.6
+    history:      Thu Mar 04 01:22:18 2021: cdo -f nc4 copy e056111t200601010...
+    CDO:          Climate Data Operators version 1.9.8 (https://mpimet.mpg.de...
+
+=== DIMENSIONS ===
+FrozenMappingWarningOnValuesAccess({'nhyi': 28, 'nhym': 27, 'time': 1, 'rlat': 100, 'rlon': 100, 'lev': 27, 'rlon_2': 129, 'rlat_2': 121, 'lev_2': 27})
+
+=== DATA VARIABLES ===
+['rotated_pole', 'hyai', 'hybi', 'hyam', 'hybm', 'FIB', 'T', 'U', 'V', 'QD', 'PS', 'OMEGA', 'QW', 'FI', 'ACLC', 'BLA', 'QDBL', 'WSMX', 'GLAC', 'WS', 'SN', 'TD', 'TDCL', 'TSN', 'TD3', 'TD4', 'TD5', 'QDB', 'WL', 'TS', 'TSL', 'TSW', 'TSI', 'SEAICE', 'SICED', 'PHI', 'RLA', 'QI']
+
+=== COORDS ===
+Coordinates:
+  * time     (time) datetime64[ns] 8B 2006-01-01
+  * rlat     (rlat) float64 800B -22.33 -21.89 -21.45 ... 20.35 20.79 21.23
+  * rlon     (rlon) float64 800B -25.57 -25.13 -24.69 ... 17.11 17.55 17.99
+  * lev      (lev) float64 216B 1.0 2.0 3.0 4.0 5.0 ... 23.0 24.0 25.0 26.0 27.0
+  * rlon_2   (rlon_2) float64 1kB -31.51 -31.07 -30.63 ... 23.93 24.37 24.81
+  * rlat_2   (rlat_2) float64 968B -26.51 -26.07 -25.63 ... 25.41 25.85 26.29
+  * lev_2    (lev_2) float64 216B 1.0 2.0 3.0 4.0 5.0 ... 24.0 25.0 26.0 27.0
+
+=== SAMPLE GRID POINTS (first 20) ===
+ gridy  gridx   rlat   rlon         TS       RLA       WS ACLC T_lev0   U_lev0 V_lev0 QW_lev0 QI_lev0
+     0      0 -22.33 -25.57 278.455627 -7.901556 0.008188 None   None 0.195741   None    None    None
+     0      1 -22.33 -25.13 278.088196 -7.486372 0.007870 None   None 2.531912   None    None    None
+     0      2 -22.33 -24.69 278.469757 -7.069769 0.009609 None   None 5.275590   None    None    None
+     0      3 -22.33 -24.25 279.140656 -6.651757 0.012071 None   None 6.608638   None    None    None
+     0      4 -22.33 -23.81 279.203491 -6.232348 0.011298 None   None 7.010349   None    None    None
+     0      5 -22.33 -23.37 279.237946 -5.811555 0.009247 None   None 7.107456   None    None    None
+     0      6 -22.33 -22.93 279.603760 -5.389392 0.010576 None   None 7.207960   None    None    None
+     0      7 -22.33 -22.49 279.635803 -4.965872 0.010402 None   None 7.393740   None    None    None
+     0      8 -22.33 -22.05 279.843445 -4.541010 0.012277 None   None 7.626784   None    None    None
+     0      9 -22.33 -21.61 279.638733 -4.114820 0.012142 None   None 7.816980   None    None    None
+     0     10 -22.33 -21.17 279.562286 -3.687317 0.011693 None   None 7.929336   None    None    None
+     0     11 -22.33 -20.73 279.748840 -3.258518 0.014116 None   None 8.001881   None    None    None
+     0     12 -22.33 -20.29 279.235260 -2.828439 0.013263 None   None 8.090132   None    None    None
+     0     13 -22.33 -19.85 278.437622 -2.397096 0.014310 None   None 8.221581   None    None    None
+     0     14 -22.33 -19.41 278.056885 -1.964509 0.014138 None   None 8.389868   None    None    None
+     0     15 -22.33 -18.97 277.263092 -1.530693 0.014049 None   None 8.573112   None    None    None
+     0     16 -22.33 -18.53 276.639496 -1.095669 0.013479 None   None 8.753761   None    None    None
+     0     17 -22.33 -18.09 276.062775 -0.659456 0.013019 None   None 8.926042   None    None    None
+     0     18 -22.33 -17.65 275.401886 -0.222072 0.011915 None   None 9.093559   None    None    None
+     0     19 -22.33 -17.21 275.603821  0.216461 0.011277 None   None 9.262689   None    None    None
+primoportal@MacBookPro klimawerke % python3 check_netcdf.py
+
+=== DATASET INFO ===
+<xarray.Dataset> Size: 11MB
+Dimensions:       (nhyi: 28, nhym: 27, time: 1, rlat: 100, rlon: 100, lev: 27,
+                   rlon_2: 129, rlat_2: 121, lev_2: 27)
+Coordinates:
+  * time          (time) datetime64[ns] 8B 2006-01-01
+  * rlat          (rlat) float64 800B -22.33 -21.89 -21.45 ... 20.35 20.79 21.23
+  * rlon          (rlon) float64 800B -25.57 -25.13 -24.69 ... 17.11 17.55 17.99
+  * lev           (lev) float64 216B 1.0 2.0 3.0 4.0 5.0 ... 24.0 25.0 26.0 27.0
+  * rlon_2        (rlon_2) float64 1kB -31.51 -31.07 -30.63 ... 24.37 24.81
+  * rlat_2        (rlat_2) float64 968B -26.51 -26.07 -25.63 ... 25.85 26.29
+  * lev_2         (lev_2) float64 216B 1.0 2.0 3.0 4.0 ... 24.0 25.0 26.0 27.0
+Dimensions without coordinates: nhyi, nhym
+Data variables: (12/38)
+    rotated_pole  int32 4B ...
+    hyai          (nhyi) float64 224B ...
+    hybi          (nhyi) float64 224B ...
+    hyam          (nhym) float64 216B ...
+    hybm          (nhym) float64 216B ...
+    FIB           (time, rlat, rlon) float32 40kB ...
+    ...            ...
+    TSI           (time, rlat, rlon) float32 40kB ...
+    SEAICE        (time, rlat, rlon) float32 40kB ...
+    SICED         (time, rlat, rlon) float32 40kB ...
+    PHI           (time, rlat, rlon) float32 40kB ...
+    RLA           (time, rlat, rlon) float32 40kB ...
+    QI            (time, lev, rlat, rlon) float32 1MB ...
+Attributes:
+    CDI:          Climate Data Interface version 1.9.8 (https://mpimet.mpg.de...
+    Conventions:  CF-1.6
+    history:      Thu Mar 04 01:22:18 2021: cdo -f nc4 copy e056111t200601010...
+    CDO:          Climate Data Operators version 1.9.8 (https://mpimet.mpg.de...
+
+=== DIMENSIONS ===
+FrozenMappingWarningOnValuesAccess({'nhyi': 28, 'nhym': 27, 'time': 1, 'rlat': 100, 'rlon': 100, 'lev': 27, 'rlon_2': 129, 'rlat_2': 121, 'lev_2': 27})
+
+=== DATA VARIABLES ===
+['rotated_pole', 'hyai', 'hybi', 'hyam', 'hybm', 'FIB', 'T', 'U', 'V', 'QD', 'PS', 'OMEGA', 'QW', 'FI', 'ACLC', 'BLA', 'QDBL', 'WSMX', 'GLAC', 'WS', 'SN', 'TD', 'TDCL', 'TSN', 'TD3', 'TD4', 'TD5', 'QDB', 'WL', 'TS', 'TSL', 'TSW', 'TSI', 'SEAICE', 'SICED', 'PHI', 'RLA', 'QI']
+
+=== COORDS ===
+Coordinates:
+  * time     (time) datetime64[ns] 8B 2006-01-01
+  * rlat     (rlat) float64 800B -22.33 -21.89 -21.45 ... 20.35 20.79 21.23
+  * rlon     (rlon) float64 800B -25.57 -25.13 -24.69 ... 17.11 17.55 17.99
+  * lev      (lev) float64 216B 1.0 2.0 3.0 4.0 5.0 ... 23.0 24.0 25.0 26.0 27.0
+  * rlon_2   (rlon_2) float64 1kB -31.51 -31.07 -30.63 ... 23.93 24.37 24.81
+  * rlat_2   (rlat_2) float64 968B -26.51 -26.07 -25.63 ... 25.41 25.85 26.29
+  * lev_2    (lev_2) float64 216B 1.0 2.0 3.0 4.0 5.0 ... 24.0 25.0 26.0 27.0
+
+=== SAMPLE GRID POINTS IN GERMANY (first 20) ===
+Empty DataFrame
+Columns: []
+Index: []
+primoportal@MacBookPro klimawerke % python3 check_netcdf eur-44.py
+/Library/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python: can't open file '/Users/primoportal/development/klimawerke/check_netcdf': [Errno 2] No such file or directory
+primoportal@MacBookPro klimawerke % python3 check_netcdf_eur-44.py
+
+=== DATASET INFO ===
+<xarray.Dataset> Size: 11MB
+Dimensions:       (nhyi: 28, nhym: 27, time: 1, rlat: 100, rlon: 100, lev: 27,
+                   rlon_2: 129, rlat_2: 121, lev_2: 27)
+Coordinates:
+  * time          (time) datetime64[ns] 8B 2006-01-01
+  * rlat          (rlat) float64 800B -22.33 -21.89 -21.45 ... 20.35 20.79 21.23
+  * rlon          (rlon) float64 800B -25.57 -25.13 -24.69 ... 17.11 17.55 17.99
+  * lev           (lev) float64 216B 1.0 2.0 3.0 4.0 5.0 ... 24.0 25.0 26.0 27.0
+  * rlon_2        (rlon_2) float64 1kB -31.51 -31.07 -30.63 ... 24.37 24.81
+  * rlat_2        (rlat_2) float64 968B -26.51 -26.07 -25.63 ... 25.85 26.29
+  * lev_2         (lev_2) float64 216B 1.0 2.0 3.0 4.0 ... 24.0 25.0 26.0 27.0
+Dimensions without coordinates: nhyi, nhym
+Data variables: (12/38)
+    rotated_pole  int32 4B ...
+    hyai          (nhyi) float64 224B ...
+    hybi          (nhyi) float64 224B ...
+    hyam          (nhym) float64 216B ...
+    hybm          (nhym) float64 216B ...
+    FIB           (time, rlat, rlon) float32 40kB ...
+    ...            ...
+    TSI           (time, rlat, rlon) float32 40kB ...
+    SEAICE        (time, rlat, rlon) float32 40kB ...
+    SICED         (time, rlat, rlon) float32 40kB ...
+    PHI           (time, rlat, rlon) float32 40kB ...
+    RLA           (time, rlat, rlon) float32 40kB ...
+    QI            (time, lev, rlat, rlon) float32 1MB ...
+Attributes:
+    CDI:          Climate Data Interface version 1.9.8 (https://mpimet.mpg.de...
+    Conventions:  CF-1.6
+    history:      Thu Mar 04 01:22:18 2021: cdo -f nc4 copy e056111t200601010...
+    CDO:          Climate Data Operators version 1.9.8 (https://mpimet.mpg.de...
+
+=== DIMENSIONS ===
+FrozenMappingWarningOnValuesAccess({'nhyi': 28, 'nhym': 27, 'time': 1, 'rlat': 100, 'rlon': 100, 'lev': 27, 'rlon_2': 129, 'rlat_2': 121, 'lev_2': 27})
+
+=== DATA VARIABLES ===
+['rotated_pole', 'hyai', 'hybi', 'hyam', 'hybm', 'FIB', 'T', 'U', 'V', 'QD', 'PS', 'OMEGA', 'QW', 'FI', 'ACLC', 'BLA', 'QDBL', 'WSMX', 'GLAC', 'WS', 'SN', 'TD', 'TDCL', 'TSN', 'TD3', 'TD4', 'TD5', 'QDB', 'WL', 'TS', 'TSL', 'TSW', 'TSI', 'SEAICE', 'SICED', 'PHI', 'RLA', 'QI']
+
+=== COORDS ===
+Coordinates:
+  * time     (time) datetime64[ns] 8B 2006-01-01
+  * rlat     (rlat) float64 800B -22.33 -21.89 -21.45 ... 20.35 20.79 21.23
+  * rlon     (rlon) float64 800B -25.57 -25.13 -24.69 ... 17.11 17.55 17.99
+  * lev      (lev) float64 216B 1.0 2.0 3.0 4.0 5.0 ... 23.0 24.0 25.0 26.0 27.0
+  * rlon_2   (rlon_2) float64 1kB -31.51 -31.07 -30.63 ... 23.93 24.37 24.81
+  * rlat_2   (rlat_2) float64 968B -26.51 -26.07 -25.63 ... 25.41 25.85 26.29
+  * lev_2    (lev_2) float64 216B 1.0 2.0 3.0 4.0 5.0 ... 24.0 25.0 26.0 27.0
+
+=== SAMPLE GRID POINTS (first 20) ===
+ gridy  gridx   rlat   rlon         TS       RLA       WS ACLC T_lev0   U_lev0 V_lev0 QW_lev0 QI_lev0
+     0      0 -22.33 -25.57 278.455627 -7.901556 0.008188 None   None 0.195741   None    None    None
+     0      1 -22.33 -25.13 278.088196 -7.486372 0.007870 None   None 2.531912   None    None    None
+     0      2 -22.33 -24.69 278.469757 -7.069769 0.009609 None   None 5.275590   None    None    None
+     0      3 -22.33 -24.25 279.140656 -6.651757 0.012071 None   None 6.608638   None    None    None
+     0      4 -22.33 -23.81 279.203491 -6.232348 0.011298 None   None 7.010349   None    None    None
+     0      5 -22.33 -23.37 279.237946 -5.811555 0.009247 None   None 7.107456   None    None    None
+     0      6 -22.33 -22.93 279.603760 -5.389392 0.010576 None   None 7.207960   None    None    None
+     0      7 -22.33 -22.49 279.635803 -4.965872 0.010402 None   None 7.393740   None    None    None
+     0      8 -22.33 -22.05 279.843445 -4.541010 0.012277 None   None 7.626784   None    None    None
+     0      9 -22.33 -21.61 279.638733 -4.114820 0.012142 None   None 7.816980   None    None    None
+     0     10 -22.33 -21.17 279.562286 -3.687317 0.011693 None   None 7.929336   None    None    None
+     0     11 -22.33 -20.73 279.748840 -3.258518 0.014116 None   None 8.001881   None    None    None
+     0     12 -22.33 -20.29 279.235260 -2.828439 0.013263 None   None 8.090132   None    None    None
+     0     13 -22.33 -19.85 278.437622 -2.397096 0.014310 None   None 8.221581   None    None    None
+     0     14 -22.33 -19.41 278.056885 -1.964509 0.014138 None   None 8.389868   None    None    None
+     0     15 -22.33 -18.97 277.263092 -1.530693 0.014049 None   None 8.573112   None    None    None
+     0     16 -22.33 -18.53 276.639496 -1.095669 0.013479 None   None 8.753761   None    None    None
+     0     17 -22.33 -18.09 276.062775 -0.659456 0.013019 None   None 8.926042   None    None    None
+     0     18 -22.33 -17.65 275.401886 -0.222072 0.011915 None   None 9.093559   None    None    None
+     0     19 -22.33 -17.21 275.603821  0.216461 0.011277 None   None 9.262689   None    None    None
+primoportal@MacBookPro klimawerke % python3 check_netcdf.py       
+
+=== DATASET INFO ===
+<xarray.Dataset> Size: 11MB
+Dimensions:       (nhyi: 28, nhym: 27, time: 1, rlat: 100, rlon: 100, lev: 27,
+                   rlon_2: 129, rlat_2: 121, lev_2: 27)
+Coordinates:
+  * time          (time) datetime64[ns] 8B 2006-01-01
+  * rlat          (rlat) float64 800B -22.33 -21.89 -21.45 ... 20.35 20.79 21.23
+  * rlon          (rlon) float64 800B -25.57 -25.13 -24.69 ... 17.11 17.55 17.99
+  * lev           (lev) float64 216B 1.0 2.0 3.0 4.0 5.0 ... 24.0 25.0 26.0 27.0
+  * rlon_2        (rlon_2) float64 1kB -31.51 -31.07 -30.63 ... 24.37 24.81
+  * rlat_2        (rlat_2) float64 968B -26.51 -26.07 -25.63 ... 25.85 26.29
+  * lev_2         (lev_2) float64 216B 1.0 2.0 3.0 4.0 ... 24.0 25.0 26.0 27.0
+Dimensions without coordinates: nhyi, nhym
+Data variables: (12/38)
+    rotated_pole  int32 4B ...
+    hyai          (nhyi) float64 224B ...
+    hybi          (nhyi) float64 224B ...
+    hyam          (nhym) float64 216B ...
+    hybm          (nhym) float64 216B ...
+    FIB           (time, rlat, rlon) float32 40kB ...
+    ...            ...
+    TSI           (time, rlat, rlon) float32 40kB ...
+    SEAICE        (time, rlat, rlon) float32 40kB ...
+    SICED         (time, rlat, rlon) float32 40kB ...
+    PHI           (time, rlat, rlon) float32 40kB ...
+    RLA           (time, rlat, rlon) float32 40kB ...
+    QI            (time, lev, rlat, rlon) float32 1MB ...
+Attributes:
+    CDI:          Climate Data Interface version 1.9.8 (https://mpimet.mpg.de...
+    Conventions:  CF-1.6
+    history:      Thu Mar 04 01:22:18 2021: cdo -f nc4 copy e056111t200601010...
+    CDO:          Climate Data Operators version 1.9.8 (https://mpimet.mpg.de...
+
+=== DIMENSIONS ===
+FrozenMappingWarningOnValuesAccess({'nhyi': 28, 'nhym': 27, 'time': 1, 'rlat': 100, 'rlon': 100, 'lev': 27, 'rlon_2': 129, 'rlat_2': 121, 'lev_2': 27})
+
+=== DATA VARIABLES ===
+['rotated_pole', 'hyai', 'hybi', 'hyam', 'hybm', 'FIB', 'T', 'U', 'V', 'QD', 'PS', 'OMEGA', 'QW', 'FI', 'ACLC', 'BLA', 'QDBL', 'WSMX', 'GLAC', 'WS', 'SN', 'TD', 'TDCL', 'TSN', 'TD3', 'TD4', 'TD5', 'QDB', 'WL', 'TS', 'TSL', 'TSW', 'TSI', 'SEAICE', 'SICED', 'PHI', 'RLA', 'QI']
+
+=== COORDS ===
+Coordinates:
+  * time     (time) datetime64[ns] 8B 2006-01-01
+  * rlat     (rlat) float64 800B -22.33 -21.89 -21.45 ... 20.35 20.79 21.23
+  * rlon     (rlon) float64 800B -25.57 -25.13 -24.69 ... 17.11 17.55 17.99
+  * lev      (lev) float64 216B 1.0 2.0 3.0 4.0 5.0 ... 23.0 24.0 25.0 26.0 27.0
+  * rlon_2   (rlon_2) float64 1kB -31.51 -31.07 -30.63 ... 23.93 24.37 24.81
+  * rlat_2   (rlat_2) float64 968B -26.51 -26.07 -25.63 ... 25.41 25.85 26.29
+  * lev_2    (lev_2) float64 216B 1.0 2.0 3.0 4.0 5.0 ... 24.0 25.0 26.0 27.0
+
+=== SAMPLE GRID POINTS IN GERMANY (first 20) ===
+Empty DataFrame
+Columns: []
+Index: []
+primoportal@MacBookPro klimawerke % python3 check_netcdf_eur-44.py
+
+=== DATASET INFO ===
+<xarray.Dataset> Size: 11MB
+Dimensions:       (nhyi: 28, nhym: 27, time: 1, rlat: 100, rlon: 100, lev: 27,
+                   rlon_2: 129, rlat_2: 121, lev_2: 27)
+Coordinates:
+  * time          (time) datetime64[ns] 8B 2006-01-01
+  * rlat          (rlat) float64 800B -22.33 -21.89 -21.45 ... 20.35 20.79 21.23
+  * rlon          (rlon) float64 800B -25.57 -25.13 -24.69 ... 17.11 17.55 17.99
+  * lev           (lev) float64 216B 1.0 2.0 3.0 4.0 5.0 ... 24.0 25.0 26.0 27.0
+  * rlon_2        (rlon_2) float64 1kB -31.51 -31.07 -30.63 ... 24.37 24.81
+  * rlat_2        (rlat_2) float64 968B -26.51 -26.07 -25.63 ... 25.85 26.29
+  * lev_2         (lev_2) float64 216B 1.0 2.0 3.0 4.0 ... 24.0 25.0 26.0 27.0
+Dimensions without coordinates: nhyi, nhym
+Data variables: (12/38)
+    rotated_pole  int32 4B ...
+    hyai          (nhyi) float64 224B ...
+    hybi          (nhyi) float64 224B ...
+    hyam          (nhym) float64 216B ...
+    hybm          (nhym) float64 216B ...
+    FIB           (time, rlat, rlon) float32 40kB ...
+    ...            ...
+    TSI           (time, rlat, rlon) float32 40kB ...
+    SEAICE        (time, rlat, rlon) float32 40kB ...
+    SICED         (time, rlat, rlon) float32 40kB ...
+    PHI           (time, rlat, rlon) float32 40kB ...
+    RLA           (time, rlat, rlon) float32 40kB ...
+    QI            (time, lev, rlat, rlon) float32 1MB ...
+Attributes:
+    CDI:          Climate Data Interface version 1.9.8 (https://mpimet.mpg.de...
+    Conventions:  CF-1.6
+    history:      Thu Mar 04 01:22:18 2021: cdo -f nc4 copy e056111t200601010...
+    CDO:          Climate Data Operators version 1.9.8 (https://mpimet.mpg.de...
+
+=== DIMENSIONS ===
+FrozenMappingWarningOnValuesAccess({'nhyi': 28, 'nhym': 27, 'time': 1, 'rlat': 100, 'rlon': 100, 'lev': 27, 'rlon_2': 129, 'rlat_2': 121, 'lev_2': 27})
+
+=== DATA VARIABLES ===
+['rotated_pole', 'hyai', 'hybi', 'hyam', 'hybm', 'FIB', 'T', 'U', 'V', 'QD', 'PS', 'OMEGA', 'QW', 'FI', 'ACLC', 'BLA', 'QDBL', 'WSMX', 'GLAC', 'WS', 'SN', 'TD', 'TDCL', 'TSN', 'TD3', 'TD4', 'TD5', 'QDB', 'WL', 'TS', 'TSL', 'TSW', 'TSI', 'SEAICE', 'SICED', 'PHI', 'RLA', 'QI']
+
+=== COORDS ===
+Coordinates:
+  * time     (time) datetime64[ns] 8B 2006-01-01
+  * rlat     (rlat) float64 800B -22.33 -21.89 -21.45 ... 20.35 20.79 21.23
+  * rlon     (rlon) float64 800B -25.57 -25.13 -24.69 ... 17.11 17.55 17.99
+  * lev      (lev) float64 216B 1.0 2.0 3.0 4.0 5.0 ... 23.0 24.0 25.0 26.0 27.0
+  * rlon_2   (rlon_2) float64 1kB -31.51 -31.07 -30.63 ... 23.93 24.37 24.81
+  * rlat_2   (rlat_2) float64 968B -26.51 -26.07 -25.63 ... 25.41 25.85 26.29
+  * lev_2    (lev_2) float64 216B 1.0 2.0 3.0 4.0 5.0 ... 24.0 25.0 26.0 27.0
+
+=== SAMPLE GRID POINTS (first 20) ===
+ gridy  gridx   rlat   rlon         TS       RLA       WS ACLC T_lev0   U_lev0 V_lev0 QW_lev0 QI_lev0
+     0      0 -22.33 -25.57 278.455627 -7.901556 0.008188 None   None 0.195741   None    None    None
+     0      1 -22.33 -25.13 278.088196 -7.486372 0.007870 None   None 2.531912   None    None    None
+     0      2 -22.33 -24.69 278.469757 -7.069769 0.009609 None   None 5.275590   None    None    None
+     0      3 -22.33 -24.25 279.140656 -6.651757 0.012071 None   None 6.608638   None    None    None
+     0      4 -22.33 -23.81 279.203491 -6.232348 0.011298 None   None 7.010349   None    None    None
+     0      5 -22.33 -23.37 279.237946 -5.811555 0.009247 None   None 7.107456   None    None    None
+     0      6 -22.33 -22.93 279.603760 -5.389392 0.010576 None   None 7.207960   None    None    None
+     0      7 -22.33 -22.49 279.635803 -4.965872 0.010402 None   None 7.393740   None    None    None
+     0      8 -22.33 -22.05 279.843445 -4.541010 0.012277 None   None 7.626784   None    None    None
+     0      9 -22.33 -21.61 279.638733 -4.114820 0.012142 None   None 7.816980   None    None    None
+     0     10 -22.33 -21.17 279.562286 -3.687317 0.011693 None   None 7.929336   None    None    None
+     0     11 -22.33 -20.73 279.748840 -3.258518 0.014116 None   None 8.001881   None    None    None
+     0     12 -22.33 -20.29 279.235260 -2.828439 0.013263 None   None 8.090132   None    None    None
+     0     13 -22.33 -19.85 278.437622 -2.397096 0.014310 None   None 8.221581   None    None    None
+     0     14 -22.33 -19.41 278.056885 -1.964509 0.014138 None   None 8.389868   None    None    None
+     0     15 -22.33 -18.97 277.263092 -1.530693 0.014049 None   None 8.573112   None    None    None
+     0     16 -22.33 -18.53 276.639496 -1.095669 0.013479 None   None 8.753761   None    None    None
+     0     17 -22.33 -18.09 276.062775 -0.659456 0.013019 None   None 8.926042   None    None    None
+     0     18 -22.33 -17.65 275.401886 -0.222072 0.011915 None   None 9.093559   None    None    None
+     0     19 -22.33 -17.21 275.603821  0.216461 0.011277 None   None 9.262689   None    None    None
+primoportal@MacBookPro klimawerke % python3 check_netcdf.py       
+
+=== DATASET INFO ===
+<xarray.Dataset> Size: 11MB
+Dimensions:       (nhyi: 28, nhym: 27, time: 1, rlat: 100, rlon: 100, lev: 27,
+                   rlon_2: 129, rlat_2: 121, lev_2: 27)
+Coordinates:
+  * time          (time) datetime64[ns] 8B 2006-01-01
+  * rlat          (rlat) float64 800B -22.33 -21.89 -21.45 ... 20.35 20.79 21.23
+  * rlon          (rlon) float64 800B -25.57 -25.13 -24.69 ... 17.11 17.55 17.99
+  * lev           (lev) float64 216B 1.0 2.0 3.0 4.0 5.0 ... 24.0 25.0 26.0 27.0
+  * rlon_2        (rlon_2) float64 1kB -31.51 -31.07 -30.63 ... 24.37 24.81
+  * rlat_2        (rlat_2) float64 968B -26.51 -26.07 -25.63 ... 25.85 26.29
+  * lev_2         (lev_2) float64 216B 1.0 2.0 3.0 4.0 ... 24.0 25.0 26.0 27.0
+Dimensions without coordinates: nhyi, nhym
+Data variables: (12/38)
+    rotated_pole  int32 4B ...
+    hyai          (nhyi) float64 224B ...
+    hybi          (nhyi) float64 224B ...
+    hyam          (nhym) float64 216B ...
+    hybm          (nhym) float64 216B ...
+    FIB           (time, rlat, rlon) float32 40kB ...
+    ...            ...
+    TSI           (time, rlat, rlon) float32 40kB ...
+    SEAICE        (time, rlat, rlon) float32 40kB ...
+    SICED         (time, rlat, rlon) float32 40kB ...
+    PHI           (time, rlat, rlon) float32 40kB ...
+    RLA           (time, rlat, rlon) float32 40kB ...
+    QI            (time, lev, rlat, rlon) float32 1MB ...
+Attributes:
+    CDI:          Climate Data Interface version 1.9.8 (https://mpimet.mpg.de...
+    Conventions:  CF-1.6
+    history:      Thu Mar 04 01:22:18 2021: cdo -f nc4 copy e056111t200601010...
+    CDO:          Climate Data Operators version 1.9.8 (https://mpimet.mpg.de...
+
+=== DIMENSIONS ===
+FrozenMappingWarningOnValuesAccess({'nhyi': 28, 'nhym': 27, 'time': 1, 'rlat': 100, 'rlon': 100, 'lev': 27, 'rlon_2': 129, 'rlat_2': 121, 'lev_2': 27})
+
+=== DATA VARIABLES ===
+['rotated_pole', 'hyai', 'hybi', 'hyam', 'hybm', 'FIB', 'T', 'U', 'V', 'QD', 'PS', 'OMEGA', 'QW', 'FI', 'ACLC', 'BLA', 'QDBL', 'WSMX', 'GLAC', 'WS', 'SN', 'TD', 'TDCL', 'TSN', 'TD3', 'TD4', 'TD5', 'QDB', 'WL', 'TS', 'TSL', 'TSW', 'TSI', 'SEAICE', 'SICED', 'PHI', 'RLA', 'QI']
+
+=== COORDS ===
+Coordinates:
+  * time     (time) datetime64[ns] 8B 2006-01-01
+  * rlat     (rlat) float64 800B -22.33 -21.89 -21.45 ... 20.35 20.79 21.23
+  * rlon     (rlon) float64 800B -25.57 -25.13 -24.69 ... 17.11 17.55 17.99
+  * lev      (lev) float64 216B 1.0 2.0 3.0 4.0 5.0 ... 23.0 24.0 25.0 26.0 27.0
+  * rlon_2   (rlon_2) float64 1kB -31.51 -31.07 -30.63 ... 23.93 24.37 24.81
+  * rlat_2   (rlat_2) float64 968B -26.51 -26.07 -25.63 ... 25.41 25.85 26.29
+  * lev_2    (lev_2) float64 216B 1.0 2.0 3.0 4.0 5.0 ... 24.0 25.0 26.0 27.0
+
+=== SAMPLE GRID POINTS IN GERMANY (first 20) ===
+/Users/primoportal/development/klimawerke/check_netcdf.py:36: FutureWarning: The return type of `Dataset.dims` will be changed to return a set of dimension names in future, in order to be more consistent with `DataArray.dims`. To access a mapping from dimension names to lengths, please use `Dataset.sizes`.
+  n_lat = ds.dims["rlat"]
+/Users/primoportal/development/klimawerke/check_netcdf.py:37: FutureWarning: The return type of `Dataset.dims` will be changed to return a set of dimension names in future, in order to be more consistent with `DataArray.dims`. To access a mapping from dimension names to lengths, please use `Dataset.sizes`.
+  n_lon = ds.dims["rlon"]
+ gridy  gridx       lat       lon         TS   RLA_Wm2    WS_ms ACLC T_lev0    U_lev0 V_lev0 QW_lev0 QI_lev0
+    43     54 47.307583 15.334906 275.371552 15.334906 0.244811 None   None 29.175276   None    None    None
+    43     55 47.321503 15.982427 276.133331 15.982427 0.264533 None   None 29.364147   None    None    None
+    44     43 47.338421  8.174056 282.032196  8.174056 0.289569 None   None 29.852461   None    None    None
+    44     44 47.394684  8.817479 283.574219  8.817479 0.411785 None   None 29.568104   None    None    None
+    44     45 47.447166  9.462262 282.096222  9.462262 0.499583 None   None 29.317205   None    None    None
+    44     46 47.495850 10.108316 278.859070 10.108316 0.547585 None   None 29.098776   None    None    None
+    44     47 47.540726 10.755551 273.567627 10.755551 0.561843 None   None 28.919075   None    None    None
+    44     48 47.581783 11.403872 277.618713 11.403872 0.542965 None   None 28.821188   None    None    None
+    44     49 47.619003 12.053187 278.100128 12.053187 0.489240 None   None 28.816175   None    None    None
+    44     50 47.652382 12.703400 276.389771 12.703400 0.524633 None   None 28.868998   None    None    None
+    44     51 47.681908 13.354415 277.472809 13.354415 0.478058 None   None 28.902203   None    None    None
+    44     52 47.707573 14.006136 273.381348 14.006136 0.456562 None   None 28.877586   None    None    None
+    44     53 47.729370 14.658463 276.863953 14.658463 0.357664 None   None 28.845310   None    None    None
+    44     54 47.747295 15.311301 273.160004 15.311301 0.280218 None   None 28.908657   None    None    None
+    44     55 47.761337 15.964550 276.292480 15.964550 0.192112 None   None 29.113234   None    None    None
+    45     39 47.509701  5.507393 282.817657  5.507393 0.290168 None   None 31.076998   None    None    None
+    45     40 47.581539  6.149854 279.813751  6.149854 0.419236 None   None 30.681717   None    None    None
+    45     41 47.649635  6.794068 276.848236  6.794068 0.326538 None   None 30.273376   None    None    None
+    45     42 47.713970  7.439952 276.832123  7.439952 0.305243 None   None 29.884518   None    None    None
+    45     43 47.774521  8.087417 277.121216  8.087417 0.238254 None   None 29.532255   None    None    None
+primoportal@MacBookPro klimawerke % print ds               
+ds
+primoportal@MacBookPro klimawerke % print ds data_vars
+ds data_vars
+primoportal@MacBookPro klimawerke % python3 check_netcdf.py
+
+=== DATASET INFO ===
+<xarray.Dataset> Size: 11MB
+Dimensions:       (nhyi: 28, nhym: 27, time: 1, rlat: 100, rlon: 100, lev: 27,
+                   rlon_2: 129, rlat_2: 121, lev_2: 27)
+Coordinates:
+  * time          (time) datetime64[ns] 8B 2006-01-01
+  * rlat          (rlat) float64 800B -22.33 -21.89 -21.45 ... 20.35 20.79 21.23
+  * rlon          (rlon) float64 800B -25.57 -25.13 -24.69 ... 17.11 17.55 17.99
+  * lev           (lev) float64 216B 1.0 2.0 3.0 4.0 5.0 ... 24.0 25.0 26.0 27.0
+  * rlon_2        (rlon_2) float64 1kB -31.51 -31.07 -30.63 ... 24.37 24.81
+  * rlat_2        (rlat_2) float64 968B -26.51 -26.07 -25.63 ... 25.85 26.29
+  * lev_2         (lev_2) float64 216B 1.0 2.0 3.0 4.0 ... 24.0 25.0 26.0 27.0
+Dimensions without coordinates: nhyi, nhym
+Data variables: (12/38)
+    rotated_pole  int32 4B ...
+    hyai          (nhyi) float64 224B ...
+    hybi          (nhyi) float64 224B ...
+    hyam          (nhym) float64 216B ...
+    hybm          (nhym) float64 216B ...
+    FIB           (time, rlat, rlon) float32 40kB ...
+    ...            ...
+    TSI           (time, rlat, rlon) float32 40kB ...
+    SEAICE        (time, rlat, rlon) float32 40kB ...
+    SICED         (time, rlat, rlon) float32 40kB ...
+    PHI           (time, rlat, rlon) float32 40kB ...
+    RLA           (time, rlat, rlon) float32 40kB ...
+    QI            (time, lev, rlat, rlon) float32 1MB ...
+Attributes:
+    CDI:          Climate Data Interface version 1.9.8 (https://mpimet.mpg.de...
+    Conventions:  CF-1.6
+    history:      Thu Mar 04 01:22:18 2021: cdo -f nc4 copy e056111t200601010...
+    CDO:          Climate Data Operators version 1.9.8 (https://mpimet.mpg.de...
+
+=== DIMENSIONS ===
+FrozenMappingWarningOnValuesAccess({'nhyi': 28, 'nhym': 27, 'time': 1, 'rlat': 100, 'rlon': 100, 'lev': 27, 'rlon_2': 129, 'rlat_2': 121, 'lev_2': 27})
+
+=== DATA VARIABLES ===
+['rotated_pole', 'hyai', 'hybi', 'hyam', 'hybm', 'FIB', 'T', 'U', 'V', 'QD', 'PS', 'OMEGA', 'QW', 'FI', 'ACLC', 'BLA', 'QDBL', 'WSMX', 'GLAC', 'WS', 'SN', 'TD', 'TDCL', 'TSN', 'TD3', 'TD4', 'TD5', 'QDB', 'WL', 'TS', 'TSL', 'TSW', 'TSI', 'SEAICE', 'SICED', 'PHI', 'RLA', 'QI']
+
+=== COORDS ===
+Coordinates:
+  * time     (time) datetime64[ns] 8B 2006-01-01
+  * rlat     (rlat) float64 800B -22.33 -21.89 -21.45 ... 20.35 20.79 21.23
+  * rlon     (rlon) float64 800B -25.57 -25.13 -24.69 ... 17.11 17.55 17.99
+  * lev      (lev) float64 216B 1.0 2.0 3.0 4.0 5.0 ... 23.0 24.0 25.0 26.0 27.0
+  * rlon_2   (rlon_2) float64 1kB -31.51 -31.07 -30.63 ... 23.93 24.37 24.81
+  * rlat_2   (rlat_2) float64 968B -26.51 -26.07 -25.63 ... 25.41 25.85 26.29
+  * lev_2    (lev_2) float64 216B 1.0 2.0 3.0 4.0 5.0 ... 24.0 25.0 26.0 27.0
+
+=== SAMPLE GRID POINTS IN GERMANY (first 20) ===
+ gridy  gridx       lat       lon         TS   RLA_Wm2    WS_ms T_lev0    U_lev0 V_lev0 QW_lev0 QI_lev0
+    43     54 47.307583 15.334906 275.371552 15.334906 0.244811   None 29.175276   None    None    None
+    43     55 47.321503 15.982427 276.133331 15.982427 0.264533   None 29.364147   None    None    None
+    44     43 47.338421  8.174056 282.032196  8.174056 0.289569   None 29.852461   None    None    None
+    44     44 47.394684  8.817479 283.574219  8.817479 0.411785   None 29.568104   None    None    None
+    44     45 47.447166  9.462262 282.096222  9.462262 0.499583   None 29.317205   None    None    None
+    44     46 47.495850 10.108316 278.859070 10.108316 0.547585   None 29.098776   None    None    None
+    44     47 47.540726 10.755551 273.567627 10.755551 0.561843   None 28.919075   None    None    None
+    44     48 47.581783 11.403872 277.618713 11.403872 0.542965   None 28.821188   None    None    None
+    44     49 47.619003 12.053187 278.100128 12.053187 0.489240   None 28.816175   None    None    None
+    44     50 47.652382 12.703400 276.389771 12.703400 0.524633   None 28.868998   None    None    None
+    44     51 47.681908 13.354415 277.472809 13.354415 0.478058   None 28.902203   None    None    None
+    44     52 47.707573 14.006136 273.381348 14.006136 0.456562   None 28.877586   None    None    None
+    44     53 47.729370 14.658463 276.863953 14.658463 0.357664   None 28.845310   None    None    None
+    44     54 47.747295 15.311301 273.160004 15.311301 0.280218   None 28.908657   None    None    None
+    44     55 47.761337 15.964550 276.292480 15.964550 0.192112   None 29.113234   None    None    None
+    45     39 47.509701  5.507393 282.817657  5.507393 0.290168   None 31.076998   None    None    None
+    45     40 47.581539  6.149854 279.813751  6.149854 0.419236   None 30.681717   None    None    None
+    45     41 47.649635  6.794068 276.848236  6.794068 0.326538   None 30.273376   None    None    None
+    45     42 47.713970  7.439952 276.832123  7.439952 0.305243   None 29.884518   None    None    None
+    45     43 47.774521  8.087417 277.121216  8.087417 0.238254   None 29.532255   None    None    None
+primoportal@MacBookPro klimawerke % python3 final_visualization_demoremo.py
+
+============================================================
+REMO Climate Model - Complete Visualization Pipeline (PHI/RLA)
+============================================================
+Loading remo_germany_subset.nc...
+✓ Loaded successfully
+1) Extracting Germany grid points...
+ Extracted 10000 grid points.
+ Filtered to 279 grid points in Germany
+
+ Note: Using all available Germany grid points for visualization
+
+[2] Creating grid polygons (cell size: 0.44°)...
+✓ Created 279 polygons
+
+[3] Extracting climate parameters...
+✓ Extracted parameters for 279 points
+
+[4] Creating interactive map...
+/Users/primoportal/development/klimawerke/final_visualization_demoremo.py:238: UserWarning: Geometry is in a geographic CRS. Results from 'centroid' are likely incorrect. Use 'GeoSeries.to_crs()' to re-project geometries to a projected CRS before this operation.
+
+  center_lat = gdf.geometry.centroid.y.mean()
+/Users/primoportal/development/klimawerke/final_visualization_demoremo.py:239: UserWarning: Geometry is in a geographic CRS. Results from 'centroid' are likely incorrect. Use 'GeoSeries.to_crs()' to re-project geometries to a projected CRS before this operation.
+
+  center_lon = gdf.geometry.centroid.x.mean()
+ Adding polygons... 0/279
+ Adding polygons... 100/279
+ Adding polygons... 200/279
+✓ Map saved to "remo_interactive_map.html"
+
+[5] Creating parameter table...
+✓ Table saved to "climate_parameters_table.html"
+
+[6] Creating summary report...
+/Users/primoportal/development/klimawerke/final_visualization_demoremo.py:370: FutureWarning: The return type of `Dataset.dims` will be changed to return a set of dimension names in future, in order to be more consistent with `DataArray.dims`. To access a mapping from dimension names to lengths, please use `Dataset.sizes`.
+  Grid dimensions: {dict(ds.dims)}
+
+============================================================
+REMO CLIMATE MODEL ANALYSIS - SUMMARY REPORT
+============================================================
+
+DATASET INFORMATION:
+  Time steps: 1
+  Grid dimensions: {'nhyi': 28, 'nhym': 27, 'time': 1, 'rlat': 100, 'rlon': 100, 'lev': 27, 'rlon_2': 129, 'rlat_2': 121, 'lev_2': 27}
+  Variables: ['rotated_pole', 'hyai', 'hybi', 'hyam', 'hybm', 'FIB', 'T', 'U', 'V', 'QD', 'PS', 'OMEGA', 'QW', 'FI', 'ACLC', 'BLA', 'QDBL', 'WSMX', 'GLAC', 'WS', 'SN', 'TD', 'TDCL', 'TSN', 'TD3', 'TD4', 'TD5', 'QDB', 'WL', 'TS', 'TSL', 'TSW', 'TSI', 'SEAICE', 'SICED', 'PHI', 'RLA', 'QI']
+
+EXTRACTED REGION: Germany
+  Total grid points (all): 10000
+  Total grid points (DE-filter): 279
+  Lat range (DE-filter): 47.31° - 55.46°
+  Lon range (DE-filter): 5.51° - 15.98°
+
+CLIMATE PARAMETERS:
+
+  Temperature (°C):
+    Min:  -3.99 °C
+    Max:  10.42 °C
+    Mean: 1.63 °C
+
+  Longwave radiation (W/m²):
+    Min:  5.51 W/m²
+    Max:  15.98 W/m²
+    Mean: 10.83 W/m²
+
+  Wind speed (m/s):
+    Min:  0.00 m/s
+    Max:  0.56 m/s
+    Mean: 0.30 m/s
+
+  Cloud cover (-):
+    Min:  nan
+    Max:  nan
+    Mean: nan
+
+  Precipitation (mm):
+    Min:  nan mm
+    Max:  nan mm
+    Mean: nan mm
+
+OUTPUT FILES CREATED:
+  - remo_interactive_map.html (Interactive map with polygons)
+  - climate_parameters_table.html (Parameter table)
+  - climate_parameters.csv (Full parameter data)
+  - analysis_report.txt (This report)
+
+============================================================
+
+✓ Report saved to "analysis_report.txt"
+✓ Parameters saved to "climate_parameters.csv"
+
+============================================================
+✓ VISUALIZATION COMPLETE!
+============================================================
+
+Output files created:
+ 1. remo_interactive_map.html - Open in browser!
+ 2. climate_parameters_table.html - View parameters
+ 3. climate_parameters.csv - All data in CSV format
+ 4. analysis_report.txt - Summary statistics
+============================================================
+primoportal@MacBookPro klimawerke % python3 final_visualization_demoremo.py
+
+============================================================
+REMO Climate Model - Complete Visualization Pipeline (PHI/RLA)
+============================================================
+Loading remo_germany_subset.nc...
+✓ Loaded successfully
+1) Extracting Germany grid points...
+ Extracted 10000 grid points.
+ Filtered to 279 grid points in Germany
+
+ Note: Using all available Germany grid points for visualization
+
+[2] Creating grid polygons (cell size: 0.44°)...
+✓ Created 279 polygons
+
+[3] Extracting climate parameters...
+✓ Extracted parameters for 279 points
+
+[4] Creating interactive map...
+/Users/primoportal/development/klimawerke/final_visualization_demoremo.py:362: UserWarning: Geometry is in a geographic CRS. Results from 'centroid' are likely incorrect. Use 'GeoSeries.to_crs()' to re-project geometries to a projected CRS before this operation.
+
+  center_lat = gdf.geometry.centroid.y.mean()
+/Users/primoportal/development/klimawerke/final_visualization_demoremo.py:363: UserWarning: Geometry is in a geographic CRS. Results from 'centroid' are likely incorrect. Use 'GeoSeries.to_crs()' to re-project geometries to a projected CRS before this operation.
+
+  center_lon = gdf.geometry.centroid.x.mean()
+ Adding polygons... 0/279
+ Adding polygons... 100/279
+ Adding polygons... 200/279
+✓ Map saved to "remo_interactive_map.html"
+
+[5] Creating parameter table...
+✓ Table saved to "climate_parameters_table.html"
+
+[6] Creating summary report...
+/Users/primoportal/development/klimawerke/final_visualization_demoremo.py:494: FutureWarning: The return type of `Dataset.dims` will be changed to return a set of dimension names in future, in order to be more consistent with `DataArray.dims`. To access a mapping from dimension names to lengths, please use `Dataset.sizes`.
+  Grid dimensions: {dict(ds.dims)}
+
+============================================================
+REMO CLIMATE MODEL ANALYSIS - SUMMARY REPORT
+============================================================
+
+DATASET INFORMATION:
+  Time steps: 1
+  Grid dimensions: {'nhyi': 28, 'nhym': 27, 'time': 1, 'rlat': 100, 'rlon': 100, 'lev': 27, 'rlon_2': 129, 'rlat_2': 121, 'lev_2': 27}
+  Variables: ['rotated_pole', 'hyai', 'hybi', 'hyam', 'hybm', 'FIB', 'T', 'U', 'V', 'QD', 'PS', 'OMEGA', 'QW', 'FI', 'ACLC', 'BLA', 'QDBL', 'WSMX', 'GLAC', 'WS', 'SN', 'TD', 'TDCL', 'TSN', 'TD3', 'TD4', 'TD5', 'QDB', 'WL', 'TS', 'TSL', 'TSW', 'TSI', 'SEAICE', 'SICED', 'PHI', 'RLA', 'QI']
+
+EXTRACTED REGION: Germany
+  Total grid points (all): 10000
+  Total grid points (DE-filter): 279
+  Lat range (DE-filter): 47.31° - 55.46°
+  Lon range (DE-filter): 5.51° - 15.98°
+
+CLIMATE PARAMETERS:
+
+  Temperature (°C):
+    Min:  -3.99 °C
+    Max:  10.42 °C
+    Mean: 1.63 °C
+
+  Longwave radiation (W/m²):
+    Min:  5.51 W/m²
+    Max:  15.98 W/m²
+    Mean: 10.83 W/m²
+
+  Wind speed (m/s):
+    Min:  0.00 m/s
+    Max:  0.56 m/s
+    Mean: 0.30 m/s
+
+  Cloud cover (-):
+    Min:  nan
+    Max:  nan
+    Mean: nan
+
+  Precipitation (mm):
+    Min:  nan mm
+    Max:  nan mm
+    Mean: nan mm
+
+OUTPUT FILES CREATED:
+  - remo_interactive_map.html (Interactive map with polygons)
+  - climate_parameters_table.html (Parameter table)
+  - climate_parameters.csv (Full parameter data)
+  - analysis_report.txt (This report)
+
+============================================================
+
+✓ Report saved to "analysis_report.txt"
+✓ Parameters saved to "climate_parameters.csv"
+
+============================================================
+✓ VISUALIZATION COMPLETE!
+============================================================
+
+Output files created:
+ 1. remo_interactive_map.html - Open in browser!
+ 2. climate_parameters_table.html - View parameters
+ 3. climate_parameters.csv - All data in CSV format
+ 4. analysis_report.txt - Summary statistics
+============================================================
+primoportal@MacBookPro klimawerke % python3 final_visualization_demoremo.py
+
+primoportal@MacBookPro klimawerke % python3 final_visualization_demoremo.py
+
+============================================================
+REMO Climate Model - Complete Visualization Pipeline (PHI/RLA)
+============================================================
+Loading remo_germany_subset.nc...
+✓ Loaded successfully
+1) Extracting Germany grid points...
+ Extracted 10000 grid points.
+ Filtered to 279 grid points in Germany
+
+ Note: Using all available Germany grid points for visualization
+
+[2] Creating grid polygons (cell size: 0.44°)...
+✓ Created 279 polygons
+
+[3] Extracting climate parameters...
+✓ Extracted parameters for 279 points
+
+[4] Creating interactive map...
+/Users/primoportal/development/klimawerke/final_visualization_demoremo.py:362: UserWarning: Geometry is in a geographic CRS. Results from 'centroid' are likely incorrect. Use 'GeoSeries.to_crs()' to re-project geometries to a projected CRS before this operation.
+
+  center_lat = gdf.geometry.centroid.y.mean()
+/Users/primoportal/development/klimawerke/final_visualization_demoremo.py:363: UserWarning: Geometry is in a geographic CRS. Results from 'centroid' are likely incorrect. Use 'GeoSeries.to_crs()' to re-project geometries to a projected CRS before this operation.
+
+  center_lon = gdf.geometry.centroid.x.mean()
+ Adding polygons... 0/279
+ Adding polygons... 100/279
+ Adding polygons... 200/279
+✓ Map saved to "remo_interactive_map.html"
+
+[5] Creating parameter table...
+✓ Table saved to 'climate_parameters_table.html'
+
+[6] Creating summary report...
+/Users/primoportal/development/klimawerke/final_visualization_demoremo.py:526: FutureWarning: The return type of `Dataset.dims` will be changed to return a set of dimension names in future, in order to be more consistent with `DataArray.dims`. To access a mapping from dimension names to lengths, please use `Dataset.sizes`.
+  Grid dimensions: {dict(ds.dims)}
+
+============================================================
+REMO CLIMATE MODEL ANALYSIS - SUMMARY REPORT
+============================================================
+
+DATASET INFORMATION:
+  Time steps: 1
+  Grid dimensions: {'nhyi': 28, 'nhym': 27, 'time': 1, 'rlat': 100, 'rlon': 100, 'lev': 27, 'rlon_2': 129, 'rlat_2': 121, 'lev_2': 27}
+  Variables: ['rotated_pole', 'hyai', 'hybi', 'hyam', 'hybm', 'FIB', 'T', 'U', 'V', 'QD', 'PS', 'OMEGA', 'QW', 'FI', 'ACLC', 'BLA', 'QDBL', 'WSMX', 'GLAC', 'WS', 'SN', 'TD', 'TDCL', 'TSN', 'TD3', 'TD4', 'TD5', 'QDB', 'WL', 'TS', 'TSL', 'TSW', 'TSI', 'SEAICE', 'SICED', 'PHI', 'RLA', 'QI']
+
+EXTRACTED REGION: Germany
+  Total grid points (all): 10000
+  Total grid points (DE-filter): 279
+  Lat range (DE-filter): 47.31° - 55.46°
+  Lon range (DE-filter): 5.51° - 15.98°
+
+CLIMATE PARAMETERS:
+
+  Temperature (°C):
+    Min:  -3.99 °C
+    Max:  10.42 °C
+    Mean: 1.63 °C
+
+  Longwave radiation (W/m²):
+    Min:  5.51 W/m²
+    Max:  15.98 W/m²
+    Mean: 10.83 W/m²
+
+  Wind speed (m/s):
+    Min:  0.00 m/s
+    Max:  0.56 m/s
+    Mean: 0.30 m/s
+
+  Cloud cover (-):
+    Min:  nan
+    Max:  nan
+    Mean: nan
+
+  Precipitation (mm):
+    Min:  nan mm
+    Max:  nan mm
+    Mean: nan mm
+
+OUTPUT FILES CREATED:
+  - remo_interactive_map.html (Interactive map with polygons)
+  - climate_parameters_table.html (Parameter table)
+  - climate_parameters.csv (Full parameter data)
+  - analysis_report.txt (This report)
+
+============================================================
+
+✓ Report saved to "analysis_report.txt"
+✓ Parameters saved to "climate_parameters.csv"
+
+============================================================
+✓ VISUALIZATION COMPLETE!
+============================================================
+
+Output files created:
+ 1. remo_interactive_map.html - Open in browser!
+ 2. climate_parameters_table.html - View parameters
+ 3. climate_parameters.csv - All data in CSV format
+ 4. analysis_report.txt - Summary statistics
+============================================================
+primoportal@MacBookPro klimawerke % python3 final_visualization_demoremo.py
+
+============================================================
+REMO Climate Model - Complete Visualization Pipeline (PHI/RLA)
+============================================================
+Loading remo_germany_subset.nc...
+✓ Loaded successfully
+1) Extracting Germany grid points...
+ Extracted 10000 grid points.
+ Filtered to 279 grid points in Germany
+
+ Note: Using all available Germany grid points for visualization
+
+[2] Creating grid polygons (cell size: 0.44°)...
+✓ Created 279 polygons
+
+[3] Extracting climate parameters...
+✓ Extracted parameters for 279 points
+
+[4] Creating interactive map...
+/Users/primoportal/development/klimawerke/final_visualization_demoremo.py:362: UserWarning: Geometry is in a geographic CRS. Results from 'centroid' are likely incorrect. Use 'GeoSeries.to_crs()' to re-project geometries to a projected CRS before this operation.
+
+  center_lat = gdf.geometry.centroid.y.mean()
+/Users/primoportal/development/klimawerke/final_visualization_demoremo.py:363: UserWarning: Geometry is in a geographic CRS. Results from 'centroid' are likely incorrect. Use 'GeoSeries.to_crs()' to re-project geometries to a projected CRS before this operation.
+
+  center_lon = gdf.geometry.centroid.x.mean()
+ Adding polygons... 0/279
+ Adding polygons... 100/279
+ Adding polygons... 200/279
+✓ Map saved to "remo_interactive_map.html"
+
+[5] Creating parameter table...
+✓ Table saved to 'climate_parameters_table.html'
+
+[6] Creating summary report...
+/Users/primoportal/development/klimawerke/final_visualization_demoremo.py:526: FutureWarning: The return type of `Dataset.dims` will be changed to return a set of dimension names in future, in order to be more consistent with `DataArray.dims`. To access a mapping from dimension names to lengths, please use `Dataset.sizes`.
+  Grid dimensions: {dict(ds.dims)}
+
+============================================================
+REMO CLIMATE MODEL ANALYSIS - SUMMARY REPORT
+============================================================
+
+DATASET INFORMATION:
+  Time steps: 1
+  Grid dimensions: {'nhyi': 28, 'nhym': 27, 'time': 1, 'rlat': 100, 'rlon': 100, 'lev': 27, 'rlon_2': 129, 'rlat_2': 121, 'lev_2': 27}
+  Variables: ['rotated_pole', 'hyai', 'hybi', 'hyam', 'hybm', 'FIB', 'T', 'U', 'V', 'QD', 'PS', 'OMEGA', 'QW', 'FI', 'ACLC', 'BLA', 'QDBL', 'WSMX', 'GLAC', 'WS', 'SN', 'TD', 'TDCL', 'TSN', 'TD3', 'TD4', 'TD5', 'QDB', 'WL', 'TS', 'TSL', 'TSW', 'TSI', 'SEAICE', 'SICED', 'PHI', 'RLA', 'QI']
+
+EXTRACTED REGION: Germany
+  Total grid points (all): 10000
+  Total grid points (DE-filter): 279
+  Lat range (DE-filter): 47.31° - 55.46°
+  Lon range (DE-filter): 5.51° - 15.98°
+
+CLIMATE PARAMETERS:
+
+  Temperature (°C):
+    Min:  -3.99 °C
+    Max:  10.42 °C
+    Mean: 1.63 °C
+
+  Longwave radiation (W/m²):
+    Min:  5.51 W/m²
+    Max:  15.98 W/m²
+    Mean: 10.83 W/m²
+
+  Wind speed (m/s):
+    Min:  0.00 m/s
+    Max:  0.56 m/s
+    Mean: 0.30 m/s
+
+  Cloud cover (-):
+    Min:  nan
+    Max:  nan
+    Mean: nan
+
+  Precipitation (mm):
+    Min:  nan mm
+    Max:  nan mm
+    Mean: nan mm
+
+OUTPUT FILES CREATED:
+  - remo_interactive_map.html (Interactive map with polygons)
+  - climate_parameters_table.html (Parameter table)
+  - climate_parameters.csv (Full parameter data)
+  - analysis_report.txt (This report)
+
+============================================================
+
+✓ Report saved to "analysis_report.txt"
+✓ Parameters saved to "climate_parameters.csv"
+
+============================================================
+✓ VISUALIZATION COMPLETE!
+============================================================
+
+Output files created:
+ 1. remo_interactive_map.html - Open in browser!
+ 2. climate_parameters_table.html - View parameters
+ 3. climate_parameters.csv - All data in CSV format
+ 4. analysis_report.txt - Summary statistics
+============================================================
+primoportal@MacBookPro klimawerke % python3 demoremo_temp_graph.py         
+Traceback (most recent call last):
+  File "/Users/primoportal/development/klimawerke/demoremo_temp_graph.py", line 8, in <module>
+    import plotly.express as px
+ModuleNotFoundError: No module named 'plotly'
+primoportal@MacBookPro klimawerke % python3 demoremo_temp_graph.py
+Lade climate_parameters.csv...
+279 Punkte im Plot.
+Diagramm als HTML gespeichert: lon_lat_temperature_scatter.html
+primoportal@MacBookPro klimawerke % python3 check_netcdf.py                
+
+=== DATASET INFO ===
+<xarray.Dataset> Size: 11MB
+Dimensions:       (nhyi: 28, nhym: 27, time: 1, rlat: 100, rlon: 100, lev: 27,
+                   rlon_2: 129, rlat_2: 121, lev_2: 27)
+Coordinates:
+  * time          (time) datetime64[ns] 8B 2006-01-01
+  * rlat          (rlat) float64 800B -22.33 -21.89 -21.45 ... 20.35 20.79 21.23
+  * rlon          (rlon) float64 800B -25.57 -25.13 -24.69 ... 17.11 17.55 17.99
+  * lev           (lev) float64 216B 1.0 2.0 3.0 4.0 5.0 ... 24.0 25.0 26.0 27.0
+  * rlon_2        (rlon_2) float64 1kB -31.51 -31.07 -30.63 ... 24.37 24.81
+  * rlat_2        (rlat_2) float64 968B -26.51 -26.07 -25.63 ... 25.85 26.29
+  * lev_2         (lev_2) float64 216B 1.0 2.0 3.0 4.0 ... 24.0 25.0 26.0 27.0
+Dimensions without coordinates: nhyi, nhym
+Data variables: (12/38)
+    rotated_pole  int32 4B ...
+    hyai          (nhyi) float64 224B ...
+    hybi          (nhyi) float64 224B ...
+    hyam          (nhym) float64 216B ...
+    hybm          (nhym) float64 216B ...
+    FIB           (time, rlat, rlon) float32 40kB ...
+    ...            ...
+    TSI           (time, rlat, rlon) float32 40kB ...
+    SEAICE        (time, rlat, rlon) float32 40kB ...
+    SICED         (time, rlat, rlon) float32 40kB ...
+    PHI           (time, rlat, rlon) float32 40kB ...
+    RLA           (time, rlat, rlon) float32 40kB ...
+    QI            (time, lev, rlat, rlon) float32 1MB ...
+Attributes:
+    CDI:          Climate Data Interface version 1.9.8 (https://mpimet.mpg.de...
+    Conventions:  CF-1.6
+    history:      Thu Mar 04 01:22:18 2021: cdo -f nc4 copy e056111t200601010...
+    CDO:          Climate Data Operators version 1.9.8 (https://mpimet.mpg.de...
+
+=== DIMENSIONS ===
+FrozenMappingWarningOnValuesAccess({'nhyi': 28, 'nhym': 27, 'time': 1, 'rlat': 100, 'rlon': 100, 'lev': 27, 'rlon_2': 129, 'rlat_2': 121, 'lev_2': 27})
+
+=== DATA VARIABLES ===
+['rotated_pole', 'hyai', 'hybi', 'hyam', 'hybm', 'FIB', 'T', 'U', 'V', 'QD', 'PS', 'OMEGA', 'QW', 'FI', 'ACLC', 'BLA', 'QDBL', 'WSMX', 'GLAC', 'WS', 'SN', 'TD', 'TDCL', 'TSN', 'TD3', 'TD4', 'TD5', 'QDB', 'WL', 'TS', 'TSL', 'TSW', 'TSI', 'SEAICE', 'SICED', 'PHI', 'RLA', 'QI']
+
+=== COORDS ===
+Coordinates:
+  * time     (time) datetime64[ns] 8B 2006-01-01
+  * rlat     (rlat) float64 800B -22.33 -21.89 -21.45 ... 20.35 20.79 21.23
+  * rlon     (rlon) float64 800B -25.57 -25.13 -24.69 ... 17.11 17.55 17.99
+  * lev      (lev) float64 216B 1.0 2.0 3.0 4.0 5.0 ... 23.0 24.0 25.0 26.0 27.0
+  * rlon_2   (rlon_2) float64 1kB -31.51 -31.07 -30.63 ... 23.93 24.37 24.81
+  * rlat_2   (rlat_2) float64 968B -26.51 -26.07 -25.63 ... 25.41 25.85 26.29
+  * lev_2    (lev_2) float64 216B 1.0 2.0 3.0 4.0 5.0 ... 24.0 25.0 26.0 27.0
+
+=== SAMPLE GRID POINTS IN GERMANY (first 20) ===
+ gridy  gridx       lat       lon         TS   RLA_Wm2    WS_ms T_lev0    U_lev0 V_lev0 QW_lev0 QI_lev0
+    43     54 47.307583 15.334906 275.371552 15.334906 0.244811   None 29.175276   None    None    None
+    43     55 47.321503 15.982427 276.133331 15.982427 0.264533   None 29.364147   None    None    None
+    44     43 47.338421  8.174056 282.032196  8.174056 0.289569   None 29.852461   None    None    None
+    44     44 47.394684  8.817479 283.574219  8.817479 0.411785   None 29.568104   None    None    None
+    44     45 47.447166  9.462262 282.096222  9.462262 0.499583   None 29.317205   None    None    None
+    44     46 47.495850 10.108316 278.859070 10.108316 0.547585   None 29.098776   None    None    None
+    44     47 47.540726 10.755551 273.567627 10.755551 0.561843   None 28.919075   None    None    None
+    44     48 47.581783 11.403872 277.618713 11.403872 0.542965   None 28.821188   None    None    None
+    44     49 47.619003 12.053187 278.100128 12.053187 0.489240   None 28.816175   None    None    None
+    44     50 47.652382 12.703400 276.389771 12.703400 0.524633   None 28.868998   None    None    None
+    44     51 47.681908 13.354415 277.472809 13.354415 0.478058   None 28.902203   None    None    None
+    44     52 47.707573 14.006136 273.381348 14.006136 0.456562   None 28.877586   None    None    None
+    44     53 47.729370 14.658463 276.863953 14.658463 0.357664   None 28.845310   None    None    None
+    44     54 47.747295 15.311301 273.160004 15.311301 0.280218   None 28.908657   None    None    None
+    44     55 47.761337 15.964550 276.292480 15.964550 0.192112   None 29.113234   None    None    None
+    45     39 47.509701  5.507393 282.817657  5.507393 0.290168   None 31.076998   None    None    None
+    45     40 47.581539  6.149854 279.813751  6.149854 0.419236   None 30.681717   None    None    None
+    45     41 47.649635  6.794068 276.848236  6.794068 0.326538   None 30.273376   None    None    None
+    45     42 47.713970  7.439952 276.832123  7.439952 0.305243   None 29.884518   None    None    None
+    45     43 47.774521  8.087417 277.121216  8.087417 0.238254   None 29.532255   None    None    None
+primoportal@MacBookPro klimawerke % 

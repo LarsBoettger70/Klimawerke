@@ -5,20 +5,46 @@ REMO CLIMATE MODEL ANALYSIS - SUMMARY REPORT
 
 DATASET INFORMATION:
   Time steps: 1
-  Grid dimensions: {'nhyi': 28, 'nhym': 27, 'time': 1, 'rlat': 121, 'rlon': 129, 'lev': 27, 'rlon_2': 129, 'rlat_2': 121, 'lev_2': 27}
+  Grid dimensions: {'nhyi': 28, 'nhym': 27, 'time': 1, 'rlat': 100, 'rlon': 100, 'lev': 27, 'rlon_2': 129, 'rlat_2': 121, 'lev_2': 27}
   Variables: ['rotated_pole', 'hyai', 'hybi', 'hyam', 'hybm', 'FIB', 'T', 'U', 'V', 'QD', 'PS', 'OMEGA', 'QW', 'FI', 'ACLC', 'BLA', 'QDBL', 'WSMX', 'GLAC', 'WS', 'SN', 'TD', 'TDCL', 'TSN', 'TD3', 'TD4', 'TD5', 'QDB', 'WL', 'TS', 'TSL', 'TSW', 'TSI', 'SEAICE', 'SICED', 'PHI', 'RLA', 'QI']
 
-EXTRACTED REGION:  Germany
-  Total grid points: 15609
-  Lat range: 13.27° - 66.07°
-  Lon range: -21.73° - 34.59°
+EXTRACTED REGION: Germany
+  Total grid points (all): 10000
+  Total grid points (DE-filter): 279
+  Lat range (DE-filter): 47.31° - 55.46°
+  Lon range (DE-filter): 5.51° - 15.98°
 
-CLIMATE PARAMETERS: 
+CLIMATE PARAMETERS:
+
+  Temperature (°C):
+    Min:  -3.99 °C
+    Max:  10.42 °C
+    Mean: 1.63 °C
+
+  Longwave radiation (W/m²):
+    Min:  5.51 W/m²
+    Max:  15.98 W/m²
+    Mean: 10.83 W/m²
+
+  Wind speed (m/s):
+    Min:  0.00 m/s
+    Max:  0.56 m/s
+    Mean: 0.30 m/s
+
+  Cloud cover (-):
+    Min:  nan
+    Max:  nan
+    Mean: nan
+
+  Precipitation (mm):
+    Min:  nan mm
+    Max:  nan mm
+    Mean: nan mm
 
 OUTPUT FILES CREATED:
-  - remo_interactive_map. html (Interactive map with polygons)
+  - remo_interactive_map.html (Interactive map with polygons)
   - climate_parameters_table.html (Parameter table)
-  - climate_parameters. csv (Full parameter data)
+  - climate_parameters.csv (Full parameter data)
   - analysis_report.txt (This report)
 
 ============================================================
