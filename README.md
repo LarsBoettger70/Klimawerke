@@ -69,8 +69,8 @@ This demonstrates the complete interpolation workflow:
 
 ### Output Files:
 - `interpolation_demo_map.html` - Interactive map showing grid points, stations, and interpolated surface
-- `interpolation_results.csv` - Interpolated values at mesh points
-- `interpolation_quality_report.txt` - Quality metrics and statistics
+- `interpolation_results.csv` - Interpolated values at mesh points (includes both Kelvin and Celsius values for temperature variables)
+- `interpolation_quality_report.txt` - Quality metrics and statistics (temperature metrics shown in Celsius)
 
 ## Usage Examples
 
@@ -78,7 +78,7 @@ This demonstrates the complete interpolation workflow:
 
 ```python
 import xarray as xr
-from polynomial_interpolation import RemoInterpolator
+from polynomial_interpolation import RemoInterpolator, kelvin_to_celsius
 
 # Load REMO data
 ds = xr.open_dataset('remo_germany_subset.nc')
@@ -98,6 +98,10 @@ values = interp.interpolate(
     query_rlon=[5.0, 5.5, 6.0],
     method='rbf'
 )
+
+# Convert temperature from Kelvin to Celsius
+values_celsius = kelvin_to_celsius(values)
+print(f"Temperatures: {values_celsius}°C")
 
 # Interpolate over a regular grid
 rlat_grid, rlon_grid, values_grid = interp.interpolate_grid(
@@ -178,6 +182,10 @@ Creates smooth polynomial surfaces through REMO grid points for downscaling.
 - `interpolate_grid(rlat_range, rlon_range, resolution, method='rbf')` - Interpolate over regular grid
 - `find_neighbors(query_rlat, query_rlon, k=None)` - Find k nearest grid points
 - `get_statistics()` - Get grid statistics
+
+**Utility Functions:**
+- `kelvin_to_celsius(kelvin_value)` - Convert temperature from Kelvin to Celsius
+- `calculate_interpolation_error(interpolator, test_points, true_values, method)` - Calculate error metrics
 
 **Interpolation Methods:**
 - `rbf`: Radial Basis Function with thin-plate spline (smooth, recommended)
