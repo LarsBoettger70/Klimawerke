@@ -507,27 +507,21 @@ QUALITY METRICS (Cross-validation):
 """
     
     for method, metrics in quality_metrics.items():
-        # Convert error metrics to Celsius if temperature variable
+        # Error metrics (MAE, RMSE, etc.) are deltas that remain unchanged
+        # when converting from Kelvin to Celsius since it's a linear conversion
+        # (the offset of 273.15 cancels out in differences)
         if is_temperature:
-            mae = kelvin_to_celsius(metrics['mae'] + 273.15) - kelvin_to_celsius(273.15)  # Convert delta
-            rmse = kelvin_to_celsius(metrics['rmse'] + 273.15) - kelvin_to_celsius(273.15)  # Convert delta
-            mean_error = kelvin_to_celsius(metrics['mean_error'] + 273.15) - kelvin_to_celsius(273.15)
-            std_error = kelvin_to_celsius(metrics['std_error'] + 273.15) - kelvin_to_celsius(273.15)
             error_unit = "°C"
         else:
-            mae = metrics['mae']
-            rmse = metrics['rmse']
-            mean_error = metrics['mean_error']
-            std_error = metrics['std_error']
             error_unit = ""
         
         report += f"""
   Method: {method.upper()}
-    Mean Absolute Error (MAE): {mae:.4f}{error_unit}
-    Root Mean Square Error (RMSE): {rmse:.4f}{error_unit}
+    Mean Absolute Error (MAE): {metrics['mae']:.4f}{error_unit}
+    Root Mean Square Error (RMSE): {metrics['rmse']:.4f}{error_unit}
     R² Score: {metrics['r2']:.4f}
-    Mean Error: {mean_error:.4f}{error_unit}
-    Std Error: {std_error:.4f}{error_unit}
+    Mean Error: {metrics['mean_error']:.4f}{error_unit}
+    Std Error: {metrics['std_error']:.4f}{error_unit}
     Test points: {metrics['n_points']}
 """
     
