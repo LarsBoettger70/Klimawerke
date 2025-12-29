@@ -352,7 +352,7 @@ class CoordinateTransformer:
             np.cos(rlat_rad) * np.cos(pole_lat_rad) * np.cos(rlon_rad)
         ))
         
-        lon = pole_lon + np.rad2deg(np.arctan2(
+        lon = self.pole_lon + np.rad2deg(np.arctan2(
             np.cos(rlat_rad) * np.sin(rlon_rad),
             np.cos(rlat_rad) * np.cos(rlon_rad) * np.sin(pole_lat_rad) -
             np.sin(rlat_rad) * np.cos(pole_lat_rad)
