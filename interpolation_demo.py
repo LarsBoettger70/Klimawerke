@@ -188,7 +188,7 @@ def perform_interpolation(interp, mesh, stations, grid_points, ds):
         mesh['value_rbf'] = interp.interpolate(mesh_rlat, mesh_rlon, method='rbf')
         mesh['value_linear'] = interp.interpolate(mesh_rlat, mesh_rlon, method='linear')
         print(f"✓ Mesh interpolation complete")
-    except Exception as e:
+    except (ValueError, RuntimeError, np.linalg.LinAlgError) as e:
         print(f"⚠ Warning: Mesh interpolation failed: {e}")
         mesh['value_rbf'] = np.nan
         mesh['value_linear'] = np.nan
@@ -208,7 +208,7 @@ def perform_interpolation(interp, mesh, stations, grid_points, ds):
         stations['value_rbf'] = interp.interpolate(station_rlat, station_rlon, method='rbf')
         stations['value_linear'] = interp.interpolate(station_rlat, station_rlon, method='linear')
         print(f"✓ Station interpolation complete")
-    except Exception as e:
+    except (ValueError, RuntimeError, np.linalg.LinAlgError) as e:
         print(f"⚠ Warning: Station interpolation failed: {e}")
         stations['value_rbf'] = np.nan
         stations['value_linear'] = np.nan
@@ -246,7 +246,7 @@ def evaluate_interpolation_quality(interp, grid_points):
                 rlon=int(point['rlon_idx'])
             ).values)
             true_values.append(val)
-        except:
+        except (IndexError, KeyError, ValueError) as e:
             true_values.append(np.nan)
     
     true_values = np.array(true_values)
@@ -287,7 +287,7 @@ def evaluate_interpolation_quality(interp, grid_points):
             print(f"    RMSE: {errors['rmse']:.4f}")
             print(f"    R²:   {errors['r2']:.4f}")
             
-        except Exception as e:
+        except (ValueError, RuntimeError, np.linalg.LinAlgError) as e:
             print(f"  ⚠ Error evaluating {method}: {e}")
     
     print(f"\n✓ Quality evaluation complete")

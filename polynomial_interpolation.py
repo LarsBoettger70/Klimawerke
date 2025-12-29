@@ -277,7 +277,7 @@ class RemoInterpolator:
                     try:
                         interp = self._build_interpolator(local_points, local_values)
                         interpolated[i] = interp(qp.reshape(1, -1))[0]
-                    except:
+                    except (ValueError, RuntimeError, np.linalg.LinAlgError) as e:
                         # Fallback to nearest neighbor if RBF fails
                         interpolated[i] = local_values[0]
                 else:

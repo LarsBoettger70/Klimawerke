@@ -266,8 +266,18 @@ class CoordinateTransformer:
     coordinates.
     
     Note:
-        For REMO EUR-44, the transformation requires the pole position
-        which is stored in the 'rotated_pole' variable of the NetCDF file.
+        This implementation uses simplified spherical coordinate transformations
+        suitable for small to medium regions. For production use requiring
+        high accuracy over large regions, consider using:
+        - pyproj: https://pyproj4.github.io/pyproj/stable/
+        - cartopy: https://scitools.org.uk/cartopy/docs/latest/
+        
+        These libraries provide rigorous geodetic transformations and
+        support for various coordinate reference systems.
+    
+    Example:
+        >>> transformer = CoordinateTransformer(pole_lat=39.25, pole_lon=-162.0)
+        >>> lat, lon = transformer.rotated_to_geographic(rlat=[0.0], rlon=[0.0])
     """
     
     def __init__(
@@ -323,9 +333,8 @@ class CoordinateTransformer:
             Tuple of (lat, lon) in geographic coordinates
         
         Note:
-            This is a simplified transformation. For production use,
-            consider using more accurate transformations from pyproj
-            or cartopy.
+            Uses simplified spherical transformation. For high accuracy
+            requirements, use pyproj or cartopy libraries instead.
         """
         # Simple approximation for small regions
         # For accurate transformation, use proper rotation matrices
@@ -365,6 +374,10 @@ class CoordinateTransformer:
         
         Returns:
             Tuple of (rlat, rlon) in rotated coordinates
+        
+        Note:
+            Uses simplified inverse spherical transformation. For high accuracy
+            requirements, use pyproj or cartopy libraries instead.
         """
         # Inverse transformation
         # This is also simplified; use proper transformation in production
