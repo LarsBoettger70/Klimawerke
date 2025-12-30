@@ -4,13 +4,24 @@ This repository provides tools for downloading, processing, and analyzing REMO r
 
 ## Features
 
-### 1. Data Download and Exploration
+### 1. Git Sync Automation Tool ⭐ NEW
+A terminal-based tool for managing Git synchronization between your local machine and GitHub.
+
+#### Key Features:
+- **Python Installation Check**: Verify Python installation and display version information
+- **Local to GitHub Sync**: Automatically stage, commit, and push changes to remote repository
+- **GitHub to Local Sync**: Pull latest changes from remote with conflict detection
+- **User-Friendly Menu**: Interactive terminal interface with clear prompts
+- **Exception Handling**: Graceful handling of network issues and Git conflicts
+- **Smart Conflict Detection**: Alerts user of merge conflicts and provides resolution guidance
+
+### 2. Data Download and Exploration
 - Download REMO demo data from GitHub repositories
 - Explore NetCDF file structure and metadata
 - Extract regional subsets (e.g., Germany)
 - Basic visualization with folium maps
 
-### 2. Polynomial Interpolation Module ⭐ NEW
+### 3. Polynomial Interpolation Module
 Comprehensive toolkit for downscaling REMO climate data from coarse grids (EUR-44, EUR-22, EUR-11) to regional and point-level resolution.
 
 #### Key Capabilities:
@@ -47,14 +58,50 @@ pip install -r requirements.txt
 
 ## Quick Start
 
-### 1. Download Demo Data
+### 1. Git Sync Automation
+
+Use the Git sync tool to manage repository synchronization:
+
+```bash
+# Run the interactive sync tool
+python3 git_sync.py
+
+# Or make it executable and run directly
+chmod +x git_sync.py
+./git_sync.py
+```
+
+**Menu Options:**
+1. **Check Python Installation** - Verify Python is installed and view version details
+2. **Sync MacBook → GitHub** - Stage, commit, and push local changes to remote
+3. **Sync GitHub → MacBook** - Pull latest changes from remote repository
+4. **Exit** - Close the program
+
+**Usage Examples:**
+
+```bash
+# Check Python installation
+→ Select option 1
+
+# Push local changes to GitHub
+→ Select option 2
+→ Enter commit message (optional)
+→ Changes are automatically staged, committed, and pushed
+
+# Pull changes from GitHub
+→ Select option 3
+→ If local changes exist, choose to stash or discard
+→ Latest changes are pulled from remote
+```
+
+### 2. Download Demo Data
 ```bash
 python3 download_and_explore_demodata.py
 ```
 
 This downloads a small REMO EUR-44 demo file (~16 MB) and extracts a Germany subset.
 
-### 2. Run Interpolation Demo
+### 3. Run Interpolation Demo
 ```bash
 python3 interpolation_demo.py
 ```
@@ -262,6 +309,7 @@ REMO domains from: https://github.com/remo-rcm/tables
 
 ```
 Klimawerke/
+├── git_sync.py                   # Git synchronization automation tool ⭐ NEW
 ├── polynomial_interpolation.py   # Core interpolation engine
 ├── mesh_generator.py             # Mesh and coordinate tools
 ├── interpolation_demo.py         # Complete demo workflow
@@ -270,6 +318,72 @@ Klimawerke/
 ├── requirements.txt              # Python dependencies
 ├── README.md                     # This file
 └── *.nc                         # NetCDF data files (not in git)
+```
+
+## Git Sync Automation Tool
+
+The `git_sync.py` script provides a user-friendly terminal interface for managing Git operations.
+
+### Features:
+
+1. **Python Installation Check**
+   - Verifies Python is installed on your system
+   - Displays Python version, executable path, and platform information
+   - Useful for troubleshooting Python-related issues
+
+2. **Local to GitHub Sync (Push)**
+   - Automatically stages all changes (`git add .`)
+   - Prompts for a commit message (or uses default)
+   - Commits changes with the provided message
+   - Pushes changes to the remote repository
+   - Handles both `main` and other branch names automatically
+   - Shows clear status messages at each step
+
+3. **GitHub to Local Sync (Pull)**
+   - Fetches latest changes from remote repository
+   - Detects uncommitted local changes
+   - Provides options to stash or discard local changes if conflicts exist
+   - Pulls latest changes from remote branch
+   - Detects and alerts about merge conflicts
+   - Provides guidance for resolving conflicts
+
+### Usage:
+
+```bash
+# Make script executable (first time only)
+chmod +x git_sync.py
+
+# Run the script
+./git_sync.py
+# or
+python3 git_sync.py
+```
+
+### Exception Handling:
+
+The script gracefully handles:
+- Network connection issues
+- Git repository errors (not in a git repo, branch doesn't exist)
+- Merge conflicts with clear guidance
+- Uncommitted local changes during pull operations
+- Divergent branches with suggestions
+- User interruptions (Ctrl+C)
+
+### Menu Navigation:
+
+```
+============================================================
+               Git Sync Automation Tool
+============================================================
+
+Options:
+  1. Check Python Installation
+  2. Sync files from MacBook to GitHub (Push)
+  3. Sync files from GitHub to MacBook (Pull)
+  4. Exit
+
+------------------------------------------------------------
+Enter your choice (1-4):
 ```
 
 ## Visualization
