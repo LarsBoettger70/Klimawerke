@@ -107,10 +107,12 @@ Architecture: {platform.machine()}
         empty_dirs = []
         
         for root, dirs, files in os.walk(self.repo_path):
-            # Skip .git directory
+            # Filter out .git directory from subdirectories to search
             dirs[:] = [d for d in dirs if d != '.git']
             
-            # Check if directory is empty (no files and no subdirectories)
+            # A directory is empty if it has no files and no subdirectories
+            # (after filtering out .git). The filtering happens in-place above,
+            # so 'dirs' here only contains non-.git subdirectories.
             if not dirs and not files:
                 empty_dirs.append(Path(root))
         
@@ -129,15 +131,18 @@ Architecture: {platform.machine()}
             if not empty_dirs:
                 return True, "No empty directories found."
             
-            created_count = 0
+            created_dirs = []
             for dir_path in empty_dirs:
                 gitkeep_path = dir_path / '.gitkeep'
                 if not gitkeep_path.exists():
                     gitkeep_path.touch()
-                    created_count += 1
+                    created_dirs.append(dir_path)
             
-            message = f"Created .gitkeep files in {created_count} empty directories:\n"
-            for dir_path in empty_dirs:
+            if not created_dirs:
+                return True, f"Found {len(empty_dirs)} empty directories, but all already have .gitkeep files."
+            
+            message = f"Created .gitkeep files in {len(created_dirs)} empty directories:\n"
+            for dir_path in created_dirs:
                 rel_path = dir_path.relative_to(self.repo_path)
                 message += f"  - {rel_path}\n"
             
@@ -172,7 +177,8 @@ Architecture: {platform.machine()}
         1. Add .gitkeep to empty directories
         2. Stage all changes
         3. Commit changes
-        4. Push to remote main branch
+        4. Get current branch name
+        5. Push to current branch on remote
         
         Args:
             commit_message: Optional custom commit message
