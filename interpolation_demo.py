@@ -8,13 +8,14 @@ model data using polynomial interpolation:
     3. Add synthetic weather stations
     4. Perform interpolation
     5. Create visualizations comparing original grid vs interpolated surface
+    6. Convert temperature values from Kelvin to Celsius
 
 Usage:
     python3 interpolation_demo.py
     
 Output:
     - interpolation_demo_map.html: Interactive visualization
-    - interpolation_results.csv: Interpolated values at mesh points
+    - interpolation_results.csv: Interpolated values at mesh points (includes both Kelvin and Celsius for temperature)
     - interpolation_quality_report.txt: Analysis of interpolation quality
 """
 
@@ -38,6 +39,9 @@ from mesh_generator import (
     MeshGenerator, GermanyDomain, WeatherStationManager,
     CoordinateTransformer, extract_remo_grid_in_domain
 )
+
+# Constants
+KELVIN_TO_CELSIUS_OFFSET = 273.15  # Conversion factor for temperature
 
 
 def load_demo_data(filename='remo_germany_subset.nc'):
@@ -152,9 +156,25 @@ def generate_mesh_and_stations(ds):
     return mesh, all_stations, grid_points
 
 
+def add_celsius_columns(df, variable):
+    """
+    Add Celsius temperature columns to DataFrame if processing TS variable.
+    
+    Args:
+        df: DataFrame with value_rbf and value_linear columns
+        variable: REMO variable name (e.g., 'TS' for temperature)
+    """
+    if variable == 'TS':
+        df['value_rbf_celsius'] = df['value_rbf'] - KELVIN_TO_CELSIUS_OFFSET
+        df['value_linear_celsius'] = df['value_linear'] - KELVIN_TO_CELSIUS_OFFSET
+
+
 def perform_interpolation(interp, mesh, stations, grid_points, ds):
     """
     Perform interpolation at mesh and station points.
+    
+    For temperature data (TS variable), also converts values from Kelvin to Celsius
+    by subtracting 273.15, creating additional columns with '_celsius' suffix.
     
     Args:
         interp: RemoInterpolator instance
@@ -165,6 +185,8 @@ def perform_interpolation(interp, mesh, stations, grid_points, ds):
     
     Returns:
         Tuple of (mesh_with_values, stations_with_values)
+        - mesh includes columns: value_rbf, value_linear, and for TS: value_rbf_celsius, value_linear_celsius
+        - stations includes columns: value_rbf, value_linear, and for TS: value_rbf_celsius, value_linear_celsius
     """
     print(f"\n{'='*60}")
     print("STEP 4: Performing Interpolation")
@@ -193,6 +215,9 @@ def perform_interpolation(interp, mesh, stations, grid_points, ds):
         mesh['value_rbf'] = np.nan
         mesh['value_linear'] = np.nan
     
+    # Add Celsius columns for temperature data
+    add_celsius_columns(mesh, interp.variable)
+    
     # Interpolate at station points
     print(f"\n  Interpolating at {len(stations)} station points...")
     station_rlat, station_rlon = transformer.geographic_to_rotated(
@@ -212,6 +237,9 @@ def perform_interpolation(interp, mesh, stations, grid_points, ds):
         print(f"⚠ Warning: Station interpolation failed: {e}")
         stations['value_rbf'] = np.nan
         stations['value_linear'] = np.nan
+    
+    # Add Celsius columns for temperature data
+    add_celsius_columns(stations, interp.variable)
     
     return mesh, stations
 
@@ -422,7 +450,11 @@ def create_visualization(ds, mesh, stations, grid_points, interp, quality_metric
     print(f"✓ Interactive map saved to '{output_file}'")
     
     # Save results to CSV
-    mesh_out = mesh[['lat', 'lon', 'value_rbf', 'value_linear']].copy()
+    # Include Celsius columns if they exist (for TS variable)
+    csv_columns = ['lat', 'lon', 'value_rbf', 'value_linear']
+    if 'value_rbf_celsius' in mesh.columns:
+        csv_columns.extend(['value_rbf_celsius', 'value_linear_celsius'])
+    mesh_out = mesh[csv_columns].copy()
     mesh_out.to_csv('interpolation_results.csv', index=False)
     print(f"✓ Results saved to 'interpolation_results.csv'")
     

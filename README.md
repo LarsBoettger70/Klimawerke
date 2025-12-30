@@ -95,7 +95,7 @@ This demonstrates the complete interpolation workflow:
 
 ### Output Files:
 - `interpolation_demo_map.html` - Interactive map showing grid points, stations, and interpolated surface
-- `interpolation_results.csv` - Interpolated values at mesh points
+- `interpolation_results.csv` - Interpolated values at mesh points (includes both Kelvin and Celsius for temperature data)
 - `interpolation_quality_report.txt` - Quality metrics and statistics
 
 ## Usage Examples
