@@ -77,6 +77,26 @@ Architecture: {platform.machine()}
         except subprocess.CalledProcessError:
             return False
     
+    def get_current_branch(self) -> Tuple[bool, str]:
+        """
+        Get the current Git branch name.
+        
+        Returns:
+            Tuple[bool, str]: (success, branch_name)
+        """
+        try:
+            result = subprocess.run(
+                ['git', 'rev-parse', '--abbrev-ref', 'HEAD'],
+                cwd=self.repo_path,
+                capture_output=True,
+                text=True,
+                check=True
+            )
+            branch_name = result.stdout.strip()
+            return True, branch_name
+        except subprocess.CalledProcessError as e:
+            return False, f"Error getting current branch: {e.stderr}"
+    
     def find_empty_directories(self) -> List[Path]:
         """
         Find all empty directories in the repository (excluding .git).
@@ -208,10 +228,17 @@ Architecture: {platform.machine()}
             )
             output.append(f"✓ Changes committed: {commit_message}")
             
-            # Step 5: Push to remote
-            output.append("\nStep 5: Pushing to remote main branch...")
+            # Step 5: Get current branch
+            output.append("\nStep 5: Getting current branch...")
+            success, branch_name = self.get_current_branch()
+            if not success:
+                return False, "\n".join(output) + f"\n{branch_name}"
+            output.append(f"Current branch: {branch_name}")
+            
+            # Step 6: Push to remote
+            output.append(f"\nStep 6: Pushing to remote branch '{branch_name}'...")
             result = subprocess.run(
-                ['git', 'push', 'origin', 'HEAD'],
+                ['git', 'push', 'origin', branch_name],
                 cwd=self.repo_path,
                 capture_output=True,
                 text=True,
@@ -269,25 +296,37 @@ Architecture: {platform.machine()}
                 output.append("\nPlease commit or stash your changes before pulling.")
                 return False, "\n".join(output)
             
-            # Step 3: Check for divergence
-            output.append("\nStep 3: Checking for remote updates...")
+            # Step 3: Get current branch
+            output.append("\nStep 3: Getting current branch...")
+            success, branch_name = self.get_current_branch()
+            if not success:
+                return False, "\n".join(output) + f"\n{branch_name}"
+            output.append(f"Current branch: {branch_name}")
+            
+            # Step 4: Check for divergence
+            output.append("\nStep 4: Checking for remote updates...")
+            # Use the current branch's upstream if set, otherwise use origin/<branch>
             result = subprocess.run(
-                ['git', 'rev-list', 'HEAD...origin/HEAD', '--count'],
+                ['git', 'rev-list', f'HEAD...origin/{branch_name}', '--count'],
                 cwd=self.repo_path,
                 capture_output=True,
                 text=True,
-                check=True
+                check=False
             )
             
-            divergence_count = result.stdout.strip()
-            if divergence_count == '0':
-                output.append("✓ Already up to date with remote")
-                return True, "\n".join(output)
+            if result.returncode != 0:
+                output.append(f"⚠ Warning: Could not compare with origin/{branch_name}")
+                output.append("Proceeding with pull anyway...")
+            else:
+                divergence_count = result.stdout.strip()
+                if divergence_count == '0':
+                    output.append("✓ Already up to date with remote")
+                    return True, "\n".join(output)
             
-            # Step 4: Pull changes
-            output.append("\nStep 4: Pulling changes from remote...")
+            # Step 5: Pull changes
+            output.append(f"\nStep 5: Pulling changes from origin/{branch_name}...")
             result = subprocess.run(
-                ['git', 'pull', 'origin', 'HEAD', '--no-rebase'],
+                ['git', 'pull', 'origin', branch_name, '--no-rebase'],
                 cwd=self.repo_path,
                 capture_output=True,
                 text=True,
