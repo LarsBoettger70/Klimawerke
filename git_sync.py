@@ -29,29 +29,24 @@ class GitSyncManager:
         Check if Python is installed and display version information.
         
         Returns:
-            bool: True if Python is installed, False otherwise
+            bool: True (always, since this code runs in Python)
         """
         print("\n" + "="*60)
         print("Python Installation Check")
         print("="*60)
         
-        try:
-            # Get Python version
-            python_version = sys.version
-            python_version_info = sys.version_info
-            
-            print(f"✓ Python is installed and running")
-            print(f"  Version: {python_version_info.major}.{python_version_info.minor}.{python_version_info.micro}")
-            print(f"  Full info: {python_version}")
-            print(f"  Executable: {sys.executable}")
-            print(f"  Platform: {platform.platform()}")
-            print(f"  System: {platform.system()} {platform.release()}")
-            
-            return True
-            
-        except Exception as e:
-            print(f"✗ Error checking Python installation: {e}")
-            return False
+        # Get Python version
+        python_version = sys.version
+        python_version_info = sys.version_info
+        
+        print(f"✓ Python is installed and running")
+        print(f"  Version: {python_version_info.major}.{python_version_info.minor}.{python_version_info.micro}")
+        print(f"  Full info: {python_version}")
+        print(f"  Executable: {sys.executable}")
+        print(f"  Platform: {platform.platform()}")
+        print(f"  System: {platform.system()} {platform.release()}")
+        
+        return True
     
     def check_git_status(self):
         """
@@ -284,8 +279,8 @@ class GitSyncManager:
                 if result.stdout:
                     print(f"\n{result.stdout}")
                 
-                # Check if there was a merge conflict
-                if "CONFLICT" in result.stdout or "conflict" in result.stdout.lower():
+                # Check if there was a merge conflict (CONFLICT appears in output)
+                if "CONFLICT" in result.stdout:
                     print("\n⚠ MERGE CONFLICT DETECTED!")
                     print("  Please resolve conflicts manually:")
                     print("  1. Check files with conflicts: git status")
