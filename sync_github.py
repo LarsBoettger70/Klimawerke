@@ -244,7 +244,7 @@ Architecture: {platform.machine()}
             # Step 6: Push to remote
             output.append(f"\nStep 6: Pushing to remote branch '{branch_name}'...")
             result = subprocess.run(
-                ['git', 'push', 'origin', branch_name],
+                ['git', 'push', '--set-upstream', 'origin', branch_name],
                 cwd=self.repo_path,
                 capture_output=True,
                 text=True,
@@ -331,6 +331,8 @@ Architecture: {platform.machine()}
             
             # Step 5: Pull changes
             output.append(f"\nStep 5: Pulling changes from origin/{branch_name}...")
+            # Use --no-rebase to ensure merge behavior for better conflict detection
+            # even if user has configured git to use rebase by default
             result = subprocess.run(
                 ['git', 'pull', 'origin', branch_name, '--no-rebase'],
                 cwd=self.repo_path,
