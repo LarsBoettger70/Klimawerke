@@ -1,0 +1,67 @@
+
+=== FILE OVERVIEW ===
+
+<xarray.Dataset> Size: 22MB
+Dimensions:     (valid_time: 576, latitude: 33, longitude: 41)
+Coordinates:
+  * valid_time  (valid_time) datetime64[ns] 5kB 2025-12-01 ... 2025-12-24T23:...
+  * latitude    (latitude) float64 264B 55.0 54.75 54.5 ... 47.5 47.25 47.0
+  * longitude   (longitude) float64 328B 5.0 5.25 5.5 5.75 ... 14.5 14.75 15.0
+    number      int64 8B ...
+    expver      (valid_time) <U4 9kB ...
+Data variables:
+    u10         (valid_time, latitude, longitude) float32 3MB ...
+    v10         (valid_time, latitude, longitude) float32 3MB ...
+    d2m         (valid_time, latitude, longitude) float32 3MB ...
+    t2m         (valid_time, latitude, longitude) float32 3MB ...
+    msl         (valid_time, latitude, longitude) float32 3MB ...
+    sst         (valid_time, latitude, longitude) float32 3MB ...
+    sp          (valid_time, latitude, longitude) float32 3MB ...
+Attributes:
+    GRIB_centre:             ecmf
+    GRIB_centreDescription:  European Centre for Medium-Range Weather Forecasts
+    GRIB_subCentre:          0
+    Conventions:             CF-1.7
+    institution:             European Centre for Medium-Range Weather Forecasts
+    history:                 2025-12-30T14:30 GRIB to CDM+CF via cfgrib-0.9.1...
+
+=== DIMENSIONS ===
+
+FrozenMappingWarningOnValuesAccess({'valid_time': 576, 'latitude': 33, 'longitude': 41})
+
+=== COORDINATES ===
+
+Coordinates:
+  * valid_time  (valid_time) datetime64[ns] 5kB 2025-12-01 ... 2025-12-24T23:...
+  * latitude    (latitude) float64 264B 55.0 54.75 54.5 ... 47.5 47.25 47.0
+  * longitude   (longitude) float64 328B 5.0 5.25 5.5 5.75 ... 14.5 14.75 15.0
+    number      int64 8B ...
+    expver      (valid_time) <U4 9kB ...
+
+=== DATA VARIABLES ===
+
+['u10', 'v10', 'd2m', 't2m', 'msl', 'sst', 'sp']
+
+=== SAMPLE GRID POINTS (first 20) ===
+
+ gridy  gridx  latitude  longitude       u10      v10        d2m        t2m        msl        sst        sp
+     0      0      55.0       5.00  9.953583 3.581390 276.197998 281.555664 100918.375 284.476318 100917.75
+     0      1      55.0       5.25 10.207489 3.115570 276.233154 281.518555 100927.125 284.492920 100926.75
+     0      2      55.0       5.50 10.209442 2.776703 276.512451 281.493164 100937.125 284.477295 100939.75
+     0      3      55.0       5.75 10.286591 2.372406 276.598389 281.489258 100945.625 284.447021 100950.75
+     0      4      55.0       6.00 10.443817 1.902679 276.485107 281.510742 100952.375 284.402100 100959.75
+     0      5      55.0       6.25 10.637177 1.586273 276.473389 281.579102 100955.375 284.347412 100962.75
+     0      6      55.0       6.50 10.754364 1.319672 276.352295 281.631836 100958.625 284.226318 100971.75
+     0      7      55.0       6.75 11.098114 1.172211 276.338623 281.680664 100959.875 284.083740 100964.75
+     0      8      55.0       7.00 11.493622 1.041351 276.356201 281.741211 100959.625 283.906006 100953.75
+     0      9      55.0       7.25 11.480927 0.918304 276.342529 281.760742 100961.125 283.529053 100962.75
+     0     10      55.0       7.50 11.374481 0.828461 276.389404 281.760742 100964.125 283.167725 100968.75
+     0     11      55.0       7.75 11.396942 0.984711 276.426514 281.616211 100966.375 282.106201 100954.75
+     0     12      55.0       8.00 11.372528 1.168304 276.432373 281.467773 100967.375 281.123779 100943.75
+     0     13      55.0       8.25 10.655731 1.392914 276.461670 281.061523 100971.375 279.762451 100979.75
+     0     14      55.0       8.50  9.654755 1.571625 276.283936 280.499023 100974.625 278.724365 100986.75
+     0     15      55.0       8.75  7.487762 1.722992 275.539795 279.454102 100976.375        NaN 100886.75
+     0     16      55.0       9.00  6.094208 1.977875 275.071045 278.708008 100973.625        NaN 100783.75
+     0     17      55.0       9.25  5.581512 2.088226 275.030029 278.295898 100969.625        NaN 100666.75
+     0     18      55.0       9.50  5.441864 2.498383 275.012451 278.137695 100967.375        NaN 100653.75
+     0     19      55.0       9.75  5.677216 3.213226 275.033936 278.245117 100966.625        NaN 100745.75

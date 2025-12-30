@@ -1,0 +1,63 @@
+
+=== FILE OVERVIEW ===
+
+<xarray.Dataset> Size: 2MB
+Dimensions:     (valid_time: 576, latitude: 17, longitude: 21)
+Coordinates:
+  * valid_time  (valid_time) datetime64[ns] 5kB 2025-12-01 ... 2025-12-24T23:...
+  * latitude    (latitude) float64 136B 55.0 54.5 54.0 53.5 ... 48.0 47.5 47.0
+  * longitude   (longitude) float64 168B 5.0 5.5 6.0 6.5 ... 13.5 14.0 14.5 15.0
+    number      int64 8B ...
+    expver      (valid_time) <U4 9kB ...
+Data variables:
+    mwd         (valid_time, latitude, longitude) float32 823kB ...
+    mwp         (valid_time, latitude, longitude) float32 823kB ...
+    swh         (valid_time, latitude, longitude) float32 823kB ...
+Attributes:
+    GRIB_centre:             ecmf
+    GRIB_centreDescription:  European Centre for Medium-Range Weather Forecasts
+    GRIB_subCentre:          0
+    Conventions:             CF-1.7
+    institution:             European Centre for Medium-Range Weather Forecasts
+    history:                 2025-12-30T14:30 GRIB to CDM+CF via cfgrib-0.9.1...
+
+=== DIMENSIONS ===
+
+FrozenMappingWarningOnValuesAccess({'valid_time': 576, 'latitude': 17, 'longitude': 21})
+
+=== COORDINATES ===
+
+Coordinates:
+  * valid_time  (valid_time) datetime64[ns] 5kB 2025-12-01 ... 2025-12-24T23:...
+  * latitude    (latitude) float64 136B 55.0 54.5 54.0 53.5 ... 48.0 47.5 47.0
+  * longitude   (longitude) float64 168B 5.0 5.5 6.0 6.5 ... 13.5 14.0 14.5 15.0
+    number      int64 8B ...
+    expver      (valid_time) <U4 9kB ...
+
+=== DATA VARIABLES ===
+
+['mwd', 'mwp', 'swh']
+
+=== SAMPLE GRID POINTS (first 20) ===
+
+ gridy  gridx  latitude  longitude        mwd      mwp      swh
+     0      0      55.0        5.0 303.845154 7.511234 2.870061
+     0      1      55.0        5.5 300.681091 7.510502 2.941106
+     0      2      55.0        6.0 297.204529 7.499516 3.002629
+     0      3      55.0        6.5 293.142029 7.451908 3.031438
+     0      4      55.0        7.0 288.352966 7.342777 3.002385
+     0      5      55.0        7.5 283.993591 7.231937 2.919621
+     0      6      55.0        8.0 279.298279 7.088139 2.672063
+     0      7      55.0        8.5 273.290466 6.392826 2.112981
+     0      8      55.0        9.0        NaN      NaN      NaN
+     0      9      55.0        9.5        NaN      NaN      NaN
+     0     10      55.0       10.0 223.954544 3.248783 0.539738
+     0     11      55.0       10.5 223.337357 3.741947 0.846867
+     0     12      55.0       11.0 224.735794 4.036137 1.092961
+     0     13      55.0       11.5 226.821732 4.233891 1.258244
+     0     14      55.0       12.0        NaN      NaN      NaN
+     0     15      55.0       12.5 225.040482 4.353519 1.408879
+     0     16      55.0       13.0 229.438919 4.464115 1.540227
+     0     17      55.0       13.5 232.110794 4.438236 1.565373
+     0     18      55.0       14.0 231.360794 4.520756 1.572697
+     0     19      55.0       14.5 228.720169 4.431644 1.455266

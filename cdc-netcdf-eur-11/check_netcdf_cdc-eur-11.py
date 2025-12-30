@@ -1,80 +1,90 @@
-# check netcdf dateien auf datenfelder
-
 import xarray as xr
 import pandas as pd
 
-NETCDF_FILE = "data_stream-oper_stepType-accum.nc"
-# data_stream-oper_stepType-accum.nc
-# data_stream-oper_stepType-instant.nc
-# data_stream-oper_stepType-accum.nc
+# List of available files
+file_options = {
+    "1": "data_stream-wave_stepType-instant.nc",  # First file
+    "2": "data_stream-oper_stepType-instant.nc",  # Second file
+    "3": "data_stream-oper_stepType-accum.nc",    # Third file
+}
+
+# Menu to select the file
+print("Select a file to analyze:")
+for key, filename in file_options.items():
+    print(f"{key}: {filename}")
+
+file_choice = input("\nPlease enter the number corresponding to your choice: ").strip()
+
+if file_choice not in file_options:
+    print("Invalid choice! Please restart the program and select a valid option.")
+    exit()
+
+# Load the selected NetCDF file
+NETCDF_FILE = file_options[file_choice]
+print(f"\nAnalyzing file: {NETCDF_FILE}")
 
 ds = xr.open_dataset(NETCDF_FILE)
 
-print("\n=== DATASET INFO ===")
-print(ds)
+# Prepare the data structure output string
+output = []
 
-print("\n=== DIMENSIONS ===")
-print(ds.dims)
+output.append("\n=== FILE OVERVIEW ===\n")
+output.append(str(ds))
 
-print("\n=== DATA VARIABLES ===")
-print(list(ds.data_vars))
+output.append("\n=== DIMENSIONS ===\n")
+output.append(str(ds.dims))
 
-print("\n=== COORDS ===")
-print(ds.coords)
+output.append("\n=== COORDINATES ===\n")
+output.append(str(ds.coords))
 
-# Hilfsfunktion: sicher einen Skalar holen, falls möglich
-def get_scalar(var, indexers):
-    try:
-        da = ds[var].isel(**indexers)
-        # Wenn noch mehr als 0 Dimensionen übrig sind, nicht erzwingen
-        if da.size != 1:
-            return None
-        return float(da.values.reshape(-1)[0])
-    except Exception:
-        return None
+output.append("\n=== DATA VARIABLES ===\n")
+output.append(str(list(ds.data_vars)))
 
-# Erste 20 Zeilen ausgewählter Felder anzeigen
-print("\n=== SAMPLE GRID POINTS (first 20) ===")
+# Dynamically use latitude and longitude dimensions
+lat_coord = "latitude"
+lon_coord = "longitude"
 
-rlat = ds.rlat.values
-rlon = ds.rlon.values
-n_lon = len(rlon)
+lat_values = ds[lat_coord].values
+lon_values = ds[lon_coord].values
 
 rows = []
-for i in range(20):
-    iy = i // n_lon
-    ix = i % n_lon
+max_points = 20  # Limit grid points to the first 20 for simplicity
+output.append("\n=== SAMPLE GRID POINTS (first 20) ===\n")
+
+for i in range(min(max_points, len(lat_values) * len(lon_values))):
+    iy = i // len(lon_values)  # Grid index in latitude
+    ix = i % len(lon_values)  # Grid index in longitude
 
     row = {
         "gridy": iy,
         "gridx": ix,
-        "rlat": float(rlat[iy]),
-        "rlon": float(rlon[ix]),
+        "latitude": float(lat_values[iy]),
+        "longitude": float(lon_values[ix]),
     }
 
-    # 2D-Felder TS, RLA, WS, ACLC (evtl. mit zusätzlicher Tiefe)
-    if "TS" in ds.data_vars:
-        row["TS"] = get_scalar("TS", {"time": 0, "rlat": iy, "rlon": ix})
-    if "RLA" in ds.data_vars:
-        row["RLA"] = get_scalar("RLA", {"time": 0, "rlat": iy, "rlon": ix})
-    if "WS" in ds.data_vars:
-        row["WS"] = get_scalar("WS", {"time": 0, "rlat": iy, "rlon": ix})
-    if "ACLC" in ds.data_vars:
-        row["ACLC"] = get_scalar("ACLC", {"time": 0, "rlat": iy, "rlon": ix})
-
-    # 3D-Felder mit lev, rlon_2
-    if "T" in ds.data_vars:
-        row["T_lev0"] = get_scalar("T", {"time": 0, "lev": 0, "rlat": iy, "rlon_2": ix})
-    if "U" in ds.data_vars:
-        row["U_lev0"] = get_scalar("U", {"time": 0, "lev": 0, "rlat": iy, "rlon_2": ix})
-    if "V" in ds.data_vars:
-        row["V_lev0"] = get_scalar("V", {"time": 0, "lev": 0, "rlat": iy, "rlon_2": ix})
-    if "QW" in ds.data_vars:
-        row["QW_lev0"] = get_scalar("QW", {"time": 0, "lev": 0, "rlat": iy, "rlon_2": ix})
-    if "QI" in ds.data_vars:
-        row["QI_lev0"] = get_scalar("QI", {"time": 0, "lev": 0, "rlat": iy, "rlon_2": ix})
+    # Dynamically extract variables for the grid point
+    for var in ds.data_vars:
+        try:
+            value = ds[var].isel(valid_time=0, latitude=iy, longitude=ix).values
+            row[var] = float(value) if value.size > 0 else None
+        except Exception:
+            row[var] = None  # Handle missing values gracefully
 
     rows.append(row)
 
+# Create a DataFrame for the grid points
 df_sample = pd.DataFrame(rows)
+output.append(df_sample.to_string(index=False))
+
+# Save the output to a text file
+base_name = NETCDF_FILE[:-3]  # Remove the last three characters (".nc")
+text_filename = f"datastructure_{base_name}.txt"
+
+with open(text_filename, "w") as file:
+    file.write("\n".join(output))
+
+# Notify the user
+print("\n")  # An empty line for better readability
+print(f"Data structure saved to '{text_filename}'.")
+print("\n=== SAMPLE GRID POINTS (first 20) ===")
 print(df_sample.to_string(index=False))
