@@ -47,14 +47,40 @@ pip install -r requirements.txt
 
 ## Quick Start
 
-### 1. Download Demo Data
+### 1. GitHub Sync Tool ⭐ NEW
+A Python automation script for syncing files between your MacBook and GitHub repository.
+
+```bash
+python3 sync_github.py
+```
+
+**Features:**
+- Check Python installation and version
+- Sync files from MacBook to GitHub (with automatic .gitkeep for empty folders)
+- Sync files from GitHub to MacBook (with conflict detection)
+- Interactive terminal menu interface
+- Exception handling for network issues and Git conflicts
+
+**Menu Options:**
+1. Check Python Installation - Verify Python version and system info
+2. Sync to GitHub - Stage, commit, and push local changes (handles empty folders)
+3. Sync from GitHub - Pull latest changes with conflict detection
+4. Exit
+
+**Usage Notes:**
+- Uses SSH for Git operations based on your configuration
+- Automatically adds .gitkeep files to empty directories
+- Provides clear prompts and error messages
+- Safe handling of merge conflicts
+
+### 2. Download Demo Data
 ```bash
 python3 download_and_explore_demodata.py
 ```
 
 This downloads a small REMO EUR-44 demo file (~16 MB) and extracts a Germany subset.
 
-### 2. Run Interpolation Demo
+### 3. Run Interpolation Demo
 ```bash
 python3 interpolation_demo.py
 ```
@@ -262,6 +288,7 @@ REMO domains from: https://github.com/remo-rcm/tables
 
 ```
 Klimawerke/
+├── sync_github.py                # GitHub sync automation tool ⭐ NEW
 ├── polynomial_interpolation.py   # Core interpolation engine
 ├── mesh_generator.py             # Mesh and coordinate tools
 ├── interpolation_demo.py         # Complete demo workflow
