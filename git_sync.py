@@ -319,7 +319,7 @@ class GitSyncManager:
         print("\n" + "="*60)
         print(" "*15 + "Git Sync Automation Tool")
         print("="*60)
-        print("\nOptions:")
+        print("\nMenue:")
         print("  1. Check Python Installation")
         print("  2. Sync files from MacBook to GitHub (Push)")
         print("  3. Sync files from GitHub to MacBook (Pull)")
