@@ -2,3 +2,5 @@ installing git and personal key.txt
 .DS_Store
 *.pyc
 __pycache__/
+geojson/
+interactive_map_with_timeslider.html
