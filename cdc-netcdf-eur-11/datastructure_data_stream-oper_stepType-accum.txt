@@ -1,0 +1,61 @@
+
+=== FILE OVERVIEW ===
+
+<xarray.Dataset> Size: 3MB
+Dimensions:     (valid_time: 576, latitude: 33, longitude: 41)
+Coordinates:
+  * valid_time  (valid_time) datetime64[ns] 5kB 2025-12-01 ... 2025-12-24T23:...
+  * latitude    (latitude) float64 264B 55.0 54.75 54.5 ... 47.5 47.25 47.0
+  * longitude   (longitude) float64 328B 5.0 5.25 5.5 5.75 ... 14.5 14.75 15.0
+    number      int64 8B ...
+    expver      (valid_time) <U4 9kB ...
+Data variables:
+    tp          (valid_time, latitude, longitude) float32 3MB ...
+Attributes:
+    GRIB_centre:             ecmf
+    GRIB_centreDescription:  European Centre for Medium-Range Weather Forecasts
+    GRIB_subCentre:          0
+    Conventions:             CF-1.7
+    institution:             European Centre for Medium-Range Weather Forecasts
+    history:                 2025-12-30T14:30 GRIB to CDM+CF via cfgrib-0.9.1...
+
+=== DIMENSIONS ===
+
+FrozenMappingWarningOnValuesAccess({'valid_time': 576, 'latitude': 33, 'longitude': 41})
+
+=== COORDINATES ===
+
+Coordinates:
+  * valid_time  (valid_time) datetime64[ns] 5kB 2025-12-01 ... 2025-12-24T23:...
+  * latitude    (latitude) float64 264B 55.0 54.75 54.5 ... 47.5 47.25 47.0
+  * longitude   (longitude) float64 328B 5.0 5.25 5.5 5.75 ... 14.5 14.75 15.0
+    number      int64 8B ...
+    expver      (valid_time) <U4 9kB ...
+
+=== DATA VARIABLES ===
+
+['tp']
+
+=== SAMPLE GRID POINTS (first 20) ===
+
+ gridy  gridx  latitude  longitude           tp
+     0      0      55.0       5.00 7.247925e-05
+     0      1      55.0       5.25 6.866455e-05
+     0      2      55.0       5.50 8.583069e-05
+     0      3      55.0       5.75 9.632111e-05
+     0      4      55.0       6.00 9.822845e-05
+     0      5      55.0       6.25 8.010864e-05
+     0      6      55.0       6.50 2.479553e-05
+     0      7      55.0       6.75 5.722046e-06
+     0      8      55.0       7.00 9.536743e-07
+     0      9      55.0       7.25 1.907349e-06
+     0     10      55.0       7.50 2.861023e-06
+     0     11      55.0       7.75 1.907349e-06
+     0     12      55.0       8.00 9.536743e-07
+     0     13      55.0       8.25 0.000000e+00
+     0     14      55.0       8.50 0.000000e+00
+     0     15      55.0       8.75 0.000000e+00
+     0     16      55.0       9.00 0.000000e+00
+     0     17      55.0       9.25 0.000000e+00
+     0     18      55.0       9.50 0.000000e+00
+     0     19      55.0       9.75 0.000000e+00
