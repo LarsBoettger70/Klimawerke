@@ -87,6 +87,8 @@ def value_to_radius(value, vmin, vmax, min_radius=2, max_radius=10):
 def extract_date_from_timestamp(timestamp):
     '''Extract YYYY-MM-DD from ISO timestamp string'''
     # Timestamp format: "2024-01-15T00:00:00"
+    if not timestamp or 'T' not in timestamp:
+        return None
     return timestamp.split('T')[0]
 
 
@@ -99,12 +101,17 @@ def get_default_date(index, default_mode):
         default_mode: 'today', 'first', or ISO date string
     
     Returns:
-        ISO date string (YYYY-MM-DD)
+        ISO date string (YYYY-MM-DD) or None if no valid dates
     '''
     if not index or not index.get('timestamps'):
         return None
     
+    # Extract dates, filtering out None values from malformed timestamps
     available_dates = [extract_date_from_timestamp(ts) for ts in index['timestamps']]
+    available_dates = [d for d in available_dates if d is not None]
+    
+    if not available_dates:
+        return None
     
     if default_mode == 'first':
         return available_dates[0]
@@ -289,15 +296,27 @@ def create_interactive_map(index):
     '''
     print('\nCreating interactive map...')
     
+    # Extract available dates for the date picker (filter out None values)
+    available_dates = [extract_date_from_timestamp(ts) for ts in index['timestamps']]
+    available_dates = [d for d in available_dates if d is not None]
+    
+    if not available_dates:
+        print('✗ Error: No valid dates found in timeseries index')
+        return None
+    
     # Determine default date to load
     default_date = get_default_date(index, DEFAULT_DATE_MODE)
-    default_timestamp = get_timestamp_for_date(default_date, index) if default_date else index['timestamps'][0]
+    if not default_date:
+        default_date = available_dates[0]  # Fallback to first date
+    
+    default_timestamp = get_timestamp_for_date(default_date, index)
+    if not default_timestamp:
+        default_timestamp = index['timestamps'][0]  # Fallback to first timestamp
     
     print(f'Default date: {default_date}')
     print(f'Default timestamp: {default_timestamp}')
     
-    # Extract available dates for the date picker
-    available_dates = [extract_date_from_timestamp(ts) for ts in index['timestamps']]
+    # Get min and max dates for date picker constraints
     min_date = min(available_dates)
     max_date = max(available_dates)
     
