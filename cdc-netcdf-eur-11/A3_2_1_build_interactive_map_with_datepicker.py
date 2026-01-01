@@ -19,6 +19,9 @@ OUTPUT_FILE = 'interactive_map_with_datepicker.html'
 DEFAULT_DATE_MODE = 'today'  # Options: 'today', 'first', or ISO date string (e.g., '2024-01-15')
 ENABLE_DATE_PICKER = True
 
+# List of variables to process
+VARIABLES = ['swh', 't2m', 'tp', 'wind_speed', 'sst']
+
 # Color scales for different variables
 COLOR_SCALES = {
     'swh': {
@@ -319,7 +322,7 @@ def create_interactive_map(index):
     layers = {}
     time_data = {}
     
-    for var_name in ['swh', 't2m', 'tp', 'wind_speed', 'sst']:
+    for var_name in VARIABLES:
         if var_name in index['files']:
             geojson_files = index['files'][var_name]
             timestamps = index['timestamps']
@@ -429,7 +432,7 @@ def create_interactive_map(index):
         
         # Build GeoJSON files mapping
         geojson_files_map = {}
-        for var_name in ['swh', 't2m', 'tp', 'wind_speed', 'sst']:
+        for var_name in VARIABLES:
             if var_name in index['files']:
                 geojson_files_map[var_name] = {}
                 for i, timestamp in enumerate(index['timestamps']):
@@ -437,6 +440,7 @@ def create_interactive_map(index):
                         geojson_files_map[var_name][timestamp] = index['files'][var_name][i]
         
         geojson_files_js = json.dumps(geojson_files_map)
+        variables_js = json.dumps(VARIABLES)
         
         javascript_code = f'''
         <script>
@@ -444,6 +448,7 @@ def create_interactive_map(index):
         const AVAILABLE_TIMESTAMPS = {available_timestamps};
         const AVAILABLE_DATES = {available_dates_js};
         const GEOJSON_FILES = {geojson_files_js};
+        const VARIABLES = {variables_js};
         
         // Extract date from ISO timestamp
         function extractDate(timestamp) {{
@@ -535,8 +540,7 @@ def create_interactive_map(index):
             console.log('Timestamp:', timestamp);
             
             // Log available GeoJSON files for this timestamp
-            const variables = ['swh', 't2m', 'tp', 'wind_speed', 'sst'];
-            variables.forEach(varName => {{
+            VARIABLES.forEach(varName => {{
                 const filename = getGeojsonFilename(varName, timestamp);
                 console.log(varName + ' file:', filename);
             }});
