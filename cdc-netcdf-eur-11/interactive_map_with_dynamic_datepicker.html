@@ -17,7 +17,7 @@
             <meta name="viewport" content="width=device-width,
                 initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
             <style>
-                #map_110aa202161e336b89a661175fae6a62 {
+                #map_df96ed930c5e8d7bdbaab6c4d7731750 {
                     position: relative;
                     width: 100.0%;
                     height: 100.0%;
@@ -163,19 +163,28 @@
         let currentDate = DEFAULT_DATE;
         let currentTimestamp = null;
         let currentLoadedFeatures = 0;
-        let leafletLayers = {};  // Store references to Leaflet layer groups
+        let leafletLayers = {};  // Store marker references for each variable
+        let layerGroups = {};  // Cache layer group references for performance
         
         // Initialize layer references from Folium's layer control
         function initializeLayerReferences() {
             // Get all overlay layers created by Folium
-            // They are stored in the layer control
-            const map = window.map_obj;  // Will be set after map loads
-            if (!map) return;
+            const map = window.map_obj;
+            if (!map || !map._layers) return;
             
-            // Store layer group references for each variable
+            // Cache layer group references for each variable
             VARIABLES.forEach(varName => {
                 leafletLayers[varName] = [];
+                
+                // Find and cache the layer group for this variable
+                Object.values(map._layers).forEach(layer => {
+                    if (layer.options && layer.options.name === COLOR_SCALES[varName].name) {
+                        layerGroups[varName] = layer;
+                    }
+                });
             });
+            
+            console.log('Layer groups cached:', Object.keys(layerGroups));
         }
         
         // Extract date from ISO timestamp
@@ -424,28 +433,17 @@
                     const features = geojsonData.features || [];
                     totalFeatures += features.length;
                     
-                    // Get the Folium layer group for this variable
-                    // Find the layer in the map's overlay layers
-                    const map = window.map_obj;
-                    if (map && map._layers) {
-                        // Find the feature group for this variable
-                        let layerGroup = null;
-                        Object.values(map._layers).forEach(layer => {
-                            if (layer.options && layer.options.name === COLOR_SCALES[varName].name) {
-                                layerGroup = layer;
-                            }
+                    // Use cached layer group for this variable
+                    const layerGroup = layerGroups[varName];
+                    
+                    if (layerGroup) {
+                        features.forEach(feature => {
+                            const marker = createLeafletMarker(feature, varName, timestamp);
+                            marker.addTo(layerGroup);
+                            leafletLayers[varName].push(marker);
                         });
-                        
-                        // If we found the layer group, add markers to it
-                        if (layerGroup) {
-                            features.forEach(feature => {
-                                const marker = createLeafletMarker(feature, varName, timestamp);
-                                marker.addTo(layerGroup);
-                                leafletLayers[varName].push(marker);
-                            });
-                        } else {
-                            console.warn(`Could not find layer group for ${varName}`);
-                        }
+                    } else {
+                        console.warn(`Could not find layer group for ${varName}`);
                     }
                     
                     console.log(`Loaded ${features.length} features for ${varName}`);
@@ -541,14 +539,14 @@
         </script>
         
     
-            <div class="folium-map" id="map_110aa202161e336b89a661175fae6a62" ></div>
+            <div class="folium-map" id="map_df96ed930c5e8d7bdbaab6c4d7731750" ></div>
         
 </body>
 <script>
     
     
-            var map_110aa202161e336b89a661175fae6a62 = L.map(
-                "map_110aa202161e336b89a661175fae6a62",
+            var map_df96ed930c5e8d7bdbaab6c4d7731750 = L.map(
+                "map_df96ed930c5e8d7bdbaab6c4d7731750",
                 {
                     center: [51.0, 10.0],
                     crs: L.CRS.EPSG3857,
@@ -565,7 +563,7 @@
 
         
     
-            var tile_layer_3dfc10e8590750fe1a59746cc19c3480 = L.tileLayer(
+            var tile_layer_f4c5c206d60614c726ca9c7541cd8481 = L.tileLayer(
                 "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
                 {
   "minZoom": 0,
@@ -582,10 +580,10 @@
             );
         
     
-            tile_layer_3dfc10e8590750fe1a59746cc19c3480.addTo(map_110aa202161e336b89a661175fae6a62);
+            tile_layer_f4c5c206d60614c726ca9c7541cd8481.addTo(map_df96ed930c5e8d7bdbaab6c4d7731750);
         
     
-            var tile_layer_8e880c4d88f1dba23aa72afa41836f71 = L.tileLayer(
+            var tile_layer_6131df64273fc03c670c29a1018cc2e9 = L.tileLayer(
                 "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
                 {
   "minZoom": 0,
@@ -602,10 +600,10 @@
             );
         
     
-            tile_layer_8e880c4d88f1dba23aa72afa41836f71.addTo(map_110aa202161e336b89a661175fae6a62);
+            tile_layer_6131df64273fc03c670c29a1018cc2e9.addTo(map_df96ed930c5e8d7bdbaab6c4d7731750);
         
     
-            var tile_layer_64479867daec64bb64af2a1f4c32e9cd = L.tileLayer(
+            var tile_layer_4b989d71468723d61072eec0ddc235ae = L.tileLayer(
                 "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
                 {
   "minZoom": 0,
@@ -622,86 +620,86 @@
             );
         
     
-            tile_layer_64479867daec64bb64af2a1f4c32e9cd.addTo(map_110aa202161e336b89a661175fae6a62);
+            tile_layer_4b989d71468723d61072eec0ddc235ae.addTo(map_df96ed930c5e8d7bdbaab6c4d7731750);
         
     
-            var feature_group_d718032f50b805ce9253823209efc07c = L.featureGroup(
+            var feature_group_fe6ee6fe96aea647656a33e16d74fd85 = L.featureGroup(
                 {
 }
             );
         
     
-            feature_group_d718032f50b805ce9253823209efc07c.addTo(map_110aa202161e336b89a661175fae6a62);
+            feature_group_fe6ee6fe96aea647656a33e16d74fd85.addTo(map_df96ed930c5e8d7bdbaab6c4d7731750);
         
     
-            var feature_group_e02439edceb4edfe6621e9ef7bf002ae = L.featureGroup(
+            var feature_group_c60259438578c97362cadbb9ca4886c3 = L.featureGroup(
                 {
 }
             );
         
     
-            feature_group_e02439edceb4edfe6621e9ef7bf002ae.addTo(map_110aa202161e336b89a661175fae6a62);
+            feature_group_c60259438578c97362cadbb9ca4886c3.addTo(map_df96ed930c5e8d7bdbaab6c4d7731750);
         
     
-            var feature_group_afa0957f271ebe492c253f78f20f4b98 = L.featureGroup(
+            var feature_group_d2eb97a4e67add986f10acca0b926242 = L.featureGroup(
                 {
 }
             );
         
     
-            feature_group_afa0957f271ebe492c253f78f20f4b98.addTo(map_110aa202161e336b89a661175fae6a62);
+            feature_group_d2eb97a4e67add986f10acca0b926242.addTo(map_df96ed930c5e8d7bdbaab6c4d7731750);
         
     
-            var feature_group_c68e7b61a7e5a800f8617b66f277dbfb = L.featureGroup(
+            var feature_group_ed496443c879a840c190207a80d92ac3 = L.featureGroup(
                 {
 }
             );
         
     
-            feature_group_c68e7b61a7e5a800f8617b66f277dbfb.addTo(map_110aa202161e336b89a661175fae6a62);
+            feature_group_ed496443c879a840c190207a80d92ac3.addTo(map_df96ed930c5e8d7bdbaab6c4d7731750);
         
     
-            var feature_group_d65dee53d157972b8b7d94750921d1f0 = L.featureGroup(
+            var feature_group_2511b0758747ce31f98c4699421576ff = L.featureGroup(
                 {
 }
             );
         
     
-            feature_group_d65dee53d157972b8b7d94750921d1f0.addTo(map_110aa202161e336b89a661175fae6a62);
+            feature_group_2511b0758747ce31f98c4699421576ff.addTo(map_df96ed930c5e8d7bdbaab6c4d7731750);
         
     
-            var layer_control_03ddd8197024e9d46478c494a3965d9e_layers = {
+            var layer_control_e13c3fa3e75e929326bb0bd54dd9d411_layers = {
                 base_layers : {
-                    "openstreetmap" : tile_layer_3dfc10e8590750fe1a59746cc19c3480,
-                    "Light Map" : tile_layer_8e880c4d88f1dba23aa72afa41836f71,
-                    "Dark Map" : tile_layer_64479867daec64bb64af2a1f4c32e9cd,
+                    "openstreetmap" : tile_layer_f4c5c206d60614c726ca9c7541cd8481,
+                    "Light Map" : tile_layer_6131df64273fc03c670c29a1018cc2e9,
+                    "Dark Map" : tile_layer_4b989d71468723d61072eec0ddc235ae,
                 },
                 overlays :  {
-                    "Significant Wave Height (m)" : feature_group_d718032f50b805ce9253823209efc07c,
-                    "Temperature 2m (\u00b0C)" : feature_group_e02439edceb4edfe6621e9ef7bf002ae,
-                    "Total Precipitation (mm)" : feature_group_afa0957f271ebe492c253f78f20f4b98,
-                    "Wind Speed (m/s)" : feature_group_c68e7b61a7e5a800f8617b66f277dbfb,
-                    "Sea Surface Temperature (\u00b0C)" : feature_group_d65dee53d157972b8b7d94750921d1f0,
+                    "Significant Wave Height (m)" : feature_group_fe6ee6fe96aea647656a33e16d74fd85,
+                    "Temperature 2m (\u00b0C)" : feature_group_c60259438578c97362cadbb9ca4886c3,
+                    "Total Precipitation (mm)" : feature_group_d2eb97a4e67add986f10acca0b926242,
+                    "Wind Speed (m/s)" : feature_group_ed496443c879a840c190207a80d92ac3,
+                    "Sea Surface Temperature (\u00b0C)" : feature_group_2511b0758747ce31f98c4699421576ff,
                 },
             };
-            let layer_control_03ddd8197024e9d46478c494a3965d9e = L.control.layers(
-                layer_control_03ddd8197024e9d46478c494a3965d9e_layers.base_layers,
-                layer_control_03ddd8197024e9d46478c494a3965d9e_layers.overlays,
+            let layer_control_e13c3fa3e75e929326bb0bd54dd9d411 = L.control.layers(
+                layer_control_e13c3fa3e75e929326bb0bd54dd9d411_layers.base_layers,
+                layer_control_e13c3fa3e75e929326bb0bd54dd9d411_layers.overlays,
                 {
   "position": "topright",
   "collapsed": false,
   "autoZIndex": true,
 }
-            ).addTo(map_110aa202161e336b89a661175fae6a62);
+            ).addTo(map_df96ed930c5e8d7bdbaab6c4d7731750);
 
         
     
-            var tile_layer_2c8418715e571e71a42f18126e120432 = L.tileLayer(
+            var tile_layer_f674a8ea113c545451f8cf15a616a72f = L.tileLayer(
                 "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
                 {"attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors", "detect_retina": false, "max_native_zoom": 19, "max_zoom": 19, "min_zoom": 0, "no_wrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
             );
-            var mini_map_997c511e6a4d88e780cedb83c06f26ec = new L.Control.MiniMap(
-                tile_layer_2c8418715e571e71a42f18126e120432,
+            var mini_map_767bc29eb9a1eed05b7c31876a36977c = new L.Control.MiniMap(
+                tile_layer_f674a8ea113c545451f8cf15a616a72f,
                 {
   "position": "bottomright",
   "width": 150,
@@ -716,7 +714,7 @@
   "minimized": false,
 }
             );
-            map_110aa202161e336b89a661175fae6a62.addControl(mini_map_997c511e6a4d88e780cedb83c06f26ec);
+            map_df96ed930c5e8d7bdbaab6c4d7731750.addControl(mini_map_767bc29eb9a1eed05b7c31876a36977c);
         
     
             L.control.fullscreen(
@@ -726,10 +724,10 @@
   "titleCancel": "Exit Fullscreen",
   "forceSeparateButton": true,
 }
-            ).addTo(map_110aa202161e336b89a661175fae6a62);
+            ).addTo(map_df96ed930c5e8d7bdbaab6c4d7731750);
         
     
-            var measure_control_1ab5c9a23542942316d47eadbc1fcb81 = new L.Control.Measure(
+            var measure_control_be391d4dec5c6d5791cd922575b672c2 = new L.Control.Measure(
                 {
   "position": "topleft",
   "primaryLengthUnit": "kilometers",
@@ -737,7 +735,7 @@
   "primaryAreaUnit": "sqmeters",
   "secondaryAreaUnit": "acres",
 });
-            map_110aa202161e336b89a661175fae6a62.addControl(measure_control_1ab5c9a23542942316d47eadbc1fcb81);
+            map_df96ed930c5e8d7bdbaab6c4d7731750.addControl(measure_control_be391d4dec5c6d5791cd922575b672c2);
 
             // Workaround for using this plugin with Leaflet>=1.8.0
             // https://github.com/ljagis/leaflet-measure/issues/171

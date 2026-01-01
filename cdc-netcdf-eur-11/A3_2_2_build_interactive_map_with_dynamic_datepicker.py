@@ -287,7 +287,7 @@ def load_all_geojson_files(index):
     return geojson_lookup
 
 
-def create_layer_for_variable(m, var_name, geojson_files, timestamps):
+def create_layer_for_variable(m, var_name):
     '''
     Create a FeatureGroup layer for a specific variable
     Phase 2: Creates empty layer - markers loaded dynamically via JavaScript
@@ -357,7 +357,7 @@ def create_interactive_map(index):
     
     for var_name in VARIABLES:
         if var_name in index['files']:
-            layer = create_layer_for_variable(m, var_name, index['files'][var_name], index['timestamps'])
+            layer = create_layer_for_variable(m, var_name)
             layers[var_name] = layer
     
     # Add layer control
@@ -562,19 +562,28 @@ def create_interactive_map(index):
         let currentDate = DEFAULT_DATE;
         let currentTimestamp = null;
         let currentLoadedFeatures = 0;
-        let leafletLayers = {{}};  // Store references to Leaflet layer groups
+        let leafletLayers = {{}};  // Store marker references for each variable
+        let layerGroups = {{}};  // Cache layer group references for performance
         
         // Initialize layer references from Folium's layer control
         function initializeLayerReferences() {{
             // Get all overlay layers created by Folium
-            // They are stored in the layer control
-            const map = window.map_obj;  // Will be set after map loads
-            if (!map) return;
+            const map = window.map_obj;
+            if (!map || !map._layers) return;
             
-            // Store layer group references for each variable
+            // Cache layer group references for each variable
             VARIABLES.forEach(varName => {{
                 leafletLayers[varName] = [];
+                
+                // Find and cache the layer group for this variable
+                Object.values(map._layers).forEach(layer => {{
+                    if (layer.options && layer.options.name === COLOR_SCALES[varName].name) {{
+                        layerGroups[varName] = layer;
+                    }}
+                }});
             }});
+            
+            console.log('Layer groups cached:', Object.keys(layerGroups));
         }}
         
         // Extract date from ISO timestamp
@@ -823,28 +832,17 @@ def create_interactive_map(index):
                     const features = geojsonData.features || [];
                     totalFeatures += features.length;
                     
-                    // Get the Folium layer group for this variable
-                    // Find the layer in the map's overlay layers
-                    const map = window.map_obj;
-                    if (map && map._layers) {{
-                        // Find the feature group for this variable
-                        let layerGroup = null;
-                        Object.values(map._layers).forEach(layer => {{
-                            if (layer.options && layer.options.name === COLOR_SCALES[varName].name) {{
-                                layerGroup = layer;
-                            }}
+                    // Use cached layer group for this variable
+                    const layerGroup = layerGroups[varName];
+                    
+                    if (layerGroup) {{
+                        features.forEach(feature => {{
+                            const marker = createLeafletMarker(feature, varName, timestamp);
+                            marker.addTo(layerGroup);
+                            leafletLayers[varName].push(marker);
                         }});
-                        
-                        // If we found the layer group, add markers to it
-                        if (layerGroup) {{
-                            features.forEach(feature => {{
-                                const marker = createLeafletMarker(feature, varName, timestamp);
-                                marker.addTo(layerGroup);
-                                leafletLayers[varName].push(marker);
-                            }});
-                        }} else {{
-                            console.warn(`Could not find layer group for ${{varName}}`);
-                        }}
+                    }} else {{
+                        console.warn(`Could not find layer group for ${{varName}}`);
                     }}
                     
                     console.log(`Loaded ${{features.length}} features for ${{varName}}`);
