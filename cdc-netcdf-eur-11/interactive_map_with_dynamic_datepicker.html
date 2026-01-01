@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_110aa202161e336b89a661175fae6a62 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-minimap/3.6.1/Control.MiniMap.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-minimap/3.6.1/Control.MiniMap.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet.fullscreen@3.0.0/Control.FullScreen.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.fullscreen@3.0.0/Control.FullScreen.css"/>
+    <script src="https://cdn.jsdelivr.net/gh/ljagis/leaflet-measure@2.1.7/dist/leaflet-measure.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ljagis/leaflet-measure@2.1.7/dist/leaflet-measure.min.css"/>
+</head>
+<body>
+    
+    
+    <div style="position: fixed; 
+                bottom: 50px; right: 50px; width: 200px; 
+                background-color: white; border:2px solid grey; 
+                z-index:9999; font-size:14px;
+                padding: 10px;
+                border-radius: 5px;">
+    <p style="margin: 0; font-weight: bold;">Legend</p>
+    <p style="margin: 5px 0; font-size: 12px;">
+        <span style="color: #d53e4f;">●</span> High values<br>
+        <span style="color: #fee08b;">●</span> Medium values<br>
+        <span style="color: #3288bd;">●</span> Low values
+    </p>
+    <p style="margin: 5px 0; font-size: 11px; color: #666;">
+        Circle size indicates magnitude
+    </p>
+    </div>
+    
+    
+            <div id="date-picker-container" style="position: fixed; 
+                        top: 10px; left: 50%; transform: translateX(-50%);
+                        background-color: white; border: 2px solid #333; 
+                        z-index: 9999; 
+                        padding: 15px 20px;
+                        border-radius: 8px;
+                        box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+                        font-family: Arial, sans-serif;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <button id="prevBtn" 
+                            style="padding: 6px 12px; 
+                                   background-color: #2196F3; 
+                                   color: white; 
+                                   border: none; 
+                                   border-radius: 4px; 
+                                   font-size: 14px; 
+                                   font-weight: bold;
+                                   cursor: pointer;">
+                        ◀ Previous
+                    </button>
+                    <input type="date" 
+                           id="dateInput" 
+                           min="2024-01-15" 
+                           max="2024-01-17" 
+                           value="2024-01-17"
+                           style="padding: 5px 10px; font-size: 14px; border: 1px solid #ccc; border-radius: 4px;">
+                    <button id="nextBtn" 
+                            style="padding: 6px 12px; 
+                                   background-color: #2196F3; 
+                                   color: white; 
+                                   border: none; 
+                                   border-radius: 4px; 
+                                   font-size: 14px; 
+                                   font-weight: bold;
+                                   cursor: pointer;">
+                        Next ▶
+                    </button>
+                    <button id="loadBtn" 
+                            style="padding: 6px 16px; 
+                                   background-color: #4CAF50; 
+                                   color: white; 
+                                   border: none; 
+                                   border-radius: 4px; 
+                                   font-size: 14px; 
+                                   font-weight: bold;
+                                   cursor: pointer;">
+                        Load
+                    </button>
+                    <span id="loadingIndicator" style="display: none; margin-left: 10px;">
+                        <svg width="20" height="20" viewBox="0 0 50 50" style="animation: spin 1s linear infinite;">
+                            <circle cx="25" cy="25" r="20" fill="none" stroke="#2196F3" stroke-width="5" stroke-dasharray="31.4 31.4" stroke-linecap="round" />
+                        </svg>
+                    </span>
+                </div>
+                <div id="dateStatus" style="margin-top: 8px; font-size: 13px; color: #666;">
+                    Loaded: <span id="currentDateDisplay" style="font-weight: bold; color: #333;">2024-01-17</span> 
+                    <span id="featureCount" style="margin-left: 10px;">(0 features)</span>
+                </div>
+            </div>
+            <style>
+                @keyframes spin {
+                    0% { transform: rotate(0deg); }
+                    100% { transform: rotate(360deg); }
+                }
+                #prevBtn:disabled, #nextBtn:disabled {
+                    opacity: 0.5;
+                    cursor: not-allowed;
+                }
+            </style>
+            
+    
+        <script>
+        // Data passed from Python
+        const AVAILABLE_TIMESTAMPS = ["2024-01-15T00:00:00", "2024-01-16T00:00:00", "2024-01-17T00:00:00"];
+        const AVAILABLE_DATES = ["2024-01-15", "2024-01-16", "2024-01-17"];
+        const GEOJSON_FILES = {"swh": {"2024-01-15T00:00:00": "swh_2024-01-15T00:00:00.geojson", "2024-01-16T00:00:00": "swh_2024-01-16T00:00:00.geojson", "2024-01-17T00:00:00": "swh_2024-01-17T00:00:00.geojson"}, "t2m": {"2024-01-15T00:00:00": "t2m_2024-01-15T00:00:00.geojson", "2024-01-16T00:00:00": "t2m_2024-01-16T00:00:00.geojson", "2024-01-17T00:00:00": "t2m_2024-01-17T00:00:00.geojson"}, "tp": {"2024-01-15T00:00:00": "tp_2024-01-15T00:00:00.geojson", "2024-01-16T00:00:00": "tp_2024-01-16T00:00:00.geojson", "2024-01-17T00:00:00": "tp_2024-01-17T00:00:00.geojson"}, "wind_speed": {"2024-01-15T00:00:00": "wind_speed_2024-01-15T00:00:00.geojson", "2024-01-16T00:00:00": "wind_speed_2024-01-16T00:00:00.geojson", "2024-01-17T00:00:00": "wind_speed_2024-01-17T00:00:00.geojson"}, "sst": {"2024-01-15T00:00:00": "sst_2024-01-15T00:00:00.geojson", "2024-01-16T00:00:00": "sst_2024-01-16T00:00:00.geojson", "2024-01-17T00:00:00": "sst_2024-01-17T00:00:00.geojson"}};
+        const GEOJSON_DIR = "geojson";
+        const VARIABLES = ["swh", "t2m", "tp", "wind_speed", "sst"];
+        const COLOR_SCALES = {"swh": {"name": "Significant Wave Height (m)", "colors": ["#3288bd", "#66c2a5", "#abdda4", "#e6f598", "#fee08b", "#fdae61", "#f46d43", "#d53e4f"], "vmin": 0, "vmax": 4}, "t2m": {"name": "Temperature 2m (\u00b0C)", "colors": ["#313695", "#4575b4", "#74add1", "#abd9e9", "#e0f3f8", "#fee090", "#fdae61", "#f46d43", "#d73027"], "vmin": -5, "vmax": 25}, "tp": {"name": "Total Precipitation (mm)", "colors": ["#f7fbff", "#deebf7", "#c6dbef", "#9ecae1", "#6baed6", "#4292c6", "#2171b5", "#08519c", "#08306b"], "vmin": 0, "vmax": 0.5}, "wind_speed": {"name": "Wind Speed (m/s)", "colors": ["#ffffe5", "#fff7bc", "#fee391", "#fec44f", "#fe9929", "#ec7014", "#cc4c02", "#993404", "#662506"], "vmin": 0, "vmax": 20}, "sst": {"name": "Sea Surface Temperature (\u00b0C)", "colors": ["#313695", "#4575b4", "#74add1", "#abd9e9", "#e0f3f8", "#fee090", "#fdae61", "#f46d43", "#d73027"], "vmin": 5, "vmax": 20}};
+        const DEFAULT_DATE = "2024-01-17";
+        
+        // State variables
+        let currentDate = DEFAULT_DATE;
+        let currentTimestamp = null;
+        let currentLoadedFeatures = 0;
+        let leafletLayers = {};  // Store references to Leaflet layer groups
+        
+        // Initialize layer references from Folium's layer control
+        function initializeLayerReferences() {
+            // Get all overlay layers created by Folium
+            // They are stored in the layer control
+            const map = window.map_obj;  // Will be set after map loads
+            if (!map) return;
+            
+            // Store layer group references for each variable
+            VARIABLES.forEach(varName => {
+                leafletLayers[varName] = [];
+            });
+        }
+        
+        // Extract date from ISO timestamp
+        function extractDate(timestamp) {
+            return timestamp.split('T')[0];
+        }
+        
+        // Get next available date
+        function getNextDate(currentDate) {
+            const currentIdx = AVAILABLE_DATES.indexOf(currentDate);
+            if (currentIdx >= 0 && currentIdx < AVAILABLE_DATES.length - 1) {
+                return AVAILABLE_DATES[currentIdx + 1];
+            }
+            return null;
+        }
+        
+        // Get previous available date
+        function getPreviousDate(currentDate) {
+            const currentIdx = AVAILABLE_DATES.indexOf(currentDate);
+            if (currentIdx > 0) {
+                return AVAILABLE_DATES[currentIdx - 1];
+            }
+            return null;
+        }
+        
+        // Select date without loading (just updates input and buttons)
+        function selectDate(newDate) {
+            if (!newDate) return;
+            currentDate = newDate;
+            document.getElementById('dateInput').value = newDate;
+            updateButtonStates();
+        }
+        
+        // Update button states (enable/disable at boundaries)
+        function updateButtonStates() {
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            
+            if (prevBtn && nextBtn) {
+                prevBtn.disabled = (getPreviousDate(currentDate) === null);
+                nextBtn.disabled = (getNextDate(currentDate) === null);
+            }
+        }
+        
+        // Show loading indicator
+        function showLoadingIndicator() {
+            const indicator = document.getElementById('loadingIndicator');
+            if (indicator) {
+                indicator.style.display = 'inline-block';
+            }
+        }
+        
+        // Hide loading indicator
+        function hideLoadingIndicator() {
+            const indicator = document.getElementById('loadingIndicator');
+            if (indicator) {
+                indicator.style.display = 'none';
+            }
+        }
+        
+        // Get GeoJSON filename for variable and timestamp
+        function getGeojsonFilenameForTimestamp(varName, timestamp) {
+            if (GEOJSON_FILES[varName] && GEOJSON_FILES[varName][timestamp]) {
+                return GEOJSON_FILES[varName][timestamp];
+            }
+            return null;
+        }
+        
+        // Get timestamp for a specific date
+        function getTimestampForDate(dateStr) {
+            for (let timestamp of AVAILABLE_TIMESTAMPS) {
+                if (extractDate(timestamp) === dateStr) {
+                    return timestamp;
+                }
+            }
+            return null;
+        }
+        
+        // Value to color conversion
+        function valueToColor(value, colors, vmin, vmax) {
+            if (isNaN(value) || value === null) {
+                return '#808080';  // Gray for NaN
+            }
+            
+            // Normalize value to 0-1
+            let normalized = (value - vmin) / (vmax - vmin);
+            normalized = Math.max(0, Math.min(1, normalized));  // Clamp to 0-1
+            
+            // Get color index
+            const idx = Math.floor(normalized * (colors.length - 1));
+            return colors[idx];
+        }
+        
+        // Value to radius conversion
+        function valueToRadius(value, vmin, vmax, minRadius = 2, maxRadius = 10) {
+            if (isNaN(value) || value === null) {
+                return minRadius;
+            }
+            
+            // Normalize value to 0-1
+            let normalized = (value - vmin) / (vmax - vmin);
+            normalized = Math.max(0, Math.min(1, normalized));  // Clamp to 0-1
+            
+            // Linear interpolation
+            return minRadius + normalized * (maxRadius - minRadius);
+        }
+        
+        // Create a Leaflet marker for a feature
+        function createLeafletMarker(feature, varName, timestamp) {
+            const value = feature.properties.value;
+            const lat = feature.geometry.coordinates[1];
+            const lon = feature.geometry.coordinates[0];
+            
+            const config = COLOR_SCALES[varName];
+            const color = valueToColor(value, config.colors, config.vmin, config.vmax);
+            const radius = valueToRadius(value, config.vmin, config.vmax);
+            
+            // Create popup text
+            const popupText = `
+                <b>${config.name}</b><br>
+                Value: ${value.toFixed(2)}<br>
+                Lat: ${lat.toFixed(2)}°<br>
+                Lon: ${lon.toFixed(2)}°<br>
+                Time: ${timestamp}
+            `;
+            
+            // Create CircleMarker
+            const marker = L.circleMarker([lat, lon], {
+                radius: radius,
+                color: color,
+                fillColor: color,
+                fillOpacity: 0.7,
+                weight: 1
+            }).bindPopup(popupText, {maxWidth: 250});
+            
+            return marker;
+        }
+        
+        // Clear all markers for a variable
+        function clearVariableMarkers(varName) {
+            if (leafletLayers[varName]) {
+                leafletLayers[varName].forEach(marker => {
+                    if (marker && marker.remove) {
+                        marker.remove();
+                    }
+                });
+                leafletLayers[varName] = [];
+            }
+        }
+        
+        // Find nearest available date
+        function findNearestDate(targetDate, availableDates) {
+            if (!availableDates || availableDates.length === 0) {
+                return null;
+            }
+            
+            const target = new Date(targetDate);
+            if (isNaN(target.getTime())) {
+                return availableDates[0];
+            }
+            
+            let nearest = availableDates[0];
+            let minDiff = Math.abs(new Date(availableDates[0]) - target);
+            
+            for (let i = 1; i < availableDates.length; i++) {
+                const current = new Date(availableDates[i]);
+                const diff = Math.abs(current - target);
+                if (diff < minDiff) {
+                    minDiff = diff;
+                    nearest = availableDates[i];
+                }
+            }
+            
+            return nearest;
+        }
+        
+        // Main function to load data for a date
+        async function loadDataForDate(dateStr) {
+            console.log('Loading data for date:', dateStr);
+            
+            // Validate date
+            if (!dateStr) {
+                alert('Please select a valid date.');
+                return;
+            }
+            
+            // Find nearest available date
+            const nearestDate = findNearestDate(dateStr, AVAILABLE_DATES);
+            
+            if (!nearestDate) {
+                alert('No data available for the selected date.');
+                return;
+            }
+            
+            // Get corresponding timestamp
+            const timestamp = getTimestampForDate(nearestDate);
+            
+            if (!timestamp) {
+                alert('Could not find timestamp for date: ' + nearestDate);
+                return;
+            }
+            
+            // Update current state
+            currentDate = nearestDate;
+            currentTimestamp = timestamp;
+            
+            // Update input if nearest date is different
+            if (nearestDate !== dateStr) {
+                document.getElementById('dateInput').value = nearestDate;
+                console.log('Adjusted to nearest available date:', nearestDate);
+            }
+            
+            // Show loading indicator
+            showLoadingIndicator();
+            
+            // Track total features loaded
+            let totalFeatures = 0;
+            
+            // Load data for each variable
+            for (const varName of VARIABLES) {
+                // Clear previous markers for this variable
+                clearVariableMarkers(varName);
+                
+                // Get GeoJSON filename
+                const filename = getGeojsonFilenameForTimestamp(varName, timestamp);
+                
+                if (!filename) {
+                    console.warn(`No GeoJSON file found for ${varName} at ${timestamp}`);
+                    continue;
+                }
+                
+                // Fetch GeoJSON file
+                const geojsonPath = `${GEOJSON_DIR}/${filename}`;
+                
+                try {
+                    const response = await fetch(geojsonPath);
+                    
+                    if (!response.ok) {
+                        console.error(`Failed to fetch ${geojsonPath}: ${response.status}`);
+                        continue;
+                    }
+                    
+                    const geojsonData = await response.json();
+                    
+                    // Create markers for each feature
+                    const features = geojsonData.features || [];
+                    totalFeatures += features.length;
+                    
+                    // Get the Folium layer group for this variable
+                    // Find the layer in the map's overlay layers
+                    const map = window.map_obj;
+                    if (map && map._layers) {
+                        // Find the feature group for this variable
+                        let layerGroup = null;
+                        Object.values(map._layers).forEach(layer => {
+                            if (layer.options && layer.options.name === COLOR_SCALES[varName].name) {
+                                layerGroup = layer;
+                            }
+                        });
+                        
+                        // If we found the layer group, add markers to it
+                        if (layerGroup) {
+                            features.forEach(feature => {
+                                const marker = createLeafletMarker(feature, varName, timestamp);
+                                marker.addTo(layerGroup);
+                                leafletLayers[varName].push(marker);
+                            });
+                        } else {
+                            console.warn(`Could not find layer group for ${varName}`);
+                        }
+                    }
+                    
+                    console.log(`Loaded ${features.length} features for ${varName}`);
+                    
+                } catch (error) {
+                    console.error(`Error loading ${geojsonPath}:`, error);
+                }
+            }
+            
+            // Update UI
+            document.getElementById('currentDateDisplay').textContent = nearestDate;
+            document.getElementById('featureCount').textContent = `(${totalFeatures} features)`;
+            
+            currentLoadedFeatures = totalFeatures;
+            
+            // Update button states
+            updateButtonStates();
+            
+            // Hide loading indicator
+            hideLoadingIndicator();
+            
+            console.log('Date loaded successfully:', nearestDate);
+            console.log('Total features loaded:', totalFeatures);
+        }
+        
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get map object reference
+            // Folium creates a global variable for the map
+            setTimeout(() => {
+                // Find the map object in the global scope
+                for (let key in window) {
+                    if (window[key] && window[key]._leaflet_id && window[key]._layers) {
+                        window.map_obj = window[key];
+                        console.log('Found map object:', key);
+                        break;
+                    }
+                }
+                
+                initializeLayerReferences();
+                updateButtonStates();
+                
+                // Load default date
+                loadDataForDate(DEFAULT_DATE);
+            }, 500);
+            
+            // Previous button
+            const prevBtn = document.getElementById('prevBtn');
+            if (prevBtn) {
+                prevBtn.addEventListener('click', function() {
+                    const prevDate = getPreviousDate(currentDate);
+                    if (prevDate) {
+                        selectDate(prevDate);
+                    }
+                });
+            }
+            
+            // Next button
+            const nextBtn = document.getElementById('nextBtn');
+            if (nextBtn) {
+                nextBtn.addEventListener('click', function() {
+                    const nextDate = getNextDate(currentDate);
+                    if (nextDate) {
+                        selectDate(nextDate);
+                    }
+                });
+            }
+            
+            // Load button
+            const loadBtn = document.getElementById('loadBtn');
+            if (loadBtn) {
+                loadBtn.addEventListener('click', function() {
+                    const selectedDate = document.getElementById('dateInput').value;
+                    loadDataForDate(selectedDate);
+                });
+            }
+            
+            // Date input change
+            const dateInput = document.getElementById('dateInput');
+            if (dateInput) {
+                dateInput.addEventListener('change', function(e) {
+                    selectDate(e.target.value);
+                });
+                
+                // Enter key on date input
+                dateInput.addEventListener('keypress', function(event) {
+                    if (event.key === 'Enter') {
+                        loadDataForDate(this.value);
+                    }
+                });
+            }
+        });
+        </script>
+        
+    
+            <div class="folium-map" id="map_110aa202161e336b89a661175fae6a62" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_110aa202161e336b89a661175fae6a62 = L.map(
+                "map_110aa202161e336b89a661175fae6a62",
+                {
+                    center: [51.0, 10.0],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 6,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_3dfc10e8590750fe1a59746cc19c3480 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_3dfc10e8590750fe1a59746cc19c3480.addTo(map_110aa202161e336b89a661175fae6a62);
+        
+    
+            var tile_layer_8e880c4d88f1dba23aa72afa41836f71 = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_8e880c4d88f1dba23aa72afa41836f71.addTo(map_110aa202161e336b89a661175fae6a62);
+        
+    
+            var tile_layer_64479867daec64bb64af2a1f4c32e9cd = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_64479867daec64bb64af2a1f4c32e9cd.addTo(map_110aa202161e336b89a661175fae6a62);
+        
+    
+            var feature_group_d718032f50b805ce9253823209efc07c = L.featureGroup(
+                {
+}
+            );
+        
+    
+            feature_group_d718032f50b805ce9253823209efc07c.addTo(map_110aa202161e336b89a661175fae6a62);
+        
+    
+            var feature_group_e02439edceb4edfe6621e9ef7bf002ae = L.featureGroup(
+                {
+}
+            );
+        
+    
+            feature_group_e02439edceb4edfe6621e9ef7bf002ae.addTo(map_110aa202161e336b89a661175fae6a62);
+        
+    
+            var feature_group_afa0957f271ebe492c253f78f20f4b98 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            feature_group_afa0957f271ebe492c253f78f20f4b98.addTo(map_110aa202161e336b89a661175fae6a62);
+        
+    
+            var feature_group_c68e7b61a7e5a800f8617b66f277dbfb = L.featureGroup(
+                {
+}
+            );
+        
+    
+            feature_group_c68e7b61a7e5a800f8617b66f277dbfb.addTo(map_110aa202161e336b89a661175fae6a62);
+        
+    
+            var feature_group_d65dee53d157972b8b7d94750921d1f0 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            feature_group_d65dee53d157972b8b7d94750921d1f0.addTo(map_110aa202161e336b89a661175fae6a62);
+        
+    
+            var layer_control_03ddd8197024e9d46478c494a3965d9e_layers = {
+                base_layers : {
+                    "openstreetmap" : tile_layer_3dfc10e8590750fe1a59746cc19c3480,
+                    "Light Map" : tile_layer_8e880c4d88f1dba23aa72afa41836f71,
+                    "Dark Map" : tile_layer_64479867daec64bb64af2a1f4c32e9cd,
+                },
+                overlays :  {
+                    "Significant Wave Height (m)" : feature_group_d718032f50b805ce9253823209efc07c,
+                    "Temperature 2m (\u00b0C)" : feature_group_e02439edceb4edfe6621e9ef7bf002ae,
+                    "Total Precipitation (mm)" : feature_group_afa0957f271ebe492c253f78f20f4b98,
+                    "Wind Speed (m/s)" : feature_group_c68e7b61a7e5a800f8617b66f277dbfb,
+                    "Sea Surface Temperature (\u00b0C)" : feature_group_d65dee53d157972b8b7d94750921d1f0,
+                },
+            };
+            let layer_control_03ddd8197024e9d46478c494a3965d9e = L.control.layers(
+                layer_control_03ddd8197024e9d46478c494a3965d9e_layers.base_layers,
+                layer_control_03ddd8197024e9d46478c494a3965d9e_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": false,
+  "autoZIndex": true,
+}
+            ).addTo(map_110aa202161e336b89a661175fae6a62);
+
+        
+    
+            var tile_layer_2c8418715e571e71a42f18126e120432 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors", "detect_retina": false, "max_native_zoom": 19, "max_zoom": 19, "min_zoom": 0, "no_wrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            );
+            var mini_map_997c511e6a4d88e780cedb83c06f26ec = new L.Control.MiniMap(
+                tile_layer_2c8418715e571e71a42f18126e120432,
+                {
+  "position": "bottomright",
+  "width": 150,
+  "height": 150,
+  "collapsedWidth": 25,
+  "collapsedHeight": 25,
+  "zoomLevelOffset": -5,
+  "centerFixed": false,
+  "zoomAnimation": false,
+  "toggleDisplay": true,
+  "autoToggleDisplay": false,
+  "minimized": false,
+}
+            );
+            map_110aa202161e336b89a661175fae6a62.addControl(mini_map_997c511e6a4d88e780cedb83c06f26ec);
+        
+    
+            L.control.fullscreen(
+                {
+  "position": "topleft",
+  "title": "Fullscreen",
+  "titleCancel": "Exit Fullscreen",
+  "forceSeparateButton": true,
+}
+            ).addTo(map_110aa202161e336b89a661175fae6a62);
+        
+    
+            var measure_control_1ab5c9a23542942316d47eadbc1fcb81 = new L.Control.Measure(
+                {
+  "position": "topleft",
+  "primaryLengthUnit": "kilometers",
+  "secondaryLengthUnit": "miles",
+  "primaryAreaUnit": "sqmeters",
+  "secondaryAreaUnit": "acres",
+});
+            map_110aa202161e336b89a661175fae6a62.addControl(measure_control_1ab5c9a23542942316d47eadbc1fcb81);
+
+            // Workaround for using this plugin with Leaflet>=1.8.0
+            // https://github.com/ljagis/leaflet-measure/issues/171
+            L.Control.Measure.include({
+                _setCaptureMarkerIcon: function () {
+                    // disable autopan
+                    this._captureMarker.options.autoPanOnFocus = false;
+                    // default function
+                    this._captureMarker.setIcon(
+                        L.divIcon({
+                            iconSize: this._map.getSize().multiplyBy(2)
+                        })
+                    );
+                },
+            });
+
+        
+</script>
+</html>
