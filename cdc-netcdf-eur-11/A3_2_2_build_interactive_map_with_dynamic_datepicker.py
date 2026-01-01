@@ -258,35 +258,6 @@ def get_previous_date(current_date, available_dates):
     return None
 
 
-def load_all_geojson_files(index):
-    '''
-    Build a lookup dictionary of all GeoJSON filenames by date and variable
-    
-    Args:
-        index: The timeseries index dictionary
-    
-    Returns:
-        Dictionary with structure: {date: {variable: filename}}
-    '''
-    geojson_lookup = {}
-    
-    for timestamp in index['timestamps']:
-        date = extract_date_from_timestamp(timestamp)
-        if not date:
-            continue
-        
-        if date not in geojson_lookup:
-            geojson_lookup[date] = {}
-        
-        for var_name in VARIABLES:
-            if var_name in index['files']:
-                filename = get_geojson_files_for_timestamp(timestamp, index, var_name)
-                if filename:
-                    geojson_lookup[date][var_name] = filename
-    
-    return geojson_lookup
-
-
 def create_layer_for_variable(m, var_name):
     '''
     Create a FeatureGroup layer for a specific variable
