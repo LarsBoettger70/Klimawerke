@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_e7204cefb0824bfd547accdf4111ff4b {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-minimap/3.6.1/Control.MiniMap.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-minimap/3.6.1/Control.MiniMap.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet.fullscreen@3.0.0/Control.FullScreen.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.fullscreen@3.0.0/Control.FullScreen.css"/>
+    <script src="https://cdn.jsdelivr.net/gh/ljagis/leaflet-measure@2.1.7/dist/leaflet-measure.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ljagis/leaflet-measure@2.1.7/dist/leaflet-measure.min.css"/>
+</head>
+<body>
+    
+    
+    <div style="position: fixed; 
+                bottom: 50px; right: 50px; width: 220px; 
+                background-color: white; border: 2px solid grey; 
+                z-index: 9999; font-size:14px;
+                padding: 10px;
+                border-radius: 5px;
+                box-shadow: 0 2px 6px rgba(0,0,0,0.3);">
+        <p style="margin: 0 0 8px 0; font-weight: bold; font-size: 15px;">Legend</p>
+        <p style="margin: 5px 0; font-size: 12px;">
+            <span style="color: #d53e4f;">●</span> High values<br>
+            <span style="color: #fee08b;">●</span> Medium values<br>
+            <span style="color: #3288bd;">●</span> Low values
+        </p>
+        <p style="margin: 5px 0; font-size: 11px; color: #666;">
+            Circle size indicates magnitude
+        </p>
+    </div>
+    
+    
+    <div id="date-picker-container" style="position: fixed; 
+                top: 10px; left: 50%; transform: translateX(-50%);
+                background-color: white; border: 2px solid #333; 
+                z-index:  9999; 
+                padding: 15px 20px;
+                border-radius: 8px;
+                box-shadow:  0 2px 6px rgba(0,0,0,0.3);
+                font-family: Arial, sans-serif;
+                min-width: 600px;">
+        <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 10px;">
+            <button id="prevDayBtn" 
+                    style="padding: 6px 12px; 
+                           background-color: #2196F3; 
+                           color: white; 
+                           border: none; 
+                           border-radius: 4px; 
+                           font-size: 14px; 
+                           font-weight: bold;
+                           cursor: pointer;">
+                ◀ Prev Day
+            </button>
+            <input type="date" 
+                   id="dateInput" 
+                   min="2025-12-01" 
+                   max="2025-12-28" 
+                   value="2025-12-28"
+                   style="padding: 5px 10px; font-size: 14px; border: 1px solid #ccc; border-radius: 4px;">
+            <button id="nextDayBtn" 
+                    style="padding: 6px 12px; 
+                           background-color: #2196F3; 
+                           color: white; 
+                           border: none; 
+                           border-radius: 4px; 
+                           font-size: 14px; 
+                           font-weight: bold;
+                           cursor: pointer;">
+                Next Day ▶
+            </button>
+            <span id="loadingIndicator" style="display: none; margin-left: 10px;">
+                <svg width="20" height="20" viewBox="0 0 50 50" style="animation: spin 1s linear infinite;">
+                    <circle cx="25" cy="25" r="20" fill="none" stroke="#2196F3" stroke-width="5" stroke-dasharray="31.4 31.4" stroke-linecap="round" />
+                </svg>
+            </span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <button id="prevHourBtn" 
+                    style="padding: 6px 12px; 
+                           background-color: #FF9800; 
+                           color: white; 
+                           border: none; 
+                           border-radius: 4px; 
+                           font-size: 13px; 
+                           cursor: pointer;">
+                ◀ 
+            </button>
+            <label style="font-weight: bold; font-size: 14px;">Hour:</label>
+            <input type="range" 
+                   id="hourSlider" 
+                   min="0" 
+                   max="23" 
+                   value="12"
+                   style="flex: 1;">
+            <span id="hourDisplay" style="font-weight: bold; font-size: 16px; min-width: 60px; text-align: center;"> 12:00</span>
+            <button id="nextHourBtn" 
+                    style="padding: 6px 12px; 
+                           background-color: #FF9800; 
+                           color: white; 
+                           border: none; 
+                           border-radius: 4px; 
+                           font-size: 13px; 
+                           cursor: pointer;">
+                ▶
+            </button>
+        </div>
+        <div id="statusDisplay" style="margin-top: 10px; font-size: 13px; color: #666; text-align: center;">
+            Loaded: <span id="currentDisplay" style="font-weight: bold; color: #333;">2025-12-28  12:00</span>
+            <span id="featureCount" style="margin-left: 10px;">(0 features)</span>
+        </div>
+    </div>
+    <style>
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        #prevDayBtn: disabled, #nextDayBtn: disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    </style>
+    
+    
+    <script>
+    // Configuration
+    const METADATA = {"version": "1.1", "type": "daily_files", "description": "One GeoJSON file per variable per day, containing all hourly data", "dates": ["2025-12-01", "2025-12-02", "2025-12-03", "2025-12-04", "2025-12-05", "2025-12-06", "2025-12-07", "2025-12-08", "2025-12-09", "2025-12-10", "2025-12-11", "2025-12-12", "2025-12-13", "2025-12-14", "2025-12-15", "2025-12-16", "2025-12-17", "2025-12-18", "2025-12-19", "2025-12-20", "2025-12-21", "2025-12-22", "2025-12-23", "2025-12-24", "2025-12-25", "2025-12-26", "2025-12-27", "2025-12-28"], "grid": {"lat_min": 47.0, "lat_max": 55.0, "lon_min": 5.0, "lon_max": 15.0, "lat_count": 33, "lon_count": 41}, "variables": {"swh": {"name": "Significant Wave Height", "unit": "m", "color_scale": {"vmin": 0, "vmax": 4, "colors": ["#3288bd", "#66c2a5", "#abdda4", "#e6f598", "#fee08b", "#fdae61", "#f46d43", "#d53e4f"]}, "files": [{"filename": "swh_2025-12-01.geojson", "date": "2025-12-01", "hours": 24, "feature_count": 1296, "size_mb": 0.22}, {"filename": "swh_2025-12-02.geojson", "date": "2025-12-02", "hours": 24, "feature_count": 1296, "size_mb": 0.22}, {"filename": "swh_2025-12-03.geojson", "date": "2025-12-03", "hours": 24, "feature_count": 1296, "size_mb": 0.22}, {"filename": "swh_2025-12-04.geojson", "date": "2025-12-04", "hours": 24, "feature_count": 1296, "size_mb": 0.22}, {"filename": "swh_2025-12-05.geojson", "date": "2025-12-05", "hours": 24, "feature_count": 1296, "size_mb": 0.22}, {"filename": "swh_2025-12-06.geojson", "date": "2025-12-06", "hours": 24, "feature_count": 1296, "size_mb": 0.22}, {"filename": "swh_2025-12-07.geojson", "date": "2025-12-07", "hours": 24, "feature_count": 1296, "size_mb": 0.22}, {"filename": "swh_2025-12-08.geojson", "date": "2025-12-08", "hours": 24, "feature_count": 1296, "size_mb": 0.22}, {"filename": "swh_2025-12-09.geojson", "date": "2025-12-09", "hours": 24, "feature_count": 1296, "size_mb": 0.22}, {"filename": "swh_2025-12-10.geojson", "date": "2025-12-10", "hours": 24, "feature_count": 1296, "size_mb": 0.22}, {"filename": "swh_2025-12-11.geojson", "date": "2025-12-11", "hours": 24, "feature_count": 1296, "size_mb": 0.22}, {"filename": "swh_2025-12-12.geojson", "date": "2025-12-12", "hours": 24, "feature_count": 1296, "size_mb": 0.22}, {"filename": "swh_2025-12-13.geojson", "date": "2025-12-13", "hours": 24, "feature_count": 1296, "size_mb": 0.22}, {"filename": "swh_2025-12-14.geojson", "date": "2025-12-14", "hours": 24, "feature_count": 1296, "size_mb": 0.22}, {"filename": "swh_2025-12-15.geojson", "date": "2025-12-15", "hours": 24, "feature_count": 1296, "size_mb": 0.22}, {"filename": "swh_2025-12-16.geojson", "date": "2025-12-16", "hours": 24, "feature_count": 1296, "size_mb": 0.22}, {"filename": "swh_2025-12-17.geojson", "date": "2025-12-17", "hours": 24, "feature_count": 1296, "size_mb": 0.22}, {"filename": "swh_2025-12-18.geojson", "date": "2025-12-18", "hours": 24, "feature_count": 1296, "size_mb": 0.22}, {"filename": "swh_2025-12-19.geojson", "date": "2025-12-19", "hours": 24, "feature_count": 1296, "size_mb": 0.22}, {"filename": "swh_2025-12-20.geojson", "date": "2025-12-20", "hours": 24, "feature_count": 1296, "size_mb": 0.22}, {"filename": "swh_2025-12-21.geojson", "date": "2025-12-21", "hours": 24, "feature_count": 1296, "size_mb": 0.22}, {"filename": "swh_2025-12-22.geojson", "date": "2025-12-22", "hours": 24, "feature_count": 1296, "size_mb": 0.22}, {"filename": "swh_2025-12-23.geojson", "date": "2025-12-23", "hours": 24, "feature_count": 1296, "size_mb": 0.22}, {"filename": "swh_2025-12-24.geojson", "date": "2025-12-24", "hours": 24, "feature_count": 1296, "size_mb": 0.22}, {"filename": "swh_2025-12-25.geojson", "date": "2025-12-25", "hours": 24, "feature_count": 1296, "size_mb": 0.22}, {"filename": "swh_2025-12-26.geojson", "date": "2025-12-26", "hours": 24, "feature_count": 1296, "size_mb": 0.22}, {"filename": "swh_2025-12-27.geojson", "date": "2025-12-27", "hours": 24, "feature_count": 1296, "size_mb": 0.22}, {"filename": "swh_2025-12-28.geojson", "date": "2025-12-28", "hours": 4, "feature_count": 216, "size_mb": 0.04}]}, "t2m": {"name": "Temperature 2m", "unit": "\u00b0C", "color_scale": {"vmin": -5, "vmax": 25, "colors": ["#313695", "#4575b4", "#74add1", "#abd9e9", "#e0f3f8", "#fee090", "#fdae61", "#f46d43", "#d73027"]}, "files": [{"filename": "t2m_2025-12-01.geojson", "date": "2025-12-01", "hours": 24, "feature_count": 32472, "size_mb": 5.52}, {"filename": "t2m_2025-12-02.geojson", "date": "2025-12-02", "hours": 24, "feature_count": 32472, "size_mb": 5.52}, {"filename": "t2m_2025-12-03.geojson", "date": "2025-12-03", "hours": 24, "feature_count": 32472, "size_mb": 5.52}, {"filename": "t2m_2025-12-04.geojson", "date": "2025-12-04", "hours": 24, "feature_count": 32472, "size_mb": 5.52}, {"filename": "t2m_2025-12-05.geojson", "date": "2025-12-05", "hours": 24, "feature_count": 32472, "size_mb": 5.51}, {"filename": "t2m_2025-12-06.geojson", "date": "2025-12-06", "hours": 24, "feature_count": 32472, "size_mb": 5.51}, {"filename": "t2m_2025-12-07.geojson", "date": "2025-12-07", "hours": 24, "feature_count": 32472, "size_mb": 5.52}, {"filename": "t2m_2025-12-08.geojson", "date": "2025-12-08", "hours": 24, "feature_count": 32472, "size_mb": 5.53}, {"filename": "t2m_2025-12-09.geojson", "date": "2025-12-09", "hours": 24, "feature_count": 32472, "size_mb": 5.53}, {"filename": "t2m_2025-12-10.geojson", "date": "2025-12-10", "hours": 24, "feature_count": 32472, "size_mb": 5.53}, {"filename": "t2m_2025-12-11.geojson", "date": "2025-12-11", "hours": 24, "feature_count": 32472, "size_mb": 5.51}, {"filename": "t2m_2025-12-12.geojson", "date": "2025-12-12", "hours": 24, "feature_count": 32472, "size_mb": 5.51}, {"filename": "t2m_2025-12-13.geojson", "date": "2025-12-13", "hours": 24, "feature_count": 32472, "size_mb": 5.51}, {"filename": "t2m_2025-12-14.geojson", "date": "2025-12-14", "hours": 24, "feature_count": 32472, "size_mb": 5.51}, {"filename": "t2m_2025-12-15.geojson", "date": "2025-12-15", "hours": 24, "feature_count": 32472, "size_mb": 5.52}, {"filename": "t2m_2025-12-16.geojson", "date": "2025-12-16", "hours": 24, "feature_count": 32472, "size_mb": 5.52}, {"filename": "t2m_2025-12-17.geojson", "date": "2025-12-17", "hours": 24, "feature_count": 32472, "size_mb": 5.52}, {"filename": "t2m_2025-12-18.geojson", "date": "2025-12-18", "hours": 24, "feature_count": 32472, "size_mb": 5.52}, {"filename": "t2m_2025-12-19.geojson", "date": "2025-12-19", "hours": 24, "feature_count": 32472, "size_mb": 5.52}, {"filename": "t2m_2025-12-20.geojson", "date": "2025-12-20", "hours": 24, "feature_count": 32472, "size_mb": 5.51}, {"filename": "t2m_2025-12-21.geojson", "date": "2025-12-21", "hours": 24, "feature_count": 32472, "size_mb": 5.52}, {"filename": "t2m_2025-12-22.geojson", "date": "2025-12-22", "hours": 24, "feature_count": 32472, "size_mb": 5.52}, {"filename": "t2m_2025-12-23.geojson", "date": "2025-12-23", "hours": 24, "feature_count": 32472, "size_mb": 5.52}, {"filename": "t2m_2025-12-24.geojson", "date": "2025-12-24", "hours": 24, "feature_count": 32472, "size_mb": 5.53}, {"filename": "t2m_2025-12-25.geojson", "date": "2025-12-25", "hours": 24, "feature_count": 32472, "size_mb": 5.54}, {"filename": "t2m_2025-12-26.geojson", "date": "2025-12-26", "hours": 24, "feature_count": 32472, "size_mb": 5.53}, {"filename": "t2m_2025-12-27.geojson", "date": "2025-12-27", "hours": 24, "feature_count": 32472, "size_mb": 5.53}, {"filename": "t2m_2025-12-28.geojson", "date": "2025-12-28", "hours": 4, "feature_count": 5412, "size_mb": 0.92}]}, "tp": {"name": "Total Precipitation", "unit": "mm", "color_scale": {"vmin": 0, "vmax": 0.5, "colors": ["#f7fbff", "#deebf7", "#c6dbef", "#9ecae1", "#6baed6", "#4292c6", "#2171b5", "#08519c", "#08306b"]}, "files": [{"filename": "tp_2025-12-01.geojson", "date": "2025-12-01", "hours": 24, "feature_count": 32472, "size_mb": 5.47}, {"filename": "tp_2025-12-02.geojson", "date": "2025-12-02", "hours": 24, "feature_count": 32472, "size_mb": 5.48}, {"filename": "tp_2025-12-03.geojson", "date": "2025-12-03", "hours": 24, "feature_count": 32472, "size_mb": 5.49}, {"filename": "tp_2025-12-04.geojson", "date": "2025-12-04", "hours": 24, "feature_count": 32472, "size_mb": 5.48}, {"filename": "tp_2025-12-05.geojson", "date": "2025-12-05", "hours": 24, "feature_count": 32472, "size_mb": 5.5}, {"filename": "tp_2025-12-06.geojson", "date": "2025-12-06", "hours": 24, "feature_count": 32472, "size_mb": 5.49}, {"filename": "tp_2025-12-07.geojson", "date": "2025-12-07", "hours": 24, "feature_count": 32472, "size_mb": 5.5}, {"filename": "tp_2025-12-08.geojson", "date": "2025-12-08", "hours": 24, "feature_count": 32472, "size_mb": 5.5}, {"filename": "tp_2025-12-09.geojson", "date": "2025-12-09", "hours": 24, "feature_count": 32472, "size_mb": 5.48}, {"filename": "tp_2025-12-10.geojson", "date": "2025-12-10", "hours": 24, "feature_count": 32472, "size_mb": 5.48}, {"filename": "tp_2025-12-11.geojson", "date": "2025-12-11", "hours": 24, "feature_count": 32472, "size_mb": 5.47}, {"filename": "tp_2025-12-12.geojson", "date": "2025-12-12", "hours": 24, "feature_count": 32472, "size_mb": 5.48}, {"filename": "tp_2025-12-13.geojson", "date": "2025-12-13", "hours": 24, "feature_count": 32472, "size_mb": 5.49}, {"filename": "tp_2025-12-14.geojson", "date": "2025-12-14", "hours": 24, "feature_count": 32472, "size_mb": 5.49}, {"filename": "tp_2025-12-15.geojson", "date": "2025-12-15", "hours": 24, "feature_count": 32472, "size_mb": 5.47}, {"filename": "tp_2025-12-16.geojson", "date": "2025-12-16", "hours": 24, "feature_count": 32472, "size_mb": 5.46}, {"filename": "tp_2025-12-17.geojson", "date": "2025-12-17", "hours": 24, "feature_count": 32472, "size_mb": 5.47}, {"filename": "tp_2025-12-18.geojson", "date": "2025-12-18", "hours": 24, "feature_count": 32472, "size_mb": 5.47}, {"filename": "tp_2025-12-19.geojson", "date": "2025-12-19", "hours": 24, "feature_count": 32472, "size_mb": 5.48}, {"filename": "tp_2025-12-20.geojson", "date": "2025-12-20", "hours": 24, "feature_count": 32472, "size_mb": 5.48}, {"filename": "tp_2025-12-21.geojson", "date": "2025-12-21", "hours": 24, "feature_count": 32472, "size_mb": 5.47}, {"filename": "tp_2025-12-22.geojson", "date": "2025-12-22", "hours": 24, "feature_count": 32472, "size_mb": 5.48}, {"filename": "tp_2025-12-23.geojson", "date": "2025-12-23", "hours": 24, "feature_count": 32472, "size_mb": 5.49}, {"filename": "tp_2025-12-24.geojson", "date": "2025-12-24", "hours": 24, "feature_count": 32472, "size_mb": 5.49}, {"filename": "tp_2025-12-25.geojson", "date": "2025-12-25", "hours": 24, "feature_count": 32472, "size_mb": 5.46}, {"filename": "tp_2025-12-26.geojson", "date": "2025-12-26", "hours": 24, "feature_count": 32472, "size_mb": 5.46}, {"filename": "tp_2025-12-27.geojson", "date": "2025-12-27", "hours": 24, "feature_count": 32472, "size_mb": 5.47}, {"filename": "tp_2025-12-28.geojson", "date": "2025-12-28", "hours": 4, "feature_count": 5412, "size_mb": 0.91}]}, "sst": {"name": "Sea Surface Temperature", "unit": "\u00b0C", "color_scale": {"vmin": 5, "vmax": 20, "colors": ["#313695", "#4575b4", "#74add1", "#abd9e9", "#e0f3f8", "#fee090", "#fdae61", "#f46d43", "#d73027"]}, "files": [{"filename": "sst_2025-12-01.geojson", "date": "2025-12-01", "hours": 24, "feature_count": 4320, "size_mb": 0.73}, {"filename": "sst_2025-12-02.geojson", "date": "2025-12-02", "hours": 24, "feature_count": 4320, "size_mb": 0.73}, {"filename": "sst_2025-12-03.geojson", "date": "2025-12-03", "hours": 24, "feature_count": 4320, "size_mb": 0.73}, {"filename": "sst_2025-12-04.geojson", "date": "2025-12-04", "hours": 24, "feature_count": 4320, "size_mb": 0.73}, {"filename": "sst_2025-12-05.geojson", "date": "2025-12-05", "hours": 24, "feature_count": 4320, "size_mb": 0.73}, {"filename": "sst_2025-12-06.geojson", "date": "2025-12-06", "hours": 24, "feature_count": 4320, "size_mb": 0.73}, {"filename": "sst_2025-12-07.geojson", "date": "2025-12-07", "hours": 24, "feature_count": 4320, "size_mb": 0.73}, {"filename": "sst_2025-12-08.geojson", "date": "2025-12-08", "hours": 24, "feature_count": 4320, "size_mb": 0.73}, {"filename": "sst_2025-12-09.geojson", "date": "2025-12-09", "hours": 24, "feature_count": 4320, "size_mb": 0.73}, {"filename": "sst_2025-12-10.geojson", "date": "2025-12-10", "hours": 24, "feature_count": 4320, "size_mb": 0.73}, {"filename": "sst_2025-12-11.geojson", "date": "2025-12-11", "hours": 24, "feature_count": 4320, "size_mb": 0.73}, {"filename": "sst_2025-12-12.geojson", "date": "2025-12-12", "hours": 24, "feature_count": 4320, "size_mb": 0.73}, {"filename": "sst_2025-12-13.geojson", "date": "2025-12-13", "hours": 24, "feature_count": 4320, "size_mb": 0.73}, {"filename": "sst_2025-12-14.geojson", "date": "2025-12-14", "hours": 24, "feature_count": 4320, "size_mb": 0.73}, {"filename": "sst_2025-12-15.geojson", "date": "2025-12-15", "hours": 24, "feature_count": 4320, "size_mb": 0.73}, {"filename": "sst_2025-12-16.geojson", "date": "2025-12-16", "hours": 24, "feature_count": 4320, "size_mb": 0.73}, {"filename": "sst_2025-12-17.geojson", "date": "2025-12-17", "hours": 24, "feature_count": 4320, "size_mb": 0.73}, {"filename": "sst_2025-12-18.geojson", "date": "2025-12-18", "hours": 24, "feature_count": 4320, "size_mb": 0.73}, {"filename": "sst_2025-12-19.geojson", "date": "2025-12-19", "hours": 24, "feature_count": 4320, "size_mb": 0.73}, {"filename": "sst_2025-12-20.geojson", "date": "2025-12-20", "hours": 24, "feature_count": 4320, "size_mb": 0.73}, {"filename": "sst_2025-12-21.geojson", "date": "2025-12-21", "hours": 24, "feature_count": 4320, "size_mb": 0.73}, {"filename": "sst_2025-12-22.geojson", "date": "2025-12-22", "hours": 24, "feature_count": 4320, "size_mb": 0.73}, {"filename": "sst_2025-12-23.geojson", "date": "2025-12-23", "hours": 24, "feature_count": 4320, "size_mb": 0.73}, {"filename": "sst_2025-12-24.geojson", "date": "2025-12-24", "hours": 24, "feature_count": 4320, "size_mb": 0.73}, {"filename": "sst_2025-12-25.geojson", "date": "2025-12-25", "hours": 24, "feature_count": 4320, "size_mb": 0.73}, {"filename": "sst_2025-12-26.geojson", "date": "2025-12-26", "hours": 24, "feature_count": 4320, "size_mb": 0.73}, {"filename": "sst_2025-12-27.geojson", "date": "2025-12-27", "hours": 24, "feature_count": 4320, "size_mb": 0.73}, {"filename": "sst_2025-12-28.geojson", "date": "2025-12-28", "hours": 4, "feature_count": 720, "size_mb": 0.12}]}, "wind_speed": {"name": "Wind Speed", "unit": "m/s", "color_scale": {"vmin": 0, "vmax": 20, "colors": ["#ffffe5", "#fff7bc", "#fee391", "#fec44f", "#fe9929", "#ec7014", "#cc4c02", "#993404", "#662506"]}, "files": [{"filename": "wind_speed_2025-12-01.geojson", "date": "2025-12-01", "hours": 24, "feature_count": 32472, "size_mb": 5.51}, {"filename": "wind_speed_2025-12-02.geojson", "date": "2025-12-02", "hours": 24, "feature_count": 32472, "size_mb": 5.51}, {"filename": "wind_speed_2025-12-03.geojson", "date": "2025-12-03", "hours": 24, "feature_count": 32472, "size_mb": 5.51}, {"filename": "wind_speed_2025-12-04.geojson", "date": "2025-12-04", "hours": 24, "feature_count": 32472, "size_mb": 5.51}, {"filename": "wind_speed_2025-12-05.geojson", "date": "2025-12-05", "hours": 24, "feature_count": 32472, "size_mb": 5.51}, {"filename": "wind_speed_2025-12-06.geojson", "date": "2025-12-06", "hours": 24, "feature_count": 32472, "size_mb": 5.51}, {"filename": "wind_speed_2025-12-07.geojson", "date": "2025-12-07", "hours": 24, "feature_count": 32472, "size_mb": 5.51}, {"filename": "wind_speed_2025-12-08.geojson", "date": "2025-12-08", "hours": 24, "feature_count": 32472, "size_mb": 5.51}, {"filename": "wind_speed_2025-12-09.geojson", "date": "2025-12-09", "hours": 24, "feature_count": 32472, "size_mb": 5.51}, {"filename": "wind_speed_2025-12-10.geojson", "date": "2025-12-10", "hours": 24, "feature_count": 32472, "size_mb": 5.51}, {"filename": "wind_speed_2025-12-11.geojson", "date": "2025-12-11", "hours": 24, "feature_count": 32472, "size_mb": 5.51}, {"filename": "wind_speed_2025-12-12.geojson", "date": "2025-12-12", "hours": 24, "feature_count": 32472, "size_mb": 5.51}, {"filename": "wind_speed_2025-12-13.geojson", "date": "2025-12-13", "hours": 24, "feature_count": 32472, "size_mb": 5.51}, {"filename": "wind_speed_2025-12-14.geojson", "date": "2025-12-14", "hours": 24, "feature_count": 32472, "size_mb": 5.51}, {"filename": "wind_speed_2025-12-15.geojson", "date": "2025-12-15", "hours": 24, "feature_count": 32472, "size_mb": 5.51}, {"filename": "wind_speed_2025-12-16.geojson", "date": "2025-12-16", "hours": 24, "feature_count": 32472, "size_mb": 5.51}, {"filename": "wind_speed_2025-12-17.geojson", "date": "2025-12-17", "hours": 24, "feature_count": 32472, "size_mb": 5.51}, {"filename": "wind_speed_2025-12-18.geojson", "date": "2025-12-18", "hours": 24, "feature_count": 32472, "size_mb": 5.51}, {"filename": "wind_speed_2025-12-19.geojson", "date": "2025-12-19", "hours": 24, "feature_count": 32472, "size_mb": 5.51}, {"filename": "wind_speed_2025-12-20.geojson", "date": "2025-12-20", "hours": 24, "feature_count": 32472, "size_mb": 5.51}, {"filename": "wind_speed_2025-12-21.geojson", "date": "2025-12-21", "hours": 24, "feature_count": 32472, "size_mb": 5.51}, {"filename": "wind_speed_2025-12-22.geojson", "date": "2025-12-22", "hours": 24, "feature_count": 32472, "size_mb": 5.51}, {"filename": "wind_speed_2025-12-23.geojson", "date": "2025-12-23", "hours": 24, "feature_count": 32472, "size_mb": 5.51}, {"filename": "wind_speed_2025-12-24.geojson", "date": "2025-12-24", "hours": 24, "feature_count": 32472, "size_mb": 5.51}, {"filename": "wind_speed_2025-12-25.geojson", "date": "2025-12-25", "hours": 24, "feature_count": 32472, "size_mb": 5.51}, {"filename": "wind_speed_2025-12-26.geojson", "date": "2025-12-26", "hours": 24, "feature_count": 32472, "size_mb": 5.51}, {"filename": "wind_speed_2025-12-27.geojson", "date": "2025-12-27", "hours": 24, "feature_count": 32472, "size_mb": 5.51}, {"filename": "wind_speed_2025-12-28.geojson", "date": "2025-12-28", "hours": 4, "feature_count": 5412, "size_mb": 0.92}]}}};
+    const GEOJSON_DIR = "geojson_daily";
+    const DEFAULT_DATE = "2025-12-28";
+    const DEFAULT_HOUR = 12;
+    
+    // State
+    let currentDate = DEFAULT_DATE;
+    let currentHour = DEFAULT_HOUR;
+    let currentDayData = {};  // Stores loaded GeoJSON for current day
+    let leafletMap = null;
+    let layerGroups = {};  // Stores layer group references
+    
+    // Color/radius calculation functions
+    function valueToColor(value, colorScale) {
+        const {vmin, vmax, colors} = colorScale;
+        if (isNaN(value) || value === null) return '#808080';
+        
+        let normalized = (value - vmin) / (vmax - vmin);
+        normalized = Math.max(0, Math.min(1, normalized));
+        
+        const idx = Math.floor(normalized * (colors.length - 1));
+        return colors[idx];
+    }
+    
+    function valueToRadius(value, vmin, vmax, minRadius = 2, maxRadius = 10) {
+        if (isNaN(value) || value === null) return minRadius;
+        
+        let normalized = (value - vmin) / (vmax - vmin);
+        normalized = Math.max(0, Math.min(1, normalized));
+        
+        return minRadius + normalized * (maxRadius - minRadius);
+    }
+    
+    // Initialize layer references
+    function initializeLayerReferences() {
+        console.log('Initializing layer references...');
+    
+        if (!leafletMap) {
+            console.error('Map not found');
+            return false;
+        }
+    
+        // Get all FeatureGroups from the map
+        const featureGroups = [];
+        leafletMap.eachLayer(function(layer) {
+            if (layer instanceof L.FeatureGroup && layer._layers) {
+                featureGroups.push(layer);
+            }
+        });
+    
+        console.log('Found ' + featureGroups.length + ' FeatureGroups on map');
+    
+        if (featureGroups.length === 0) {
+            console.error('No FeatureGroups found');
+            return false;
+        }
+    
+        // Map them to variable names in order
+        // The order matches the order they were added to the map in Python
+        const varNames = Object.keys(METADATA.variables);
+    
+        for (let i = 0; i < Math.min(featureGroups.length, varNames.length); i++) {
+            const varName = varNames[i];
+            layerGroups[varName] = featureGroups[i];
+            console.log('Mapped FeatureGroup ' + i + ' to variable: ' + varName);
+        }
+    
+        console.log('Cached ' + Object.keys(layerGroups).length + ' layers');
+        return Object.keys(layerGroups).length > 0;
+    }
+
+    // Load day data
+    async function loadDay(date) {
+        console.log('Loading day:', date);
+        showLoadingIndicator();
+        
+        currentDayData = {};
+        
+        try {
+            // Load all variables for this day
+            for (let [varName, varInfo] of Object.entries(METADATA.variables)) {
+                const filename = `${varName}_${date}.geojson`;
+                const filepath = `${GEOJSON_DIR}/${filename}`;
+                
+                const response = await fetch(filepath);
+                if (!response.ok) {
+                    console.error(`Failed to load ${filepath}`);
+                    continue;
+                }
+                
+                const geojson = await response.json();
+                currentDayData[varName] = geojson.features;
+                
+                console.log(`Loaded ${varName}: ${geojson.features.length} features`);
+            }
+            
+            currentDate = date;
+            updateDateDisplay();
+            updateButtonStates();
+            
+            // Show current hour
+            showHour(currentHour);
+            
+        } catch (error) {
+            console.error('Error loading day:', error);
+            alert('Error loading data for ' + date);
+        } finally {
+            hideLoadingIndicator();
+        }
+    }
+    
+    // Show specific hour
+    function showHour(hour) {
+        console.log('Showing hour:', hour);
+        
+        let totalFeatures = 0;
+        
+        for (let [varName, layer] of Object.entries(layerGroups)) {
+            layer.clearLayers();
+            
+            if (!currentDayData[varName]) continue;
+            
+            const varInfo = METADATA.variables[varName];
+            const colorScale = varInfo.color_scale;
+            
+            // Filter features for this hour
+            const featuresForHour = currentDayData[varName].filter(
+                f => f.properties.hour === hour
+            );
+            
+            totalFeatures += featuresForHour.length;
+            
+            // Add markers
+            featuresForHour.forEach(feature => {
+                const [lon, lat] = feature.geometry.coordinates;
+                const value = feature.properties.value;
+                
+                const color = valueToColor(value, colorScale);
+                const radius = valueToRadius(value, colorScale.vmin, colorScale.vmax);
+                
+                const popup = `
+                    <b>${varInfo.name}</b><br>
+                    Value: ${value.toFixed(2)} ${varInfo.unit}<br>
+                    Time: ${feature.properties.time}<br>
+                    Location: ${lat.toFixed(2)}°, ${lon.toFixed(2)}°
+                `;
+                
+                L.circleMarker([lat, lon], {
+                    radius: radius,
+                    color: color,
+                    fillColor: color,
+                    fillOpacity: 0.7,
+                    weight: 1
+                }).bindPopup(popup).addTo(layer);
+            });
+        }
+        
+        currentHour = hour;
+        updateHourDisplay(hour);
+        updateFeatureCount(totalFeatures);
+    }
+    
+    // UI update functions
+    function updateDateDisplay() {
+        document.getElementById('currentDisplay').textContent = 
+            `${currentDate} ${String(currentHour).padStart(2, '0')}:00`;
+    }
+    
+    function updateHourDisplay(hour) {
+        document.getElementById('hourDisplay').textContent = 
+            `${String(hour).padStart(2, '0')}:00`;
+        document.getElementById('hourSlider').value = hour;
+        updateDateDisplay();
+    }
+    
+    function updateFeatureCount(count) {
+        document.getElementById('featureCount').textContent = `(${count} features)`;
+    }
+    
+    function updateButtonStates() {
+        const dates = METADATA.dates;
+        const currentIdx = dates.indexOf(currentDate);
+        
+        document.getElementById('prevDayBtn').disabled = (currentIdx <= 0);
+        document.getElementById('nextDayBtn').disabled = (currentIdx >= dates.length - 1);
+    }
+    
+    function showLoadingIndicator() {
+        document.getElementById('loadingIndicator').style.display = 'inline-block';
+    }
+    
+    function hideLoadingIndicator() {
+        document.getElementById('loadingIndicator').style.display = 'none';
+    }
+    
+    // Navigation functions
+    function goToPreviousDay() {
+        const dates = METADATA.dates;
+        const currentIdx = dates.indexOf(currentDate);
+        if (currentIdx > 0) {
+            const newDate = dates[currentIdx - 1];
+            document.getElementById('dateInput').value = newDate;
+            loadDay(newDate);
+        }
+    }
+    
+    function goToNextDay() {
+        const dates = METADATA.dates;
+        const currentIdx = dates.indexOf(currentDate);
+        if (currentIdx < dates.length - 1) {
+            const newDate = dates[currentIdx + 1];
+            document.getElementById('dateInput').value = newDate;
+            loadDay(newDate);
+        }
+    }
+    
+    function goToPreviousHour() {
+        if (currentHour > 0) {
+            showHour(currentHour - 1);
+        }
+    }
+    
+    function goToNextHour() {
+        if (currentHour < 23) {
+            showHour(currentHour + 1);
+        }
+    }
+    
+    // Event listeners
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('DOM loaded, initializing...');
+        
+        // Find map object
+        setTimeout(() => {
+            for (let key in window) {
+                try {
+                    const obj = window[key];
+                    if (obj && typeof obj === 'object' && obj._leaflet_id && obj.eachLayer) {
+                        leafletMap = obj;
+                        console.log('Found map object');
+                        break;
+                    }
+                } catch (e) {}
+            }
+            
+            if (leafletMap) {
+                const initialized = initializeLayerReferences();
+                
+                if (initialized) {
+                    // Auto-load default date
+                    loadDay(DEFAULT_DATE);
+                } else {
+                    alert('Error: Could not initialize map layers');
+                }
+            } else {
+                alert('Error:  Map object not found');
+            }
+        }, 100);
+        
+        // Day navigation
+        document.getElementById('prevDayBtn').addEventListener('click', goToPreviousDay);
+        document.getElementById('nextDayBtn').addEventListener('click', goToNextDay);
+        document.getElementById('dateInput').addEventListener('change', (e) => {
+            loadDay(e.target.value);
+        });
+        
+        document.getElementById('dateInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                loadDay(e.target.value);
+            }
+        });
+        
+        // Hour navigation
+        document.getElementById('hourSlider').addEventListener('input', (e) => {
+            showHour(parseInt(e.target.value));
+        });
+        
+        document.getElementById('prevHourBtn').addEventListener('click', goToPreviousHour);
+        document.getElementById('nextHourBtn').addEventListener('click', goToNextHour);
+    });
+    </script>
+    
+    
+            <div class="folium-map" id="map_e7204cefb0824bfd547accdf4111ff4b" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_e7204cefb0824bfd547accdf4111ff4b = L.map(
+                "map_e7204cefb0824bfd547accdf4111ff4b",
+                {
+                    center: [51.0, 10.0],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 6,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_2287f64052cd468482dd304f8aba7abd = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_2287f64052cd468482dd304f8aba7abd.addTo(map_e7204cefb0824bfd547accdf4111ff4b);
+        
+    
+            var tile_layer_0ccf9a523f2e3e7391f2edb91840b147 = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_0ccf9a523f2e3e7391f2edb91840b147.addTo(map_e7204cefb0824bfd547accdf4111ff4b);
+        
+    
+            var tile_layer_d2f9bc2efbafa8b78366aadf1e0a6be3 = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_d2f9bc2efbafa8b78366aadf1e0a6be3.addTo(map_e7204cefb0824bfd547accdf4111ff4b);
+        
+    
+            var feature_group_7760c4594bac09cb79de459f205530c6 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            feature_group_7760c4594bac09cb79de459f205530c6.addTo(map_e7204cefb0824bfd547accdf4111ff4b);
+        
+    
+            var feature_group_41299d1d16ac10b5ddec2df7b58d372c = L.featureGroup(
+                {
+}
+            );
+        
+    
+            feature_group_41299d1d16ac10b5ddec2df7b58d372c.addTo(map_e7204cefb0824bfd547accdf4111ff4b);
+        
+    
+            var feature_group_a358b1d26945b23b75421c4c83cdb4f1 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            feature_group_a358b1d26945b23b75421c4c83cdb4f1.addTo(map_e7204cefb0824bfd547accdf4111ff4b);
+        
+    
+            var feature_group_8a420dc1c29a301d4241350e95c8bdf3 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            feature_group_8a420dc1c29a301d4241350e95c8bdf3.addTo(map_e7204cefb0824bfd547accdf4111ff4b);
+        
+    
+            var feature_group_093bfe93c31b127c418eb2708c52ebef = L.featureGroup(
+                {
+}
+            );
+        
+    
+            feature_group_093bfe93c31b127c418eb2708c52ebef.addTo(map_e7204cefb0824bfd547accdf4111ff4b);
+        
+    
+            var layer_control_cfe4a7166d05b5fbb8bf03ed6946d5f4_layers = {
+                base_layers : {
+                    "openstreetmap" : tile_layer_2287f64052cd468482dd304f8aba7abd,
+                    "Light Map" : tile_layer_0ccf9a523f2e3e7391f2edb91840b147,
+                    "Dark Map" : tile_layer_d2f9bc2efbafa8b78366aadf1e0a6be3,
+                },
+                overlays :  {
+                    "Significant Wave Height" : feature_group_7760c4594bac09cb79de459f205530c6,
+                    "Temperature 2m" : feature_group_41299d1d16ac10b5ddec2df7b58d372c,
+                    "Total Precipitation" : feature_group_a358b1d26945b23b75421c4c83cdb4f1,
+                    "Sea Surface Temperature" : feature_group_8a420dc1c29a301d4241350e95c8bdf3,
+                    "Wind Speed" : feature_group_093bfe93c31b127c418eb2708c52ebef,
+                },
+            };
+            let layer_control_cfe4a7166d05b5fbb8bf03ed6946d5f4 = L.control.layers(
+                layer_control_cfe4a7166d05b5fbb8bf03ed6946d5f4_layers.base_layers,
+                layer_control_cfe4a7166d05b5fbb8bf03ed6946d5f4_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": false,
+  "autoZIndex": true,
+}
+            ).addTo(map_e7204cefb0824bfd547accdf4111ff4b);
+
+        
+    
+            var tile_layer_76e9ec505dd94fa272ed57ef352c80eb = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors", "detect_retina": false, "max_native_zoom": 19, "max_zoom": 19, "min_zoom": 0, "no_wrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            );
+            var mini_map_9ac0b124404c21c440d35e07241009c2 = new L.Control.MiniMap(
+                tile_layer_76e9ec505dd94fa272ed57ef352c80eb,
+                {
+  "position": "bottomright",
+  "width": 150,
+  "height": 150,
+  "collapsedWidth": 25,
+  "collapsedHeight": 25,
+  "zoomLevelOffset": -5,
+  "centerFixed": false,
+  "zoomAnimation": false,
+  "toggleDisplay": false,
+  "autoToggleDisplay": false,
+  "minimized": false,
+}
+            );
+            map_e7204cefb0824bfd547accdf4111ff4b.addControl(mini_map_9ac0b124404c21c440d35e07241009c2);
+        
+    
+            L.control.fullscreen(
+                {
+  "position": "topleft",
+  "title": "Fullscreen",
+  "titleCancel": "Exit Fullscreen",
+  "forceSeparateButton": true,
+}
+            ).addTo(map_e7204cefb0824bfd547accdf4111ff4b);
+        
+    
+            var measure_control_bda1784abd0d6cf8f93a2a528bf23718 = new L.Control.Measure(
+                {
+  "position": "topleft",
+  "primaryLengthUnit": "kilometers",
+  "secondaryLengthUnit": "miles",
+  "primaryAreaUnit": "sqmeters",
+  "secondaryAreaUnit": "acres",
+});
+            map_e7204cefb0824bfd547accdf4111ff4b.addControl(measure_control_bda1784abd0d6cf8f93a2a528bf23718);
+
+            // Workaround for using this plugin with Leaflet>=1.8.0
+            // https://github.com/ljagis/leaflet-measure/issues/171
+            L.Control.Measure.include({
+                _setCaptureMarkerIcon: function () {
+                    // disable autopan
+                    this._captureMarker.options.autoPanOnFocus = false;
+                    // default function
+                    this._captureMarker.setIcon(
+                        L.divIcon({
+                            iconSize: this._map.getSize().multiplyBy(2)
+                        })
+                    );
+                },
+            });
+
+        
+</script>
+</html>

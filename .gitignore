@@ -4,5 +4,6 @@ installing git and personal key.txt
 __pycache__/
 venv
 geojson/
-geojson_daily_from_three_nc
-geojson_daily_netcdf
+geojson_daily/
+geojson_daily_from_three_nc/
+geojson_daily_netcdf/
