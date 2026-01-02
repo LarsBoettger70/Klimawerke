@@ -2,6 +2,7 @@ installing git and personal key.txt
 .DS_Store
 *.pyc
 __pycache__/
+venv
 geojson/
-interactive_map_with_timeslider.html
-interactive_map_with_datepicker.html
+geojson_daily_from_three_nc
+geojson_daily_netcdf
