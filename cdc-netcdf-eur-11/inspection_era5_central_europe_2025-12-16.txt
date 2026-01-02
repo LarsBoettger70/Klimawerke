@@ -1,0 +1,127 @@
+======================================================================
+FILE: era5_central_europe_2025-12-16.nc
+======================================================================
+
+=== FILE OVERVIEW ===
+
+<xarray.Dataset> Size: 781kB
+Dimensions:     (valid_time: 24, latitude: 33, longitude: 41)
+Coordinates:
+  * valid_time  (valid_time) datetime64[ns] 192B 2025-12-16 ... 2025-12-16T23...
+  * latitude    (latitude) float64 264B 47.0 47.25 47.5 ... 54.5 54.75 55.0
+  * longitude   (longitude) float64 328B 5.0 5.25 5.5 5.75 ... 14.5 14.75 15.0
+    number      int64 8B ...
+    expver      (valid_time) <U4 384B ...
+Data variables:
+    tp          (valid_time, latitude, longitude) float32 130kB ...
+    swh         (valid_time, latitude, longitude) float32 130kB ...
+    u10         (valid_time, latitude, longitude) float32 130kB ...
+    v10         (valid_time, latitude, longitude) float32 130kB ...
+    t2m         (valid_time, latitude, longitude) float32 130kB ...
+    sst         (valid_time, latitude, longitude) float32 130kB ...
+Attributes:
+    GRIB_centre:             ecmf
+    GRIB_centreDescription:  European Centre for Medium-Range Weather Forecasts
+    GRIB_subCentre:          0
+    Conventions:             CF-1.7
+    institution:             European Centre for Medium-Range Weather Forecasts
+    history:                 2026-01-02T01:52 GRIB to CDM+CF via cfgrib-0.9.1...
+
+=== DIMENSIONS ===
+
+FrozenMappingWarningOnValuesAccess({'valid_time': 24, 'latitude': 33, 'longitude': 41})
+
+=== COORDINATES ===
+
+Coordinates:
+  * valid_time  (valid_time) datetime64[ns] 192B 2025-12-16 ... 2025-12-16T23...
+  * latitude    (latitude) float64 264B 47.0 47.25 47.5 ... 54.5 54.75 55.0
+  * longitude   (longitude) float64 328B 5.0 5.25 5.5 5.75 ... 14.5 14.75 15.0
+    number      int64 8B ...
+    expver      (valid_time) <U4 384B ...
+
+=== DATA VARIABLES ===
+
+['tp', 'swh', 'u10', 'v10', 't2m', 'sst']
+
+=== TIME INFORMATION ===
+
+Time coordinate: valid_time
+Number of time steps: 24
+First time:  2025-12-16 00:00:00
+Last time: 2025-12-16 23:00:00
+
+=== GRID INFORMATION ===
+
+Latitude: 33 points (47.00° to 55.00°)
+Longitude: 41 points (5.00° to 15.00°)
+Total grid points: 1353
+
+=== FILE SIZE ===
+
+On disk: 0.29 MB
+In memory (uncompressed): 0.74 MB
+Compression ratio: 2.6x
+
+=== SAMPLE GRID POINTS (first 20) ===
+
+ gridy  gridx  latitude  longitude           tp  swh       u10       v10        t2m  sst
+     0      0      47.0       5.00 0.000000e+00  NaN -1.189026 -1.160431 275.547607  NaN
+     0      1      47.0       5.25 0.000000e+00  NaN -1.248596 -1.086212 275.420654  NaN
+     0      2      47.0       5.50 0.000000e+00  NaN -2.095276  0.087616 275.319092  NaN
+     0      3      47.0       5.75 0.000000e+00  NaN -2.972229  1.364960 276.014404  NaN
+     0      4      47.0       6.00 0.000000e+00  NaN -3.457581  2.396210 276.346436  NaN
+     0      5      47.0       6.25 0.000000e+00  NaN -2.590393  1.849335 275.319092  NaN
+     0      6      47.0       6.50 0.000000e+00  NaN -1.839417  1.592499 273.920654  NaN
+     0      7      47.0       6.75 0.000000e+00  NaN -1.125549  0.887421 272.719482  NaN
+     0      8      47.0       7.00 0.000000e+00  NaN -0.631409  0.719452 272.356201  NaN
+     0      9      47.0       7.25 0.000000e+00  NaN  0.002380 -0.682892 272.391357  NaN
+     0     10      47.0       7.50 0.000000e+00  NaN -0.553284 -0.854767 272.531982  NaN
+     0     11      47.0       7.75 0.000000e+00  NaN -0.711487 -0.619415 272.887451  NaN
+     0     12      47.0       8.00 0.000000e+00  NaN -0.376526 -0.225861 273.803467  NaN
+     0     13      47.0       8.25 0.000000e+00  NaN -0.729065  1.613007 276.483154  NaN
+     0     14      47.0       8.50 4.768372e-07  NaN -0.616760  2.244843 276.127686  NaN
+     0     15      47.0       8.75 4.768372e-07  NaN -1.098206  2.188202 274.324951  NaN
+     0     16      47.0       9.00 4.768372e-07  NaN -0.652893  2.586639 272.799561  NaN
+     0     17      47.0       9.25 0.000000e+00  NaN -0.233948  2.418671 272.785889  NaN
+     0     18      47.0       9.50 0.000000e+00  NaN -0.955627  2.263397 273.037842  NaN
+     0     19      47.0       9.75 0.000000e+00  NaN -1.238831  1.993866 272.385498  NaN
+
+=== VARIABLE STATISTICS (first time step) ===
+
+
+tp:
+  Min: 0.0000
+  Max: 0.0001
+  Mean: 0.0000
+  NaN count: 0
+
+swh:
+  Min: nan
+  Max: nan
+  Mean: nan
+  NaN count: 1299
+
+u10:
+  Min: -4.1187
+  Max: 4.8793
+  Mean: -0.3662
+  NaN count: 0
+
+v10:
+  Min: -1.6233
+  Max: 8.9362
+  Mean: 3.0381
+  NaN count: 0
+
+t2m:
+  Min: 267.5671
+  Max: 283.5320
+  Mean: 275.9922
+  NaN count: 0
+
+sst:
+  Min: nan
+  Max: nan
+  Mean: nan
+  NaN count: 1173

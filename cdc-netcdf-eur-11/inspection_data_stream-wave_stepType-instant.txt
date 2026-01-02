@@ -1,0 +1,92 @@
+======================================================================
+FILE: data_stream-wave_stepType-instant.nc
+======================================================================
+
+=== FILE OVERVIEW ===
+
+<xarray.Dataset> Size: 35kB
+Dimensions:     (valid_time: 24, latitude: 17, longitude: 21)
+Coordinates:
+  * valid_time  (valid_time) datetime64[ns] 192B 2025-12-27 ... 2025-12-27T23...
+  * latitude    (latitude) float64 136B 55.0 54.5 54.0 53.5 ... 48.0 47.5 47.0
+  * longitude   (longitude) float64 168B 5.0 5.5 6.0 6.5 ... 13.5 14.0 14.5 15.0
+    number      int64 8B ...
+    expver      (valid_time) <U4 384B ...
+Data variables:
+    swh         (valid_time, latitude, longitude) float32 34kB ...
+Attributes:
+    GRIB_centre:             ecmf
+    GRIB_centreDescription:  European Centre for Medium-Range Weather Forecasts
+    GRIB_subCentre:          0
+    Conventions:             CF-1.7
+    institution:             European Centre for Medium-Range Weather Forecasts
+    history:                 2026-01-02T01:58 GRIB to CDM+CF via cfgrib-0.9.1...
+
+=== DIMENSIONS ===
+
+FrozenMappingWarningOnValuesAccess({'valid_time': 24, 'latitude': 17, 'longitude': 21})
+
+=== COORDINATES ===
+
+Coordinates:
+  * valid_time  (valid_time) datetime64[ns] 192B 2025-12-27 ... 2025-12-27T23...
+  * latitude    (latitude) float64 136B 55.0 54.5 54.0 53.5 ... 48.0 47.5 47.0
+  * longitude   (longitude) float64 168B 5.0 5.5 6.0 6.5 ... 13.5 14.0 14.5 15.0
+    number      int64 8B ...
+    expver      (valid_time) <U4 384B ...
+
+=== DATA VARIABLES ===
+
+['swh']
+
+=== TIME INFORMATION ===
+
+Time coordinate: valid_time
+Number of time steps: 24
+First time:  2025-12-27 00:00:00
+Last time: 2025-12-27 23:00:00
+
+=== GRID INFORMATION ===
+
+Latitude: 17 points (47.00° to 55.00°)
+Longitude: 21 points (5.00° to 15.00°)
+Total grid points: 357
+
+=== FILE SIZE ===
+
+On disk: 0.03 MB
+In memory (uncompressed): 0.03 MB
+Compression ratio: 1.2x
+
+=== SAMPLE GRID POINTS (first 20) ===
+
+ gridy  gridx  latitude  longitude      swh
+     0      0      55.0        5.0 0.647055
+     0      1      55.0        5.5 0.652426
+     0      2      55.0        6.0 0.656821
+     0      3      55.0        6.5 0.648764
+     0      4      55.0        7.0 0.605796
+     0      5      55.0        7.5 0.547446
+     0      6      55.0        8.0 0.445639
+     0      7      55.0        8.5 0.335044
+     0      8      55.0        9.0      NaN
+     0      9      55.0        9.5      NaN
+     0     10      55.0       10.0 0.153647
+     0     11      55.0       10.5 0.208579
+     0     12      55.0       11.0 0.234702
+     0     13      55.0       11.5 0.244956
+     0     14      55.0       12.0      NaN
+     0     15      55.0       12.5 0.314292
+     0     16      55.0       13.0 0.355307
+     0     17      55.0       13.5 0.383872
+     0     18      55.0       14.0 0.420249
+     0     19      55.0       14.5 0.468100
+
+=== VARIABLE STATISTICS (first time step) ===
+
+
+swh:
+  Min: nan
+  Max: nan
+  Mean: nan
+  NaN count: 303

@@ -1,0 +1,92 @@
+======================================================================
+FILE: data_stream-oper_stepType-accum.nc
+======================================================================
+
+=== FILE OVERVIEW ===
+
+<xarray.Dataset> Size: 131kB
+Dimensions:     (valid_time: 24, latitude: 33, longitude: 41)
+Coordinates:
+  * valid_time  (valid_time) datetime64[ns] 192B 2025-12-27 ... 2025-12-27T23...
+  * latitude    (latitude) float64 264B 55.0 54.75 54.5 ... 47.5 47.25 47.0
+  * longitude   (longitude) float64 328B 5.0 5.25 5.5 5.75 ... 14.5 14.75 15.0
+    number      int64 8B ...
+    expver      (valid_time) <U4 384B ...
+Data variables:
+    tp          (valid_time, latitude, longitude) float32 130kB ...
+Attributes:
+    GRIB_centre:             ecmf
+    GRIB_centreDescription:  European Centre for Medium-Range Weather Forecasts
+    GRIB_subCentre:          0
+    Conventions:             CF-1.7
+    institution:             European Centre for Medium-Range Weather Forecasts
+    history:                 2026-01-02T01:58 GRIB to CDM+CF via cfgrib-0.9.1...
+
+=== DIMENSIONS ===
+
+FrozenMappingWarningOnValuesAccess({'valid_time': 24, 'latitude': 33, 'longitude': 41})
+
+=== COORDINATES ===
+
+Coordinates:
+  * valid_time  (valid_time) datetime64[ns] 192B 2025-12-27 ... 2025-12-27T23...
+  * latitude    (latitude) float64 264B 55.0 54.75 54.5 ... 47.5 47.25 47.0
+  * longitude   (longitude) float64 328B 5.0 5.25 5.5 5.75 ... 14.5 14.75 15.0
+    number      int64 8B ...
+    expver      (valid_time) <U4 384B ...
+
+=== DATA VARIABLES ===
+
+['tp']
+
+=== TIME INFORMATION ===
+
+Time coordinate: valid_time
+Number of time steps: 24
+First time:  2025-12-27 00:00:00
+Last time: 2025-12-27 23:00:00
+
+=== GRID INFORMATION ===
+
+Latitude: 33 points (47.00° to 55.00°)
+Longitude: 41 points (5.00° to 15.00°)
+Total grid points: 1353
+
+=== FILE SIZE ===
+
+On disk: 0.04 MB
+In memory (uncompressed): 0.12 MB
+Compression ratio: 3.3x
+
+=== SAMPLE GRID POINTS (first 20) ===
+
+ gridy  gridx  latitude  longitude           tp
+     0      0      55.0       5.00 0.000000e+00
+     0      1      55.0       5.25 0.000000e+00
+     0      2      55.0       5.50 0.000000e+00
+     0      3      55.0       5.75 0.000000e+00
+     0      4      55.0       6.00 0.000000e+00
+     0      5      55.0       6.25 0.000000e+00
+     0      6      55.0       6.50 0.000000e+00
+     0      7      55.0       6.75 0.000000e+00
+     0      8      55.0       7.00 0.000000e+00
+     0      9      55.0       7.25 0.000000e+00
+     0     10      55.0       7.50 0.000000e+00
+     0     11      55.0       7.75 0.000000e+00
+     0     12      55.0       8.00 0.000000e+00
+     0     13      55.0       8.25 9.536743e-07
+     0     14      55.0       8.50 9.536743e-07
+     0     15      55.0       8.75 0.000000e+00
+     0     16      55.0       9.00 0.000000e+00
+     0     17      55.0       9.25 0.000000e+00
+     0     18      55.0       9.50 0.000000e+00
+     0     19      55.0       9.75 0.000000e+00
+
+=== VARIABLE STATISTICS (first time step) ===
+
+
+tp:
+  Min: 0.0000
+  Max: 0.0001
+  Mean: 0.0000
+  NaN count: 0
